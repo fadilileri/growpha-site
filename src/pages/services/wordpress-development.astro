@@ -1,0 +1,242 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import Deliverables from '../../components/service/Deliverables.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+import RelatedServices from '../../components/service/RelatedServices.astro';
+
+const tools = [
+	{ title: 'WordPress', src: 'https://cdn.simpleicons.org/wordpress/ffffff' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Screaming Frog', initials: 'SF' },
+];
+
+const features = [
+	{ title: 'Custom Theme Development', desc: 'Bespoke WordPress themes built to your design — not modified off-the-shelf templates.' },
+	{ title: 'Performance Engineering', desc: 'Core Web Vitals optimisation, caching strategy, image delivery, and database performance built in from the start.' },
+	{ title: 'SEO Architecture', desc: 'Clean URL structures, proper heading hierarchy, schema markup, and Yoast/RankMath configuration for organic search performance.' },
+	{ title: 'Block Editor & Gutenberg', desc: 'Custom Gutenberg blocks and patterns that give editors full layout control without breaking the design.' },
+	{ title: 'Plugin Architecture', desc: 'Selecting the right plugins, removing unnecessary ones, and ensuring the plugin stack does not create performance or security issues.' },
+	{ title: 'Security & Maintenance', desc: 'Hardening, backup strategy, update management, and ongoing maintenance to keep your site secure and stable.' },
+];
+
+const processSteps = [
+	{ title: 'Discovery & Architecture', desc: 'Understanding your content structure, editorial workflow, and technical requirements before any design begins.' },
+	{ title: 'Design & Prototyping', desc: 'Designing page templates and the editorial interface before development begins.' },
+	{ title: 'Development & Configuration', desc: 'Building the theme, custom blocks, and plugin stack to specification.' },
+	{ title: 'Testing, Launch & Training', desc: 'QA testing, launch, and editorial training so your team can manage content independently.' },
+];
+
+const deliverables = [
+	'Custom WordPress theme',
+	'CMS configuration and custom post types',
+	'SEO-optimised architecture',
+	'Performance optimisation',
+	'Security hardening',
+	'Editorial training and documentation',
+	'Launch checklist and QA',
+	'Ongoing maintenance plan',
+];
+
+const caseStudies = [
+	{ industry: 'Professional Services', metric: '1.4s', metricLabel: 'Page Load Time', title: 'WordPress Rebuild for Law Firm', challenge: 'Legacy WordPress site with 47 plugins, a 9-second load time, and no structured data was invisible in local search.', result: 'Rebuilt on a custom block theme with minimal plugin footprint. Load time dropped to 1.4 seconds. Local pack rankings appeared within 6 weeks.' },
+	{ industry: 'SaaS & Technology', metric: '100%', metricLabel: 'Editorial Autonomy', title: 'WordPress Headless CMS for SaaS', challenge: 'Marketing team needed editorial flexibility without developer involvement for every content update.', result: 'Built a headless WordPress setup with a React front end, custom Gutenberg blocks, and a structured content model. Editorial team now publishes independently.' },
+	{ industry: 'Healthcare', metric: '14', metricLabel: 'First-Page Rankings', title: 'GDPR-Compliant Healthcare WordPress Site', challenge: 'Healthcare provider needed a site that met GDPR and accessibility (WCAG 2.1 AA) requirements while ranking for high-intent local terms.', result: 'Built with a privacy-first architecture, no third-party tracking by default, and a full WCAG 2.1 AA audit. Achieved first-page rankings for 14 target terms.' },
+	{ industry: 'Education', metric: '8', metricLabel: 'Sites, One Dashboard', title: 'Multisite WordPress for Education Group', challenge: 'Group of 8 schools needed a unified brand presence with individual school sites, shared content, and centralised management.', result: 'WordPress Multisite with a shared parent theme, per-school child themes, and a centralised content hub. Managed from a single admin dashboard.' },
+];
+
+const faqs = [
+	{ q: 'How long does a WordPress build take?', a: 'A standard WordPress build with a custom block theme typically takes 4–8 weeks depending on content volume, custom functionality, and feedback cycles. Headless or multisite builds take longer given the added architecture. A clear timeline is agreed at the start based on your specific scope.' },
+	{ q: 'Will my WordPress site be bloated with plugins?', a: "No — plugin architecture is treated as a deliberate decision, not an accumulation. Growpha selects the minimum set of plugins needed, removes anything that duplicates core functionality or drags down performance, and documents the stack so it doesn't sprawl over time." },
+	{ q: 'Can you migrate my existing WordPress site to a faster theme?', a: "Yes — legacy WordPress rebuilds are a common engagement: moving from a bloated page-builder theme to a custom block theme, consolidating a large plugin count, and fixing structured data and Core Web Vitals issues along the way, without losing existing rankings." },
+	{ q: 'Will my content team be able to manage the site without a developer?', a: 'Yes — every build includes custom Gutenberg blocks and patterns that give editors full layout control within the design system, plus editorial training and documentation as part of handover.' },
+	{ q: 'Do you build headless WordPress sites?', a: 'Yes — for teams that need a decoupled front end (React, Astro, or similar) with WordPress purely as the content model and editorial interface, Growpha builds headless setups that keep editorial flexibility while giving full control over the front-end performance and architecture.' },
+];
+
+const related = [
+	{ label: 'Web Development', href: '/services/web-development' },
+	{ label: 'Shopify Development', href: '/services/shopify-development' },
+	{ label: 'Technical SEO', href: '/services/technical-seo' },
+	{ label: 'Content Marketing', href: '/services/content-marketing' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="WordPress Development | Growpha"
+			description="WordPress that doesn't look or feel like WordPress — flexible, editorially powerful, and technically robust."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="WordPress Development"
+				label="WordPress Development"
+				title="WordPress that doesn't look"
+				titleAccent="or feel like WordPress."
+				lead="WordPress development at Growpha produces flexible, editorially powerful, and technically robust websites — built to be fast, maintainable, and SEO-ready from the start. Not theme installations with a logo swap."
+				primaryLabel="Discuss Your WordPress Project"
+				secondaryLabel="← Back to Web Development"
+				secondaryHref="/services/web-development"
+			/>
+			<ToolsMarquee label="Tools & Platforms Used" tools={tools} />
+			<FeatureGrid label="What This Covers" title="Built for measurable outcomes," titleAccent="not activity metrics." features={features} />
+			<ProcessSteps label="The Process" title="How we approach" titleAccent="wordpress development." intro="Every engagement follows a structured process — audit first, strategy second, execution third. No guesswork, no assumptions." steps={processSteps} />
+			<Deliverables label="Deliverables & Outcomes" title="What you get from working with Growpha." intro="Clear outputs, documented processes, and measurable results — not activity reports that obscure whether anything is actually working." items={deliverables} ctaLabel="Discuss Your Project" />
+
+			<section class="case-section">
+				<div class="gp-container">
+					<div class="section-label">Case Studies</div>
+					<h2 class="case-h2">Projects that moved<br /><span class="text-gradient-orange">the needle.</span></h2>
+					<div class="case-total"><span class="case-total-value">20+</span><span class="case-total-label">WordPress Sites Delivered</span></div>
+					<div class="case-grid">
+						{
+							caseStudies.map((c) => (
+								<div class="growpha-card case-card">
+									<div class="case-tags">
+										<span class="case-platform">WordPress</span>
+										<span class="case-industry">{c.industry}</span>
+									</div>
+									<div class="case-metric text-gradient-orange">{c.metric}</div>
+									<div class="case-metric-label">{c.metricLabel}</div>
+									<h3 class="case-title">{c.title}</h3>
+									<div class="case-block"><span>Challenge</span><p>{c.challenge}</p></div>
+									<div class="case-block"><span>Result</span><p>{c.result}</p></div>
+								</div>
+							))
+						}
+					</div>
+					<a href="/contact" class="ghero-btn-ghost">Discuss your project</a>
+				</div>
+			</section>
+
+			<FaqAccordion items={faqs} />
+			<AuditBanner />
+			<RelatedServices items={related} />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.case-section {
+		background: var(--growpha-surface-1);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.case-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 16px 0 20px;
+		color: var(--growpha-text-primary);
+	}
+	.case-total {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 32px;
+	}
+	.case-total-value {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2rem;
+		color: var(--growpha-green-bright);
+	}
+	.case-total-label {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.case-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+		margin-bottom: 32px;
+	}
+	@media (min-width: 768px) {
+		.case-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.case-tags {
+		display: flex;
+		gap: 8px;
+		margin-bottom: 16px;
+	}
+	.case-platform {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--growpha-green-bright);
+		background: rgba(34, 197, 94, 0.1);
+		border: 1px solid rgba(34, 197, 94, 0.2);
+		border-radius: 999px;
+		padding: 4px 10px;
+	}
+	.case-industry {
+		font-size: 0.6875rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--growpha-text-muted);
+		align-self: center;
+	}
+	.case-metric {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2rem;
+		letter-spacing: -0.03em;
+	}
+	.case-metric-label {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin-bottom: 16px;
+	}
+	.case-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 16px;
+	}
+	.case-block {
+		margin-bottom: 12px;
+	}
+	.case-block span {
+		display: block;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--growpha-text-muted);
+		margin-bottom: 4px;
+	}
+	.case-block p {
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.6;
+		margin: 0;
+	}
+</style>

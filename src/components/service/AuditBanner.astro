@@ -1,0 +1,152 @@
+---
+const clipboardList =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg>';
+const badgeCheck =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path><path d="m9 12 2 2 4-4"></path></svg>';
+const clock =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
+const arrowRight =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>';
+---
+
+<section class="audit-banner">
+	<div class="gp-container">
+		<div class="audit-row">
+			<div class="audit-copy">
+				<div class="audit-tag"><span set:html={clipboardList} />SEO Audit — 999 AED</div>
+				<h3 class="audit-h3">Not sure where to start? <span class="audit-accent">Request an audit.</span></h3>
+				<p class="audit-desc">
+					A comprehensive, expert-led review of your site's technical foundation, content quality, on-page
+					signals, backlink profile, and AI search visibility — with every issue paired with a recommended
+					solution.
+				</p>
+				<div class="audit-features">
+					<div class="audit-feature"><span set:html={badgeCheck} />6 audit areas covered</div>
+					<div class="audit-feature"><span set:html={clock} />10-day delivery</div>
+					<div class="audit-feature"><span set:html={badgeCheck} />Fixed price — no surprises</div>
+				</div>
+			</div>
+			<div class="audit-cta">
+				<a href="/request-audit" class="audit-btn">
+					Request Your Audit — 999 AED
+					<span set:html={arrowRight} />
+				</a>
+				<p class="audit-fineprint">Fixed price. 10-day delivery. Expert analysis.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.audit-banner {
+		background: linear-gradient(135deg, rgba(249, 115, 22, 0.08) 0%, rgba(249, 115, 22, 0.04) 50%, rgba(6, 11, 7, 0) 100%);
+		border-top: 1px solid rgba(249, 115, 22, 0.15);
+		border-bottom: 1px solid rgba(249, 115, 22, 0.08);
+		padding: 32px 0;
+	}
+	.audit-row {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 24px;
+	}
+	@media (min-width: 1024px) {
+		.audit-row {
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+	.audit-copy {
+		flex: 1;
+		max-width: 640px;
+	}
+	.audit-tag {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 12px;
+		padding: 4px 12px;
+		border-radius: 999px;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		background: rgba(249, 115, 22, 0.1);
+		border: 1px solid rgba(249, 115, 22, 0.2);
+		color: var(--growpha-orange);
+		font-family: var(--font-heading);
+	}
+	.audit-h3 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+		color: var(--growpha-text-primary);
+		margin: 0 0 10px;
+	}
+	.audit-accent {
+		color: var(--growpha-orange);
+	}
+	.audit-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.9375rem;
+		line-height: 1.65;
+		max-width: 560px;
+		margin: 0;
+	}
+	.audit-features {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+		margin-top: 16px;
+	}
+	.audit-feature {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.audit-feature :global(svg) {
+		color: var(--growpha-orange);
+		flex-shrink: 0;
+	}
+	.audit-cta {
+		flex-shrink: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+	@media (min-width: 1024px) {
+		.audit-cta {
+			align-items: flex-end;
+		}
+	}
+	.audit-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.9375rem;
+		color: #fff;
+		background: linear-gradient(135deg, var(--growpha-orange) 0%, var(--growpha-orange-dark) 100%);
+		padding: 14px 28px;
+		border-radius: 12px;
+		text-decoration: none;
+		box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+	.audit-btn:hover {
+		transform: translateY(-1px);
+		box-shadow: 0 6px 24px rgba(249, 115, 22, 0.4);
+	}
+	.audit-fineprint {
+		font-size: 0.75rem;
+		color: var(--growpha-text-muted);
+		margin: 0;
+	}
+</style>

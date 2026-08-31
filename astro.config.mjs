@@ -4,32 +4,35 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 
+import tailwindcss from '@tailwindcss/vite';
+
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
-	fonts: [
-		{
-			provider: fontProviders.local(),
-			name: 'Atkinson',
-			cssVariable: '--font-atkinson',
-			fallbacks: ['sans-serif'],
-			options: {
-				variants: [
-					{
-						src: ['./src/assets/fonts/atkinson-regular.woff'],
-						weight: 400,
-						style: 'normal',
-						display: 'swap',
-					},
-					{
-						src: ['./src/assets/fonts/atkinson-bold.woff'],
-						weight: 700,
-						style: 'normal',
-						display: 'swap',
-					},
-				],
-			},
-		},
+  site: 'https://example.com',
+  integrations: [mdx(), sitemap()],
+
+  redirects: {
+    '/about': '/who-am-i',
+  },
+
+  fonts: [
+      {
+          provider: fontProviders.google(),
+          name: 'Space Grotesk',
+          cssVariable: '--font-heading',
+          fallbacks: ['sans-serif'],
+          weights: [400, 500, 600, 700, 800],
+      },
+      {
+          provider: fontProviders.google(),
+          name: 'DM Sans',
+          cssVariable: '--font-body',
+          fallbacks: ['sans-serif'],
+          weights: [300, 400, 500, 600, 700],
+      },
 	],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

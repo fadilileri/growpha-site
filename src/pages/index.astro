@@ -2,7 +2,216 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import HeroVisual from '../assets/brand/growpha-hero-visual.webp';
+import AhrefsLogo from '../assets/brand/tools/ahrefs.png';
+import OpenAiLogo from '../assets/brand/tools/openai.webp';
+import ScreamingFrogLogo from '../assets/brand/tools/screamingfrog.webp';
+import { Image } from 'astro:assets';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const trustItems = ['Based in Dubai, UAE', 'AI-native workflows', 'Technical-first approach'];
+
+function svcIcon(inner: string) {
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+}
+
+const services = [
+	{
+		href: '/services/seo',
+		icon: svcIcon('<circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>'),
+		tag: 'Core Service',
+		title: 'Search Engine Optimisation',
+		description:
+			'Technical foundations, content architecture, and authority building — built to compound over time, not spike and fade.',
+	},
+	{
+		href: '/services/ai-llm-seo',
+		icon: svcIcon('<path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path>'),
+		tag: 'Emerging',
+		title: 'AI & LLM Search Visibility',
+		description:
+			'Optimising for how AI systems retrieve, cite, and surface your brand — beyond traditional ranking signals.',
+	},
+	{
+		href: '/services/content-marketing',
+		icon: svcIcon('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path>'),
+		tag: 'Strategic',
+		title: 'Content Marketing',
+		description:
+			'Topical authority systems, content operations, and distribution logic — not just articles for the sake of it.',
+	},
+	{
+		href: '/services/ai-automations',
+		icon: svcIcon('<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>'),
+		tag: 'Systems',
+		title: 'AI Automations',
+		description:
+			'AI-powered workflows for SEO, reporting, QA, and content operations — removing manual bottlenecks at scale.',
+	},
+	{
+		href: '/services/wikipedia-creation',
+		icon: svcIcon('<path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>'),
+		tag: 'Reputation',
+		title: 'Wikipedia Creation',
+		description:
+			'Notability research, editorial compliance, and sourcing strategy — handled with the rigour it demands.',
+	},
+	{
+		href: '/services/web-development',
+		icon: svcIcon('<path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path>'),
+		tag: 'Technical',
+		title: 'Web Development',
+		description:
+			'Performance-first builds on Shopify and WordPress — SEO-ready architecture, clean CMS, fast by default.',
+	},
+];
+
+function whyIcon(inner: string) {
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+}
+
+const processSteps = [
+	{
+		num: '01',
+		title: 'Technical Audit',
+		desc: "A comprehensive review of your site's architecture, crawlability, indexing, and performance baseline.",
+	},
+	{
+		num: '02',
+		title: 'Strategy & Architecture',
+		desc: 'A structured growth plan built around your market, competitors, and the specific signals that drive your category.',
+	},
+	{
+		num: '03',
+		title: 'Systems Build',
+		desc: 'Automation workflows, content systems, and technical implementations — built to run efficiently at scale.',
+	},
+	{
+		num: '04',
+		title: 'Execution & Iteration',
+		desc: "Continuous optimisation driven by data. What works gets scaled. What doesn't gets replaced.",
+	},
+];
+
+const testimonials = [
+	{
+		quote:
+			'Our Shopify store was technically sound but invisible. Growpha rebuilt the information architecture, fixed the canonical mess left by our previous theme, and rewrote the collection page structure. We went from page four to position three for our primary category term.',
+		name: 'Tom Hargreaves',
+		role: 'Founder, Hargreaves Outdoor',
+		initials: 'TH',
+		tag: 'Shopify Web Development',
+		color: '#7c9ef8',
+	},
+	{
+		quote:
+			"I was sceptical about a technical SEO retainer — we'd been burned before. What changed my mind was the first month's report. It showed exactly what was done, what moved, and what was next. No fluff. Six months in, our non-brand organic revenue has doubled.",
+		name: 'Priya Menon',
+		role: 'Growth Lead, Stackly SaaS',
+		initials: 'PM',
+		tag: 'Technical SEO',
+		color: '#22c55e',
+	},
+	{
+		quote:
+			"The audit was the most thorough document I've received in ten years of working with agencies. It didn't just list problems — it ranked them by revenue impact and gave us a clear implementation sequence. We fixed the top five issues and saw ranking improvements within six weeks.",
+		name: 'Sarah Al-Rashid',
+		role: 'Marketing Director, Vantage Legal',
+		initials: 'SA',
+		tag: 'SEO Audit',
+		color: '#f97316',
+	},
+	{
+		quote:
+			'We had traffic, but very little visibility where it mattered. Growpha rebuilt our SEO foundation, fixed critical technical issues, and created a scalable content strategy. Within months, we saw significant growth in qualified organic traffic and a measurable increase in revenue from search.',
+		name: 'Ahmet Yüce',
+		role: '',
+		initials: 'AY',
+		tag: 'Technical SEO',
+		color: '#22c55e',
+	},
+	{
+		quote:
+			'We needed a Shopify rebuild that was actually built for search, not just for aesthetics. Growpha delivered a site that loads in under two seconds, passes Core Web Vitals, and has a clean URL structure our team can manage. Our organic sessions are up 41% year-on-year.',
+		name: 'Nadia Okonkwo',
+		role: 'COO, Crestline Supplements',
+		initials: 'NO',
+		tag: 'Shopify Web Development',
+		color: '#7c9ef8',
+	},
+	{
+		quote:
+			"We had crawl budget issues that three previous agencies told us were 'fine'. Growpha found the root cause within the first week — 4,200 duplicate URLs being indexed from a faceted navigation bug. Organic traffic is up 68% in four months.",
+		name: 'James Whitfield',
+		role: 'Head of E-commerce, Meridian Retail Group',
+		initials: 'JW',
+		tag: 'Technical SEO',
+		color: '#22c55e',
+	},
+];
+
+const whyPoints = [
+	{
+		icon: whyIcon('<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>'),
+		title: 'Evidence-Led Execution',
+		desc: 'Every recommendation is grounded in data, not instinct. Audits, analysis, and testing come before strategy.',
+	},
+	{
+		icon: whyIcon('<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path>'),
+		title: 'Technical Foundations First',
+		desc: 'Visibility is built on infrastructure. We fix what is broken before we scale what is working.',
+	},
+	{
+		icon: whyIcon('<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>'),
+		title: 'Automation as Standard',
+		desc: 'Manual processes are replaced with systems. Reporting, QA, and content ops run on AI-powered workflows.',
+	},
+	{
+		icon: whyIcon('<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline>'),
+		title: 'Sustainable Growth',
+		desc: 'No shortcuts, no black-hat tactics, no traffic spikes that disappear. Growth that compounds and holds.',
+	},
+	{
+		icon: whyIcon('<circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle>'),
+		title: 'Search-First Digital Systems',
+		desc: 'Every channel, every piece of content, every page — built with search visibility as a primary consideration.',
+	},
+	{
+		icon: whyIcon('<path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path>'),
+		title: 'Measurable Business Outcomes',
+		desc: 'Vanity metrics are not the goal. Revenue, qualified traffic, and market share are.',
+	},
+];
+
+const statsBar = [
+	{ value: 312, suffix: '%', label: 'Avg. Traffic Growth' },
+	{ value: 47, suffix: '+', label: 'Clients Served' },
+	{ value: 10, suffix: '+', label: 'Years in Search' },
+	{ value: 98, suffix: '%', label: 'Client Retention' },
+];
+
+const industryTags = [
+	'Dubai & UAE Businesses',
+	'Free Zone Operators',
+	'E-commerce & Retail',
+	'SaaS & Technology',
+	'Professional Services',
+	'Finance & Legal',
+];
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff', invert: false },
+	{ title: 'Ahrefs', src: AhrefsLogo.src, invert: true },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff', invert: false },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff', invert: false },
+	{ title: 'n8n', src: 'https://cdn.simpleicons.org/n8n/ffffff', invert: false },
+	{ title: 'Make', src: 'https://cdn.simpleicons.org/make/ffffff', invert: false },
+	{ title: 'Shopify', src: 'https://cdn.simpleicons.org/shopify/ffffff', invert: false },
+	{ title: 'WordPress', src: 'https://cdn.simpleicons.org/wordpress/ffffff', invert: false },
+	{ title: 'OpenAI', src: OpenAiLogo.src, invert: true },
+	{ title: 'Screaming Frog', src: ScreamingFrogLogo.src, invert: true },
+];
+const toolsLoop = [...tools, ...tools];
 ---
 
 <!doctype html>
@@ -13,37 +222,1155 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="ghero">
+				<div class="ghero-glow" aria-hidden="true"></div>
+				<div class="ghero-dots" aria-hidden="true"></div>
+				<div class="gp-container">
+					<div class="ghero-grid">
+						<div class="ghero-copy">
+							<div class="section-label"><span class="status-dot"></span>Dubai-Based SEO &amp; Digital Growth Agency</div>
+							<h1 class="ghero-h1">
+								Search-first growth<br />
+								<span class="text-gradient-orange">built on systems,</span><br />
+								not shortcuts.
+							</h1>
+							<p class="ghero-lead">
+								Growpha is a Dubai-based SEO and digital growth consultancy. I build SEO
+								infrastructure, AI-powered workflows, and content systems for UAE businesses, free
+								zone operators, and international brands targeting the GCC market.
+							</p>
+							<div class="ghero-actions">
+								<a href="/contact" class="ghero-btn-primary">
+									Start a Project
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+								</a>
+								<a href="/services" class="ghero-btn-ghost">Explore Services</a>
+							</div>
+							<div class="ghero-trust">
+								{trustItems.map((item) => (
+									<div class="trust-item">
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="trust-icon"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+										<span>{item}</span>
+									</div>
+								))}
+							</div>
+						</div>
+						<div class="ghero-visual">
+							<div class="ghero-image-frame">
+								<Image src={HeroVisual} alt="Growpha growth dashboard" width={960} height={536} />
+							</div>
+							<div class="metric-card metric-card-bl">
+								<div class="metric-value">+312%</div>
+								<div class="metric-label">Organic Traffic</div>
+							</div>
+							<div class="metric-card metric-card-tr">
+								<div class="metric-value" style="font-size: 1.5rem;">#1</div>
+								<div class="metric-label">Rankings Achieved</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="stats-bar">
+				<div class="gp-container">
+					<div class="stats-grid">
+						{
+							statsBar.map((stat) => (
+								<div class="metric-card">
+									<div class="metric-value big" data-countup data-target={stat.value} data-suffix={stat.suffix}>
+										0{stat.suffix}
+									</div>
+									<div class="metric-label">{stat.label}</div>
+								</div>
+							))
+						}
+					</div>
+					<div class="section-divider"></div>
+					<div class="industry-tags">
+						{industryTags.map((tag) => <div class="service-tag">{tag}</div>)}
+					</div>
+				</div>
+			</section>
+
+			<div class="tools-strip">
+				<div class="tools-strip-label">Tools &amp; platforms we work with</div>
+				<div class="tools-scroll-wrap">
+					<div class="tools-fade tools-fade-left"></div>
+					<div class="tools-fade tools-fade-right"></div>
+					<div class="tools-scroll-track">
+						{
+							toolsLoop.map((tool) => (
+								<div class="tools-logo-item" title={tool.title}>
+									<div class="tools-logo-icon">
+										<img src={tool.src} alt={tool.title} class:list={{ 'tools-logo-invert': tool.invert }} />
+									</div>
+									<span>{tool.title}</span>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</div>
+
+			<section class="services-section">
+				<div class="gp-container">
+					<div class="services-header">
+						<div class="section-label">What Growpha Does</div>
+						<div class="services-header-row">
+							<h2 class="services-h2">
+								Six disciplines.<br />
+								<span class="text-gradient-green">One integrated system.</span>
+							</h2>
+							<a href="/services" class="ghero-btn-ghost">
+								View All Services
+								<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+							</a>
+						</div>
+					</div>
+					<div class="services-grid">
+						{
+							services.map((service) => (
+								<a href={service.href} class="growpha-card">
+									<div class="svc-card-top">
+										<div class="svc-card-icon" set:html={service.icon} />
+										<span class="service-tag">{service.tag}</span>
+									</div>
+									<h3 class="svc-card-title">{service.title}</h3>
+									<p class="svc-card-desc">{service.description}</p>
+									<div class="svc-learn-more">
+										Learn more
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svc-arrow"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+									</div>
+								</a>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="why-section">
+				<div class="why-glow" aria-hidden="true"></div>
+				<div class="gp-container">
+					<div class="why-grid">
+						<div class="why-copy">
+							<div class="section-label">Why Growpha</div>
+							<h2 class="why-h2">
+								Built for businesses that need<span class="text-gradient-orange"> results, not reports.</span>
+							</h2>
+							<p class="why-lead">
+								Most agencies optimise for their own retainer. Growpha optimises for your growth.
+								The difference is in how we think, what we prioritise, and how we measure success.
+							</p>
+							<a href="/who-am-i" class="ghero-btn-ghost">
+								About the Approach
+								<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+							</a>
+						</div>
+						<div class="why-cards">
+							{
+								whyPoints.map((point) => (
+									<div class="growpha-card why-card">
+										<div class="why-card-icon" set:html={point.icon} />
+										<h4 class="why-card-title">{point.title}</h4>
+										<p class="why-card-desc">{point.desc}</p>
+									</div>
+								))
+							}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="testimonials-section">
+				<div class="testimonials-container">
+					<div class="testimonials-heading">
+						<span>Client Results</span>
+						<span class="testimonials-divider"></span>
+					</div>
+					<div class="testimonial-viewport">
+						{
+							testimonials.map((t, i) => (
+								<div class="testimonial-slide" data-index={i} style={i === 0 ? '' : 'display:none'}>
+									<span class="quote-mark" style={`color:${t.color}`} aria-hidden="true">
+										&quot;
+									</span>
+									<blockquote style={`border-left-color:${t.color}`}>
+										<p>&quot;{t.quote}&quot;</p>
+										<footer>
+											<div
+												class="t-avatar"
+												style={`background:${t.color}18;border-color:${t.color}40;color:${t.color}`}
+											>
+												{t.initials}
+											</div>
+											<div class="t-identity">
+												<div class="t-name">{t.name}</div>
+												{t.role && <div class="t-role">{t.role}</div>}
+											</div>
+											<div class="t-tag" style={`background:${t.color}12;border-color:${t.color}30;color:${t.color}`}>
+												{t.tag}
+											</div>
+										</footer>
+									</blockquote>
+								</div>
+							))
+						}
+					</div>
+					<div class="testimonial-nav">
+						<div class="testimonial-arrows">
+							<button aria-label="Previous testimonial" data-t-prev>←</button>
+							<button aria-label="Next testimonial" data-t-next>→</button>
+						</div>
+						<div class="testimonial-dots">
+							{
+								testimonials.map((t, i) => (
+									<button
+										aria-label={`Go to testimonial ${i + 1}`}
+										data-t-dot={i}
+										class:list={['t-dot', { active: i === 0 }]}
+										style={i === 0 ? `background:${t.color}` : ''}
+									/>
+								))
+							}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="process-section">
+				<div class="gp-container">
+					<div class="process-header">
+						<div class="section-label">How It Works</div>
+						<h2 class="process-h2">
+							A performance system,<br />
+							<span class="text-gradient-green">not an agency process.</span>
+						</h2>
+					</div>
+					<div class="process-grid">
+						{
+							processSteps.map((step, i) => (
+								<div class="process-step" style={i % 2 === 0 ? 'background:var(--growpha-surface-3)' : 'background:var(--growpha-surface-2)'}>
+									<div class="process-num">{step.num}</div>
+									<h3 class="process-title">{step.title}</h3>
+									<p class="process-desc">{step.desc}</p>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<div class="content-container">
+
+				<section class="cta">
+					<h2>Let's build something worth ranking for.</h2>
+					<p>
+						Whether you need a full SEO system, an AI automation build, or a technical audit — the
+						conversation starts here. Serving Dubai, Abu Dhabi, and the wider UAE and GCC market.
+					</p>
+					<div class="hero-actions">
+						<a href="/contact" class="btn btn-primary">Get in Touch</a>
+						<a href="/who-am-i" class="btn btn-secondary">Read the Full Story</a>
+					</div>
+				</section>
+			</div>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<script>
+	const counters = document.querySelectorAll<HTMLElement>('[data-countup]');
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting) return;
+				const el = entry.target as HTMLElement;
+				if (el.dataset.done) return;
+				el.dataset.done = 'true';
+				const target = Number(el.dataset.target || '0');
+				const suffix = el.dataset.suffix || '';
+				const duration = 1400;
+				const start = performance.now();
+				function tick(now: number) {
+					const progress = Math.min((now - start) / duration, 1);
+					const eased = 1 - Math.pow(1 - progress, 3);
+					el.textContent = Math.round(eased * target) + suffix;
+					if (progress < 1) requestAnimationFrame(tick);
+				}
+				requestAnimationFrame(tick);
+				observer.unobserve(el);
+			});
+		},
+		{ threshold: 0.4 },
+	);
+	counters.forEach((el) => observer.observe(el));
+
+	const slides = Array.from(document.querySelectorAll<HTMLElement>('.testimonial-slide'));
+	const dots = Array.from(document.querySelectorAll<HTMLElement>('[data-t-dot]'));
+	const slideColors = slides.map((s) => s.querySelector<HTMLElement>('.quote-mark')?.style.color || '');
+	let current = 0;
+	let timer: ReturnType<typeof setInterval> | undefined;
+
+	function showSlide(index: number) {
+		current = (index + slides.length) % slides.length;
+		slides.forEach((s, i) => {
+			s.style.display = i === current ? '' : 'none';
+		});
+		dots.forEach((d, i) => {
+			d.classList.toggle('active', i === current);
+			d.style.background = i === current ? slideColors[current] : '';
+		});
+	}
+
+	document.querySelector('[data-t-prev]')?.addEventListener('click', () => showSlide(current - 1));
+	document.querySelector('[data-t-next]')?.addEventListener('click', () => showSlide(current + 1));
+	dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
+
+	const testimonialSection = document.querySelector('.testimonials-section');
+	function startAutoplay() {
+		timer = setInterval(() => showSlide(current + 1), 6000);
+	}
+	function stopAutoplay() {
+		if (timer) clearInterval(timer);
+	}
+	if (slides.length > 1) {
+		startAutoplay();
+		testimonialSection?.addEventListener('mouseenter', stopAutoplay);
+		testimonialSection?.addEventListener('mouseleave', startAutoplay);
+	}
+</script>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	/* Exact-match hero section */
+	.ghero {
+		position: relative;
+		overflow: hidden;
+		background: var(--growpha-surface-1);
+		min-height: 75vh;
+		display: flex;
+		align-items: center;
+		padding: 48px 0 56px;
+	}
+	.ghero-glow {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: radial-gradient(70% 60% at 60% 40%, rgba(34, 197, 94, 0.06) 0%, transparent 65%);
+	}
+	.ghero-dots {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		opacity: 0.4;
+		background-image: radial-gradient(circle, rgba(34, 197, 94, 0.07) 1px, transparent 1px);
+		background-size: 28px 28px;
+	}
+	.gp-container {
+		position: relative;
+		z-index: 10;
+		width: 100%;
+		max-width: 1320px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+	@media (min-width: 640px) {
+		.gp-container {
+			padding: 0 28px;
+		}
+	}
+	@media (min-width: 1024px) {
+		.gp-container {
+			padding: 0 40px;
+		}
+	}
+	.ghero-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 48px;
+		align-items: center;
+	}
+	@media (min-width: 1024px) {
+		.ghero-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 64px;
+		}
+	}
+
+	.section-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--growpha-green-bright);
+		background: rgba(34, 197, 94, 0.08);
+		border: 1px solid rgba(34, 197, 94, 0.18);
+		border-radius: 999px;
+		padding: 5px 12px;
+		font-family: var(--font-heading);
+		font-size: 0.75rem;
+		font-weight: 700;
+		margin-bottom: 24px;
+	}
+	.status-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--growpha-green-bright);
+		box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+		animation: pulse-dot 2s ease-in-out infinite;
+	}
+	@keyframes pulse-dot {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.6; }
+	}
+
+	.ghero-h1 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		line-height: 1.08;
+		letter-spacing: -0.03em;
+		color: var(--growpha-text-primary);
+		margin: 0 0 16px;
+	}
+	.text-gradient-orange {
+		background: var(--accent-gradient);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.ghero-lead {
+		color: var(--growpha-text-secondary);
+		font-size: 1.125rem;
+		line-height: 1.7;
+		max-width: 480px;
+		margin: 0 0 36px;
+	}
+
+	.ghero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+	.ghero-btn-primary {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		background: var(--growpha-orange);
+		color: #060b07;
+		border-radius: 10px;
+		padding: 12px 24px;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.9375rem;
+		text-decoration: none;
+		transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+	}
+	.ghero-btn-primary:hover {
+		background: var(--growpha-orange-dark);
+		transform: translateY(-1px);
+		box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
+	}
+	.ghero-btn-ghost {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--growpha-text-primary);
+		background: transparent;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		border-radius: 10px;
+		padding: 12px 22px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.9375rem;
+		text-decoration: none;
+		transition: border-color 0.2s, background 0.2s;
+	}
+	.ghero-btn-ghost:hover {
+		background: rgba(255, 255, 255, 0.04);
+		border-color: rgba(255, 255, 255, 0.25);
+	}
+
+	.ghero-trust {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+		margin-top: 40px;
+	}
+	.trust-item {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	.trust-icon {
+		color: var(--growpha-green-bright);
+		flex-shrink: 0;
+	}
+	.trust-item span {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+	}
+
+	.ghero-visual {
+		position: relative;
+	}
+	.ghero-image-frame {
+		border-radius: 16px;
+		overflow: hidden;
+		border: 1px solid rgba(34, 197, 94, 0.2);
+		box-shadow: 0 0 40px rgba(34, 197, 94, 0.08), 0 24px 60px rgba(0, 0, 0, 0.5);
+		line-height: 0;
+	}
+	.ghero-image-frame :global(img) {
+		width: 100%;
+		height: auto;
+		display: block;
+		border-radius: 0;
+	}
+	.metric-card {
+		position: absolute;
+		background: var(--growpha-surface-3);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(34, 197, 94, 0.18);
+		border-radius: 14px;
+		padding: 14px 18px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+	}
+	.metric-card-bl {
+		left: -24px;
+		bottom: -20px;
+		min-width: 140px;
+	}
+	.metric-card-tr {
+		right: -16px;
+		top: 32px;
+		min-width: 130px;
+	}
+	.metric-value {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 1.5rem;
+		letter-spacing: -0.04em;
+		line-height: 1;
+		background: var(--accent-gradient);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.metric-label {
+		font-family: var(--font-body);
+		font-size: 0.75rem;
+		color: var(--growpha-text-muted);
+		white-space: nowrap;
+		margin-top: 4px;
+	}
+
+	/* Why Growpha (exact match) */
+	.why-section {
+		position: relative;
+		overflow: hidden;
+		background: var(--growpha-surface-2);
+		padding: 40px 0;
+	}
+	.why-glow {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: radial-gradient(50% 60% at 0% 50%, rgba(34, 197, 94, 0.05) 0%, transparent 60%);
+	}
+	.why-grid {
+		position: relative;
+		z-index: 10;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 56px;
+		align-items: start;
+	}
+	@media (min-width: 1024px) {
+		.why-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	.why-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.875rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 0 0 16px;
+	}
+	.why-lead {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.75;
+		margin: 0 0 32px;
+	}
+	.why-cards {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+	@media (min-width: 640px) {
+		.why-cards {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.why-card {
+		padding: 20px;
+	}
+	.why-card-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		border-radius: 8px;
+		background: rgba(249, 115, 22, 0.1);
+		border: 1px solid rgba(249, 115, 22, 0.2);
+		color: var(--growpha-orange);
+		margin-bottom: 12px;
+	}
+	.why-card-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.9375rem;
+		color: var(--growpha-text-primary);
+		letter-spacing: -0.01em;
+		margin: 0 0 6px;
+	}
+	.why-card-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.8125rem;
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	/* Testimonials carousel (exact match) */
+	.testimonials-section {
+		background: var(--growpha-surface-2);
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		padding: 48px 0;
+	}
+	.testimonials-container {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+	.testimonials-heading {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 32px;
+	}
+	.testimonials-heading span:first-child {
+		font-family: var(--font-heading);
+		font-size: 0.6875rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+	}
+	.testimonials-divider {
+		display: inline-block;
+		width: 28px;
+		height: 1px;
+		background: var(--growpha-text-muted);
+		opacity: 0.4;
+	}
+	.testimonial-viewport {
+		position: relative;
+		min-height: 180px;
+	}
+	.quote-mark {
+		position: absolute;
+		top: -8px;
+		left: -4px;
+		font-family: Georgia, serif;
+		font-size: 4rem;
+		line-height: 1;
+		opacity: 0.18;
+		user-select: none;
+		pointer-events: none;
+	}
+	.testimonial-slide blockquote {
+		margin: 0;
+		padding-left: 20px;
+		border-left: 2px solid;
+	}
+	.testimonial-slide blockquote p {
+		font-family: var(--font-body);
+		font-size: clamp(1rem, 1.5vw, 1.125rem);
+		line-height: 1.75;
+		color: var(--growpha-text-primary);
+		font-weight: 400;
+		font-style: italic;
+		margin: 0 0 24px;
+	}
+	.testimonial-slide footer {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+	.t-avatar {
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		border: 1px solid;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.8125rem;
+		letter-spacing: 0.02em;
+	}
+	.t-name {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.875rem;
+		color: var(--growpha-text-primary);
+		line-height: 1.3;
+	}
+	.t-role {
+		font-size: 0.75rem;
+		color: var(--growpha-text-muted);
+		line-height: 1.4;
+		margin-top: 2px;
+	}
+	.t-tag {
+		margin-left: auto;
+		padding: 4px 10px;
+		border-radius: 4px;
+		border: 1px solid;
+		font-family: var(--font-heading);
+		font-size: 0.6875rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+	.testimonial-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 32px;
+	}
+	.testimonial-arrows {
+		display: flex;
+		gap: 8px;
+	}
+	.testimonial-arrows button {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		background: transparent;
+		color: var(--growpha-text-secondary);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1rem;
+		transition: border-color 0.2s, color 0.2s;
+	}
+	.testimonial-arrows button:hover {
+		border-color: rgba(255, 255, 255, 0.3);
+		color: var(--growpha-text-primary);
+	}
+	.testimonial-dots {
+		display: flex;
+		gap: 6px;
+		align-items: center;
+	}
+	.t-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 3px;
+		border: none;
+		background: rgba(255, 255, 255, 0.2);
+		cursor: pointer;
+		padding: 0;
+		transition: width 0.3s, background 0.3s;
+	}
+	.t-dot.active {
+		width: 20px;
+	}
+
+	/* How It Works (exact match) */
+	.process-section {
+		background: var(--growpha-surface-1);
+		padding: 40px 0;
+	}
+	.process-header {
+		margin-bottom: 56px;
+	}
+	.process-header .section-label {
+		margin-bottom: 16px;
+	}
+	.process-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		max-width: 520px;
+		margin: 0;
+	}
+	.process-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+	@media (min-width: 768px) {
+		.process-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 1024px) {
+		.process-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	.process-step {
+		padding: 24px;
+		border-right: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.process-step:last-child {
+		border-right: none;
+	}
+	.process-num {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2.5rem;
+		color: rgba(34, 197, 94, 0.15);
+		line-height: 1;
+		margin-bottom: 20px;
+		letter-spacing: -0.04em;
+	}
+	.process-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 10px;
+		letter-spacing: -0.01em;
+	}
+	.process-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.875rem;
+		line-height: 1.65;
+		margin: 0;
+	}
+
+	/* Existing sections, unchanged design (kept in their own centered container) */
+	.content-container {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 5em 1.5em;
+	}
+	/* Stats bar (exact match) */
+	.stats-bar {
+		background: var(--growpha-surface-3);
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		padding: 40px 0;
+	}
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+		margin-bottom: 32px;
+	}
+	@media (min-width: 768px) {
+		.stats-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	.stats-bar .metric-card {
+		position: static;
+		text-align: center;
+		background: transparent;
+		border: none;
+		backdrop-filter: none;
+		padding: 0;
+		box-shadow: none;
+	}
+	.metric-value.big {
+		font-size: 2.75rem;
+	}
+	.section-divider {
+		background: rgba(255, 255, 255, 0.06);
+		height: 1px;
+		margin: 32px 0;
+	}
+	.industry-tags {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 24px;
+	}
+	.service-tag {
+		display: inline-flex;
+		align-items: center;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--growpha-text-secondary);
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 999px;
+		padding: 4px 10px;
+		font-family: var(--font-heading);
+		font-size: 0.6875rem;
+		font-weight: 600;
+	}
+
+	/* Tools marquee (exact match) */
+	.tools-strip {
+		background: var(--growpha-surface-2);
+		border-top: 1px solid rgba(255, 255, 255, 0.07);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+		padding: 32px 0;
+		overflow: hidden;
+	}
+	.tools-strip-label {
+		text-align: center;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-bottom: 16px;
+	}
+	.tools-scroll-wrap {
+		position: relative;
+		overflow: hidden;
+	}
+	.tools-fade {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 100px;
+		z-index: 2;
+		pointer-events: none;
+	}
+	.tools-fade-left {
+		left: 0;
+		background: linear-gradient(90deg, var(--growpha-surface-2) 0%, transparent 100%);
+	}
+	.tools-fade-right {
+		right: 0;
+		background: linear-gradient(270deg, var(--growpha-surface-2) 0%, transparent 100%);
+	}
+	.tools-scroll-track {
+		display: flex;
+		align-items: stretch;
+		width: max-content;
+		animation: tools-scroll 35s linear infinite;
+	}
+	.tools-scroll-track:hover {
+		animation-play-state: paused;
+	}
+	@keyframes tools-scroll {
+		from {
+			transform: translate(0);
+		}
+		to {
+			transform: translate(-50%);
+		}
+	}
+	.tools-logo-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		padding: 0 44px;
+		border-right: 1px solid rgba(255, 255, 255, 0.05);
+		min-width: 120px;
+		opacity: 0.55;
+		transition: opacity 0.25s;
+	}
+	.tools-logo-item:hover {
+		opacity: 1;
+	}
+	.tools-logo-icon {
+		height: 36px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.tools-logo-icon img {
+		height: 32px;
+		width: auto;
+		max-width: 110px;
+		object-fit: contain;
+		display: block;
+	}
+	.tools-logo-invert {
+		filter: grayscale(1) invert(1) brightness(1.1);
+	}
+	.tools-logo-item span {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.6875rem;
+		color: rgba(200, 217, 201, 0.7);
+		letter-spacing: 0.02em;
+		white-space: nowrap;
+		line-height: 1;
+	}
+
+	/* Services grid (exact match) */
+	.services-section {
+		background: var(--growpha-surface-1);
+		padding: 40px 0;
+	}
+	.services-header {
+		margin-bottom: 56px;
+	}
+	.services-header .section-label {
+		margin-bottom: 16px;
+	}
+	.services-header-row {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 16px;
+	}
+	@media (min-width: 768px) {
+		.services-header-row {
+			flex-direction: row;
+			align-items: flex-end;
+		}
+	}
+	.services-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		max-width: 480px;
+		margin: 0;
+	}
+	.text-gradient-green {
+		background: linear-gradient(135deg, #22c55e, #4ade80);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.services-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	@media (min-width: 768px) {
+		.services-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 1024px) {
+		.services-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	.growpha-card {
+		display: block;
+		background: var(--growpha-surface-3);
+		border: 1px solid rgba(255, 255, 255, 0.07);
+		border-radius: 16px;
+		padding: 24px;
+		text-decoration: none;
+		transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+	}
+	.growpha-card:hover {
+		border-color: rgba(34, 197, 94, 0.22);
+		transform: translateY(-2px);
+		box-shadow: 0 0 28px rgba(34, 197, 94, 0.07), 0 4px 24px rgba(0, 0, 0, 0.3);
+	}
+	.svc-card-top {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		margin-bottom: 16px;
+	}
+	.svc-card-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 8px;
+		background: rgba(34, 197, 94, 0.1);
+		border: 1px solid rgba(34, 197, 94, 0.2);
+		color: var(--growpha-green-bright);
+	}
+	.svc-card-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		letter-spacing: -0.01em;
+		margin: 0 0 10px;
+	}
+	.svc-card-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.875rem;
+		line-height: 1.65;
+		margin: 0;
+	}
+	.svc-learn-more {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin-top: 16px;
+		color: var(--growpha-orange);
+		font-size: 0.8125rem;
+		font-weight: 600;
+	}
+	.svc-arrow {
+		transition: transform 0.2s;
+	}
+	.growpha-card:hover .svc-arrow {
+		transform: translateX(4px);
+	}
+
+	.cta {
+		text-align: center;
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 3em 0;
+		border-top: 1px solid var(--border);
+	}
+	.cta p {
+		margin-bottom: 1.5em;
+	}
+	.hero-actions {
+		display: flex;
+		justify-content: center;
+		gap: 1em;
+		flex-wrap: wrap;
+	}
+
+	@media (max-width: 800px) {
+		.metric-card-bl {
+			left: 0;
+		}
+		.metric-card-tr {
+			right: 0;
+		}
+	}
+</style>

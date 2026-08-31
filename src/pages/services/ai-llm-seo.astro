@@ -1,0 +1,317 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import ClosingCta from '../../components/service/ClosingCta.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+
+const tools = [
+	{ title: 'OpenAI', initials: 'AI' },
+	{ title: 'Perplexity', initials: 'PX' },
+	{ title: 'Claude', initials: 'CL' },
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+];
+
+const shifts = [
+	{ before: 'Keyword rankings', now: 'AI citation frequency' },
+	{ before: 'Page-level optimisation', now: 'Entity-level authority' },
+	{ before: 'Link-based authority', now: 'Knowledge graph presence' },
+	{ before: 'Click-through traffic', now: 'Brand visibility in AI answers' },
+];
+
+function icon(inner: string) {
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+}
+
+const disciplines = [
+	{
+		icon: icon('<path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path>'),
+		title: 'AI Search Visibility',
+		desc: 'Optimising for how AI-powered search surfaces, cites, and recommends your brand — including ChatGPT, Perplexity, and Google AI Overviews.',
+	},
+	{
+		icon: icon('<circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle>'),
+		title: 'Entity-Based Optimisation',
+		desc: 'Building structured entity relationships that help AI systems understand who you are, what you do, and why you are authoritative.',
+	},
+	{
+		icon: icon('<path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>'),
+		title: 'Citation & Mention Strategy',
+		desc: 'Positioning your brand to be cited by AI systems through strategic content placement, Wikipedia presence, and authoritative source building.',
+	},
+	{
+		icon: icon('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path>'),
+		title: 'LLM Content Structuring',
+		desc: 'Formatting and structuring content so that large language models can accurately retrieve, summarise, and attribute your expertise.',
+	},
+	{
+		icon: icon('<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>'),
+		title: 'Search Experience Shifts',
+		desc: 'Understanding how zero-click, AI-generated answers, and conversational search are changing the traffic landscape — and adapting accordingly.',
+	},
+	{
+		icon: icon('<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path>'),
+		title: 'Technical Content Foundations',
+		desc: 'Schema, structured data, and technical signals that help AI systems parse and trust your content at a machine level.',
+	},
+];
+
+const realityPoints = [
+	'Optimisation for ChatGPT, Perplexity, and Google AI Overviews',
+	'Entity and knowledge graph development',
+	'Structured content for LLM retrieval',
+	'Wikipedia and authoritative citation strategy',
+	'Brand mention and co-citation monitoring',
+	'AI-era content architecture',
+	'Technical schema for machine readability',
+	'Ongoing AI search landscape monitoring',
+];
+
+const faqs = [
+	{
+		q: 'What is AI and LLM SEO?',
+		a: 'AI and LLM SEO is the practice of optimising your brand, content, and digital presence to be accurately represented, cited, and recommended by AI-powered search systems such as Google AI Overviews, ChatGPT, Perplexity, and Bing Copilot. These systems retrieve information differently from traditional search engines — they synthesise answers from trusted sources rather than simply ranking pages. Growpha builds the content architecture, entity signals, and authority foundations that make your brand a reliable source for AI systems to reference.',
+	},
+	{
+		q: 'How do I get my brand mentioned by ChatGPT or Perplexity?',
+		a: 'AI language models and retrieval-augmented generation systems draw from a combination of training data, indexed web content, and trusted reference sources. To increase the likelihood of being cited, your brand needs strong entity presence across authoritative sources — including Wikipedia, industry publications, structured data markup, and high-quality content that directly answers the questions your audience asks. Growpha maps the specific sources and signals that influence AI retrieval in your category and builds a strategy to establish your brand as a credible reference.',
+	},
+	{
+		q: 'Is AI SEO different from traditional SEO?',
+		a: 'AI SEO shares many foundations with traditional SEO — content quality, authority, and technical accessibility all matter — but the optimisation targets differ. Traditional SEO focuses on ranking web pages for specific keyword queries. AI SEO focuses on ensuring your brand and expertise are accurately represented in AI-generated answers, which may not link to your site at all. This requires a different content strategy, entity optimisation approach, and authority-building framework. Growpha integrates both disciplines so your visibility is protected across both traditional and AI-powered search.',
+	},
+	{
+		q: 'How do I optimise for Google AI Overviews?',
+		a: 'Google AI Overviews (formerly Search Generative Experience) draws from pages that already rank well organically, prioritising content that is authoritative, well-structured, and directly answers the query. Optimising for AI Overviews involves strong on-page structure with clear headings and concise answers, schema markup, E-E-A-T signals (experience, expertise, authoritativeness, trustworthiness), and a track record of ranking in the top positions for relevant queries. Growpha treats AI Overview visibility as an extension of its core SEO strategy, not a separate discipline.',
+	},
+	{
+		q: 'Can AI SEO be measured?',
+		a: 'AI search visibility is harder to measure than traditional organic rankings because AI systems do not always link to sources and there is no equivalent of Google Search Console for AI retrieval. However, proxy metrics include brand mention tracking across AI platforms, share of voice in AI-generated answers for target queries, referral traffic from AI search tools, and entity presence across authoritative reference sources. Growpha builds a measurement framework for each client that tracks the signals most likely to correlate with AI visibility in their specific market.',
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="AI / LLM SEO | Growpha"
+			description="Growpha builds the technical and content foundations that make you visible in the AI search era — ChatGPT, Perplexity, and Google AI Overviews."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="AI / LLM SEO"
+				label="Emerging Discipline"
+				title="Search is changing."
+				titleAccent="Your visibility strategy needs to change with it."
+				lead="AI-powered search is not a future concern — it is reshaping how brands are discovered, cited, and recommended right now. Growpha builds the technical and content foundations that make you visible in the AI search era."
+				primaryLabel="Discuss AI Search Strategy"
+				secondaryLabel="Traditional SEO"
+				secondaryHref="/services/seo"
+			/>
+			<ToolsMarquee label="AI & LLM Platforms We Work With" tools={tools} />
+
+			<section class="shift-section">
+				<div class="gp-container">
+					<div class="shift-header">
+						<div class="section-label">The Search Shift</div>
+						<h2 class="shift-h2">What used to work.<br /><span class="text-gradient-orange">What works now.</span></h2>
+					</div>
+					<div class="shift-grid">
+						{
+							shifts.map((s) => (
+								<div class="shift-row">
+									<div class="shift-before">
+										<span class="shift-tag">Previously</span>
+										<span>{s.before}</span>
+									</div>
+									<div class="shift-now">
+										<span class="shift-tag shift-tag-now">Now</span>
+										<span>{s.now}</span>
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<FeatureGrid label="What We Do" title="Six disciplines for" titleAccent="the AI search era." features={disciplines} />
+
+			<section class="reality-section">
+				<div class="gp-container">
+					<div class="reality-grid">
+						<div>
+							<div class="section-label">The Reality</div>
+							<h2 class="reality-h2">
+								AI systems are already making recommendations about your category.
+							</h2>
+							<p class="reality-p">
+								Whether your brand appears in those recommendations — or your competitor's does — depends
+								on the signals you have built. Entity authority, citation presence, structured content,
+								and knowledge graph data all influence AI retrieval.
+							</p>
+							<p class="reality-p">
+								Growpha builds the technical and content foundations that position you to be cited,
+								recommended, and trusted by AI search systems — not just ranked by traditional
+								algorithms.
+							</p>
+							<a href="/services/ai-llm-seo" class="ghero-btn-ghost">Explore AI SEO Strategy</a>
+						</div>
+						<ul class="reality-list">
+							{realityPoints.map((p) => <li>{p}</li>)}
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<FaqAccordion items={faqs} />
+
+			<ClosingCta
+				label="Get Ahead of the Shift"
+				title="The brands building AI visibility"
+				titleAccent="today will own tomorrow's search."
+				intro="Most businesses are still optimising for 2020 search. The window to build a meaningful AI search advantage is now — before your competitors do."
+				ctaLabel="Start the Conversation"
+			/>
+			<AuditBanner />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.shift-section {
+		background: var(--growpha-surface-2);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.shift-header {
+		max-width: 500px;
+		margin-bottom: 32px;
+	}
+	.shift-header .section-label {
+		margin-bottom: 16px;
+	}
+	.shift-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 0;
+		color: var(--growpha-text-primary);
+	}
+	.shift-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.shift-row {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 12px;
+		background: var(--growpha-surface-3);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 12px;
+		padding: 18px 20px;
+	}
+	@media (min-width: 640px) {
+		.shift-row {
+			grid-template-columns: 1fr 1fr;
+			align-items: center;
+		}
+	}
+	.shift-before,
+	.shift-now {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	.shift-before span:last-child {
+		color: var(--growpha-text-muted);
+		text-decoration: line-through;
+		font-size: 0.9375rem;
+	}
+	.shift-now span:last-child {
+		color: var(--growpha-text-primary);
+		font-weight: 600;
+		font-size: 0.9375rem;
+	}
+	.shift-tag {
+		font-family: var(--font-heading);
+		font-size: 0.625rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		flex-shrink: 0;
+		width: 66px;
+	}
+	.shift-tag-now {
+		color: var(--growpha-orange);
+	}
+
+	.reality-section {
+		background: var(--growpha-surface-1);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.reality-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+	@media (min-width: 1024px) {
+		.reality-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	.reality-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.5rem, 2.75vw, 2.25rem);
+		letter-spacing: -0.025em;
+		line-height: 1.15;
+		margin: 16px 0;
+		color: var(--growpha-text-primary);
+	}
+	.reality-p {
+		color: var(--growpha-text-secondary);
+		font-size: 0.9375rem;
+		line-height: 1.7;
+		margin: 0 0 16px;
+	}
+	.reality-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		align-content: start;
+	}
+	.reality-list li {
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 8px;
+		padding: 12px 16px;
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+	}
+</style>

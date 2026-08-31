@@ -1,0 +1,700 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FeatureGrid from '../components/service/FeatureGrid.astro';
+import ProcessSteps from '../components/service/ProcessSteps.astro';
+import Deliverables from '../components/service/Deliverables.astro';
+import FaqAccordion from '../components/service/FaqAccordion.astro';
+
+const scope = [
+	{
+		tag: 'Analytics',
+		title: 'Traffic Performance Review',
+		desc: "A structured review of your organic traffic data — where it comes from, which pages drive it, where it is declining, and what the trend line actually means. Not a screenshot of Google Analytics. A proper read of the data.",
+		bullets: [
+			'Organic traffic trend analysis (12-month)',
+			'Top landing page performance vs. search intent',
+			'Keyword cannibalisation signals',
+			'Click-through rate anomalies by page type',
+			'Branded vs. non-branded traffic split',
+		],
+	},
+	{
+		tag: 'Foundation',
+		title: 'Technical SEO Audit',
+		desc: 'The part most audits get wrong. Technical issues are rarely dramatic — they are quiet, cumulative, and expensive. Crawl budget waste, indexing gaps, Core Web Vitals failures, and structural problems that compound over time.',
+		bullets: [
+			'Crawlability and indexation audit',
+			'Core Web Vitals assessment (LCP, CLS, INP)',
+			'Site architecture and internal linking review',
+			'Canonical, hreflang, and redirect chain analysis',
+			'Structured data and schema implementation review',
+		],
+	},
+	{
+		tag: 'Authority',
+		title: 'Content Audit',
+		desc: 'Content quality is not about word count. It is about topical coverage, intent alignment, and whether your content actually earns authority in your category. This section identifies what is working, what is diluting, and what needs to be rebuilt.',
+		bullets: [
+			'Topical coverage gaps vs. Dubai/UAE category leaders',
+			'Thin, duplicate, or low-value content identification',
+			'Content-to-keyword intent alignment review',
+			'Internal linking and content cluster structure',
+			'E-E-A-T signals and authority indicators',
+		],
+	},
+	{
+		tag: 'Optimisation',
+		title: 'On-Page SEO Review',
+		desc: 'On-page SEO done properly is about signal clarity — making it unambiguous to search engines what a page is about, why it is relevant, and why it deserves to rank. This covers the full on-page signal set across your key pages.',
+		bullets: [
+			'Title tag and meta description quality review',
+			'Heading hierarchy and keyword placement',
+			'Page-level content relevance and depth',
+			'Image optimisation and alt text coverage',
+			'Internal anchor text and link distribution',
+		],
+	},
+	{
+		tag: 'Authority',
+		title: 'Off-Page SEO Review',
+		desc: 'Your backlink profile is a trust signal. A poor one actively suppresses rankings. This section reviews the quality, relevance, and risk profile of your inbound link portfolio — including opportunities specific to UAE business directories, Dubai press, and regional publications.',
+		bullets: [
+			'Backlink profile quality and relevance audit',
+			'Toxic or low-quality link identification',
+			'Anchor text distribution analysis',
+			'Competitor link gap analysis',
+			'Brand mention and citation coverage',
+		],
+	},
+	{
+		tag: 'Emerging',
+		title: 'LLM / AI Visibility Analysis',
+		desc: 'Search is no longer just Google. AI systems — ChatGPT, Perplexity, Gemini, Bing Copilot — are now answering commercial queries directly. This section reviews how your brand is currently represented in AI-generated responses and where the gaps are.',
+		bullets: [
+			'Brand citation presence in AI search outputs',
+			'Entity clarity and knowledge graph representation',
+			'Content structure for AI retrieval (chunking, clarity)',
+			'Competitor visibility in AI-generated answers',
+			'LLM-specific optimisation recommendations',
+		],
+	},
+];
+
+const scopeFeatures = scope.map((s) => ({ title: `${s.tag} — ${s.title}`, desc: s.desc, bullets: s.bullets }));
+
+const whyDifferent = [
+	{ title: 'Not an automated scan', desc: 'Automated tools flag issues. They do not understand context, priority, or commercial relevance. This audit involves genuine expert review — the kind that identifies what actually matters for your specific site and market.' },
+	{ title: 'Solutions, not just findings', desc: 'Most audits tell you what is wrong. This one tells you what to do about it. Every identified issue includes a recommended solution — specific, actionable, and sequenced by priority.' },
+	{ title: 'Covers AI search visibility', desc: 'The majority of SEO audits ignore how AI systems represent your brand. This one does not. LLM visibility is now a commercial consideration, and it is included in every audit.' },
+	{ title: 'Commercially prioritised', desc: 'Not every SEO issue deserves equal attention. This audit distinguishes between what is worth fixing immediately, what can wait, and what is a distraction — based on likely business impact.' },
+];
+
+const deliverableItems = [
+	'Comprehensive PDF audit document',
+	'Every identified issue documented clearly',
+	'A recommended solution for each issue',
+	'Issues prioritised by impact and effort',
+	'Traffic and ranking performance analysis',
+	'Technical SEO findings and fixes',
+	'Content quality and gap assessment',
+	'On-page optimisation recommendations',
+	'Backlink profile review and risk flags',
+	'LLM / AI visibility analysis',
+	'Realistic improvement opportunities',
+	'Clear, jargon-free language throughout',
+];
+
+const processSteps = [
+	{ title: 'Request & Intake', desc: 'Day 1 — You submit the audit request. I confirm scope, collect access requirements, and confirm the 10-day delivery window.' },
+	{ title: 'Access & Discovery', desc: 'Days 1–2 — Read-only access to Google Search Console, Analytics, and any relevant platforms. Initial crawl and data collection begins.' },
+	{ title: 'Deep Review', desc: 'Days 2–6 — The substantive work. Technical analysis, content review, backlink assessment, on-page checks, and AI visibility testing — all conducted manually alongside automated tooling.' },
+	{ title: 'Analysis & Prioritisation', desc: 'Days 6–8 — Findings are assessed for commercial impact and implementation effort. Issues are categorised by priority — not listed arbitrarily.' },
+	{ title: 'Report Preparation', desc: 'Days 8–10 — The audit document is compiled. Every identified issue includes a recommended solution. The report is structured for clarity, not volume.' },
+	{ title: 'Delivery', desc: 'Day 10 — The completed PDF audit is delivered. A follow-up call is available to walk through the findings and answer questions.' },
+];
+
+const afterAudit = [
+	{ title: 'Clarity on what is actually wrong', desc: 'Most sites have a mix of technical debt, content gaps, and missed optimisation opportunities. The audit identifies which of these are material to your performance.' },
+	{ title: 'A prioritised action plan', desc: 'Not a list of 200 issues. A structured set of priorities — what to fix first, what to address next, and what can wait — based on likely impact.' },
+	{ title: 'Understanding of your AI search visibility', desc: 'Many businesses have no idea how they are represented in AI-generated search responses. The audit gives you a clear picture and specific recommendations.' },
+	{ title: 'A foundation for informed investment', desc: 'Whether you implement internally or engage an agency, the audit gives you the information needed to make decisions based on evidence rather than sales pitches.' },
+];
+
+const faqs = [
+	{ q: 'What is included in the SEO Audit?', a: 'The audit covers six areas: traffic performance analysis, technical SEO, content quality, on-page optimisation, off-page and backlink review, and LLM / AI visibility. Each area is reviewed in detail, with identified issues and recommended solutions documented in the final PDF report.' },
+	{ q: 'How long does the audit take?', a: 'The audit is completed and delivered within 10 business days from the point of access confirmation. The timeline is fixed — not subject to delays or scope creep.' },
+	{ q: 'Will I receive solutions as well as identified issues?', a: 'Yes. Every issue identified in the audit is accompanied by a recommended solution. The report is structured to be actionable, not just diagnostic. You will know what is wrong and what to do about it.' },
+	{ q: 'Is this a technical SEO audit only?', a: 'No. The audit covers technical SEO, content quality, on-page optimisation, off-page signals, traffic performance, and LLM / AI visibility. It is a comprehensive review of your site\'s organic search presence — not a narrow technical scan.' },
+	{ q: 'Do you review content and off-page signals too?', a: 'Yes. Content quality, topical coverage, and authority signals are reviewed as part of the standard audit scope. Off-page analysis covers your backlink profile, anchor text distribution, and competitor link gaps.' },
+	{ q: 'Do you include LLM and AI visibility analysis?', a: 'Yes. This is included as a standard component. The audit reviews how your brand is currently represented in AI-generated search responses — including ChatGPT, Perplexity, and Bing Copilot — and identifies where visibility is missing or inaccurate.' },
+	{ q: 'Who is this audit suitable for?', a: 'This audit is suitable for businesses that are serious about organic search performance and want a clear, expert-led assessment of where they stand and what to prioritise. It is particularly useful for businesses that have invested in SEO without seeing expected results, or those preparing to scale their search presence.' },
+	{ q: 'How is the audit delivered?', a: 'The audit is delivered as a structured PDF document. A follow-up call is available to walk through the findings, clarify recommendations, and answer questions about implementation priorities.' },
+	{ q: 'Is the price fixed?', a: 'Yes. The current introductory price is 999 AED — reduced from the standard 2,500 AED as part of our Dubai market launch. This rate is available for a limited number of engagements. Once the allocation is filled, pricing returns to 2,500 AED. There are no hidden fees, no upsells, and no variable pricing based on site size or industry.' },
+	{ q: 'Do you work with Dubai and UAE businesses specifically?', a: 'Yes. Growpha is based in Dubai and works directly with UAE businesses — including SMEs in free zones (DIFC, DMCC, JAFZA), retail and e-commerce operators, professional services firms, and hospitality businesses. The audit is relevant to any business competing for search visibility in the UAE market or internationally.' },
+	{ q: 'What happens after I receive the audit?', a: 'The audit is a standalone deliverable. You can implement the recommendations internally, use them to brief an agency, or engage Growpha for ongoing implementation support. There is no obligation to continue beyond the audit itself.' },
+	{ q: 'Do you work with businesses outside Dubai?', a: 'Yes. The audit is built for Dubai and UAE-based businesses specifically, but the process works for any business with a website and Google Search Console access, wherever they are based.' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="SEO Audit Dubai — Technical, Content & AI Visibility Review | 999 AED | Growpha"
+			description="A structured, expert-led review of your site's technical foundation, content quality, on-page signals, backlink profile, and AI search visibility. Fixed price. 10-day delivery."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="ra-hero">
+				<div class="gp-container">
+					<div class="svc-breadcrumb">
+						<a href="/">Home</a>
+						<span>›</span>
+						<span>Request Audit</span>
+					</div>
+					<div class="section-label"><span class="status-dot"></span>SEO Audit Service</div>
+					<h1 class="ra-h1">
+						A comprehensive<br /><span class="text-gradient-orange">SEO audit</span><br />for Dubai businesses that tells you what to fix.
+					</h1>
+					<p class="ra-lead">
+						Most websites have more SEO problems than they realise — and most audits do not find them. This is a
+						structured, expert-led review of your site's technical foundation, content quality, on-page signals,
+						backlink profile, and AI search visibility. Every issue comes with a recommended solution.
+					</p>
+					<div class="ra-price-row">
+						<div class="ra-price">999 AED</div>
+						<div class="ra-price-meta">
+							<span>Fixed price</span>
+							<span>10-day delivery</span>
+							<span>PDF report</span>
+						</div>
+					</div>
+					<div class="ra-hero-actions">
+						<a href="#audit-form" class="ghero-btn-primary">Request Your Audit</a>
+						<a href="https://wa.me/971522418594" target="_blank" class="ghero-btn-ghost">Message on WhatsApp</a>
+					</div>
+					<p class="ra-note">Based in Dubai. Working with businesses across the UAE.</p>
+				</div>
+			</section>
+
+			<section class="ra-scope-strip">
+				<div class="gp-container ra-scope-strip-inner">
+					<div class="ra-scope-strip-title">6 areas covered</div>
+					<div class="ra-scope-tags">
+						<span>Traffic Performance Review</span>
+						<span>Technical SEO Audit</span>
+						<span>Content Audit</span>
+						<span>On-Page SEO Review</span>
+						<span>Off-Page SEO Review</span>
+						<span>LLM / AI Visibility Analysis</span>
+					</div>
+					<div class="ra-scope-strip-price">Delivered as PDF · <strong>999 AED</strong></div>
+				</div>
+			</section>
+
+			<FeatureGrid
+				label="Audit Scope"
+				title="What this SEO audit"
+				titleAccent="covers."
+				intro="Six areas. Each reviewed in depth. No surface-level checklist — a structured assessment of the signals that actually determine organic search performance."
+				features={scopeFeatures}
+				columns={2}
+			/>
+
+			<FeatureGrid
+				label="Why This Is Different"
+				title="Not a tool report."
+				titleAccent="An expert review."
+				intro="Automated SEO tools are useful for data collection. They are not a substitute for expert judgement. This audit is conducted by someone with over a decade of technical SEO and search strategy experience."
+				features={whyDifferent}
+				columns={2}
+			/>
+
+			<Deliverables
+				label="Deliverables"
+				title="What you receive at the end of day 10."
+				intro="A single, structured PDF document. No slide decks padded with screenshots. No 80-page reports where the actionable content is buried on page 47. The audit is written to be read, understood, and acted on."
+				items={deliverableItems}
+				ctaLabel="Request Your Audit"
+				ctaHref="#audit-form"
+			/>
+
+			<ProcessSteps
+				label="The Process"
+				title="From request to delivery"
+				titleAccent="in 10 business days."
+				intro="The timeline is fixed. The process is structured. You know exactly what happens between requesting the audit and receiving the report."
+				steps={processSteps}
+				columns={3}
+			/>
+
+			<section class="ra-pricing">
+				<div class="gp-container">
+					<div class="section-label">Pricing</div>
+					<h2 class="ra-pricing-h2">One price. No surprises.</h2>
+					<div class="growpha-card ra-pricing-card">
+						<div class="ra-pricing-badge">Dubai Launch Offer — 60% OFF</div>
+						<div class="ra-pricing-amount">999 <span>AED</span></div>
+						<div class="ra-pricing-normal">Normal price: 2,500 AED</div>
+						<p class="ra-pricing-fine">Fixed price. No hidden fees. No variable scope.</p>
+						<div class="ra-pricing-included">
+							<div class="ra-pricing-included-label">Everything Included</div>
+							<ul>
+								{deliverableItems.slice(0, 8).map((item) => <li>{item}</li>)}
+							</ul>
+						</div>
+						<a href="#audit-form" class="ghero-btn-primary">Request Your Audit — 999 AED</a>
+					</div>
+				</div>
+			</section>
+
+			<FeatureGrid
+				label="What Changes After an Audit"
+				title="Most websites have more"
+				titleAccent="fixable problems than they know."
+				intro="The most common outcome of a thorough SEO audit is clarity. Fixing the right issues, in the right order, can unlock meaningful improvements in organic visibility."
+				features={afterAudit}
+				columns={2}
+			/>
+
+			<section class="ra-conducted">
+				<div class="gp-container">
+					<div class="section-label">Conducted By</div>
+					<h2 class="ra-conducted-h2">Over a decade of technical SEO<br /><span class="text-gradient-orange">and search strategy experience.</span></h2>
+					<p class="ra-conducted-p">
+						This audit is not outsourced. It is not run through a tool and reformatted. It is conducted by the
+						founder of Growpha — someone who has spent over ten years working on technical SEO, content systems,
+						and search strategy for businesses across e-commerce, SaaS, professional services, and media.
+					</p>
+					<div class="ra-conducted-stats">
+						<div><span>10+</span>Years in technical SEO</div>
+						<div><span>47+</span>Clients audited and grown</div>
+						<div><span>6</span>Audit areas covered</div>
+						<div><span>10</span>Business days to delivery</div>
+					</div>
+					<p class="ra-conducted-meet">Available to meet in person for businesses in DIFC, Business Bay, and JLT.</p>
+				</div>
+			</section>
+
+			<section class="ra-form-section" id="audit-form">
+				<div class="gp-container">
+					<div class="section-label">Request Your Audit</div>
+					<h2 class="ra-form-h2">Ready to find out what is holding your site back?</h2>
+					<p class="ra-form-p">Submit your details below. I will review your request and respond within 1–2 business days to confirm the audit and next steps.</p>
+					<form
+						class="ra-form"
+						name="audit-request"
+						method="POST"
+						data-netlify="true"
+						data-netlify-honeypot="bot-field"
+						data-audit-form
+					>
+						<input type="hidden" name="form-name" value="audit-request" />
+						<p class="hp-field"><label>Don't fill this out: <input name="bot-field" /></label></p>
+						<label>Full Name *<input type="text" name="name" required /></label>
+						<label>Email Address *<input type="email" name="email" required /></label>
+						<label>Company / Website<input type="text" name="company" /></label>
+						<label>Tell Me About Your Website *<textarea name="message" rows="5" required></textarea></label>
+						<button type="submit" class="ghero-btn-primary" data-submit-btn>Request Your Audit</button>
+						<p class="ra-form-note" data-form-note>
+							Fixed price: 999 AED. 10-day delivery. I review every request personally. Prefer WhatsApp? Message
+							<a href="https://wa.me/971522418594" target="_blank">+971 52 241 8594</a> directly.
+						</p>
+					</form>
+				</div>
+			</section>
+
+			<FaqAccordion title="SEO Audit — Frequently Asked Questions" intro="Common questions about the audit scope, process, deliverables, and pricing." items={faqs} />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<script>
+	const form = document.querySelector('[data-audit-form]') as HTMLFormElement | null;
+	const note = document.querySelector('[data-form-note]');
+	const submitBtn = document.querySelector('[data-submit-btn]') as HTMLButtonElement | null;
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		if (submitBtn) {
+			submitBtn.disabled = true;
+			submitBtn.textContent = 'Sending…';
+		}
+		const body = new URLSearchParams(new FormData(form) as any).toString();
+		fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
+			.then(() => {
+				form.reset();
+				form.querySelectorAll('input, textarea, button').forEach((el) => ((el as HTMLElement).style.display = 'none'));
+				if (note) {
+					note.textContent = "Thanks — your audit request has been sent. I'll confirm scope and next steps within 1–2 business days.";
+					note.classList.add('form-note-success');
+				}
+			})
+			.catch(() => {
+				if (submitBtn) {
+					submitBtn.disabled = false;
+					submitBtn.textContent = 'Request Your Audit';
+				}
+				if (note) note.textContent = 'Something went wrong — please message on WhatsApp (+971 52 241 8594) instead.';
+			});
+	});
+</script>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.svc-breadcrumb {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 24px;
+	}
+	.svc-breadcrumb a {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		text-decoration: none;
+	}
+	.svc-breadcrumb span {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+	}
+
+	.ra-hero {
+		background: var(--growpha-surface-1);
+		padding: 40px 0 40px;
+	}
+	.ra-hero .section-label {
+		margin-bottom: 20px;
+	}
+	.ra-h1 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+		margin: 0 0 16px;
+		color: var(--growpha-text-primary);
+	}
+	.ra-lead {
+		color: var(--growpha-text-secondary);
+		font-size: 1.0625rem;
+		line-height: 1.7;
+		max-width: 640px;
+		margin: 0 0 28px;
+	}
+	.ra-price-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 20px;
+		margin-bottom: 28px;
+	}
+	.ra-price {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2.25rem;
+		color: var(--growpha-orange);
+	}
+	.ra-price-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+	.ra-price-meta span {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.ra-hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-bottom: 16px;
+	}
+	.ra-note {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin: 0;
+	}
+
+	.ra-scope-strip {
+		background: var(--growpha-surface-2);
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		padding: 20px 0;
+	}
+	.ra-scope-strip-inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 16px;
+		justify-content: space-between;
+	}
+	.ra-scope-strip-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.9375rem;
+		color: var(--growpha-green-bright);
+		flex-shrink: 0;
+	}
+	.ra-scope-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		flex: 1;
+	}
+	.ra-scope-tags span {
+		font-size: 0.75rem;
+		color: var(--growpha-text-secondary);
+		background: var(--growpha-surface-3);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 999px;
+		padding: 5px 12px;
+	}
+	.ra-scope-strip-price {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		flex-shrink: 0;
+	}
+	.ra-scope-strip-price strong {
+		color: var(--growpha-orange);
+	}
+
+	.ra-pricing {
+		background: var(--growpha-surface-2);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.ra-pricing .section-label {
+		margin-bottom: 16px;
+	}
+	.ra-pricing-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		margin: 0 0 32px;
+		color: var(--growpha-text-primary);
+	}
+	.ra-pricing-card {
+		max-width: 560px;
+		text-align: center;
+		padding: 36px;
+	}
+	.ra-pricing-badge {
+		display: inline-flex;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--growpha-orange);
+		background: rgba(249, 115, 22, 0.1);
+		border: 1px solid rgba(249, 115, 22, 0.25);
+		border-radius: 999px;
+		padding: 6px 14px;
+		margin-bottom: 16px;
+	}
+	.ra-pricing-amount {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 3rem;
+		color: var(--growpha-text-primary);
+	}
+	.ra-pricing-amount span {
+		font-size: 1.25rem;
+		color: var(--growpha-text-muted);
+	}
+	.ra-pricing-normal {
+		font-size: 0.875rem;
+		color: var(--growpha-text-muted);
+		text-decoration: line-through;
+		margin-top: 4px;
+	}
+	.ra-pricing-fine {
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		margin: 12px 0 24px;
+	}
+	.ra-pricing-included {
+		text-align: left;
+		background: var(--growpha-surface-2);
+		border-radius: 12px;
+		padding: 20px;
+		margin-bottom: 24px;
+	}
+	.ra-pricing-included-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--growpha-green-bright);
+		margin-bottom: 12px;
+	}
+	.ra-pricing-included ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+	.ra-pricing-included li {
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		padding-left: 18px;
+		position: relative;
+	}
+	.ra-pricing-included li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		color: var(--growpha-green-bright);
+		font-weight: 700;
+	}
+
+	.ra-conducted {
+		background: var(--growpha-surface-1);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.ra-conducted .section-label {
+		margin-bottom: 16px;
+	}
+	.ra-conducted-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.15;
+		margin: 0 0 20px;
+		color: var(--growpha-text-primary);
+		max-width: 680px;
+	}
+	.ra-conducted-p {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.75;
+		max-width: 680px;
+		margin: 0 0 32px;
+	}
+	.ra-conducted-stats {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+		margin-bottom: 20px;
+	}
+	@media (min-width: 640px) {
+		.ra-conducted-stats {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	.ra-conducted-stats div {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+	.ra-conducted-stats span {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 1.75rem;
+		color: var(--growpha-orange);
+	}
+	.ra-conducted-stats div {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.ra-conducted-meet {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin: 0;
+	}
+
+	.ra-form-section {
+		background: var(--growpha-black);
+		padding: 48px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.ra-form-section .section-label {
+		margin-bottom: 16px;
+	}
+	.ra-form-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		margin: 0 0 12px;
+		color: var(--growpha-text-primary);
+	}
+	.ra-form-p {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.7;
+		max-width: 620px;
+		margin: 0 0 32px;
+	}
+	.ra-form {
+		max-width: 620px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.ra-form label {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		font-size: 0.8125rem;
+		font-weight: 600;
+		font-family: var(--font-heading);
+		color: var(--growpha-text-secondary);
+	}
+	.ra-form input,
+	.ra-form textarea {
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 10px;
+		padding: 12px 14px;
+		color: var(--growpha-text-primary);
+		font-family: var(--font-body);
+		font-size: 0.9375rem;
+		outline: none;
+		transition: border-color 0.2s;
+		resize: vertical;
+	}
+	.ra-form input:focus,
+	.ra-form textarea:focus {
+		border-color: rgba(249, 115, 22, 0.5);
+	}
+	.ra-form button {
+		align-self: flex-start;
+	}
+	.ra-form-note {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin: 0;
+	}
+	.ra-form-note a {
+		color: var(--growpha-orange);
+	}
+	.form-note-success {
+		color: var(--growpha-green-bright);
+		font-weight: 600;
+		font-size: 0.9375rem;
+	}
+	.hp-field {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+</style>

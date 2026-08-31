@@ -1,0 +1,170 @@
+---
+interface Feature {
+	icon?: string;
+	title: string;
+	desc: string;
+	bullets?: string[];
+	href?: string;
+	linkLabel?: string;
+}
+interface Props {
+	label?: string;
+	title?: string;
+	titleAccent?: string;
+	intro?: string;
+	features: Feature[];
+	columns?: 2 | 3;
+}
+const { label, title, titleAccent, intro, features, columns = 3 } = Astro.props;
+const showHeader = Boolean(label || title);
+const chevronRight =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>';
+---
+
+<section class="fg-section">
+	<div class="gp-container">
+		{showHeader && (
+			<div class="fg-header">
+				{label && <div class="section-label">{label}</div>}
+				<h2 class="fg-h2">
+					{title}<br />
+					{titleAccent && <span class="text-gradient-orange">{titleAccent}</span>}
+				</h2>
+				{intro && <p class="fg-intro">{intro}</p>}
+			</div>
+		)}
+		<div class:list={['fg-grid', `fg-grid-${columns}`]}>
+			{
+				features.map((f) => (
+					<div class="growpha-card fg-card">
+						{f.icon && <div class="fg-icon" set:html={f.icon} />}
+						<h3 class="fg-title">{f.title}</h3>
+						<p class="fg-desc">{f.desc}</p>
+						{f.bullets && (
+							<ul class="fg-bullets">
+								{f.bullets.map((b) => (
+									<li>{b}</li>
+								))}
+							</ul>
+						)}
+						{f.href && (
+							<a href={f.href} class="fg-link">
+								{f.linkLabel || 'Learn more'}
+								<span set:html={chevronRight} />
+							</a>
+						)}
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.fg-section {
+		background: var(--growpha-surface-2);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.fg-header {
+		margin-bottom: 40px;
+		max-width: 640px;
+	}
+	.fg-header .section-label {
+		margin-bottom: 16px;
+	}
+	.fg-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 0 0 12px;
+		color: var(--growpha-text-primary);
+	}
+	.fg-intro {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.7;
+		margin: 0;
+	}
+	.fg-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	@media (min-width: 640px) {
+		.fg-grid-2,
+		.fg-grid-3 {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 1024px) {
+		.fg-grid-3 {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	.fg-card {
+		background: var(--growpha-surface-3);
+	}
+	.fg-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 8px;
+		background: rgba(34, 197, 94, 0.1);
+		border: 1px solid rgba(34, 197, 94, 0.2);
+		color: var(--growpha-green-bright);
+		margin-bottom: 16px;
+	}
+	.fg-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 10px;
+		letter-spacing: -0.01em;
+	}
+	.fg-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.875rem;
+		line-height: 1.65;
+		margin: 0;
+	}
+	.fg-bullets {
+		list-style: none;
+		margin: 14px 0 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+	.fg-bullets li {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		padding-left: 14px;
+		position: relative;
+	}
+	.fg-bullets li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.55em;
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: var(--growpha-green-bright);
+	}
+	.fg-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		margin-top: 16px;
+		color: var(--growpha-orange);
+		font-size: 0.8125rem;
+		font-weight: 600;
+		text-decoration: none;
+	}
+</style>

@@ -1,0 +1,122 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import Deliverables from '../../components/service/Deliverables.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+import RelatedServices from '../../components/service/RelatedServices.astro';
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Surfer SEO', initials: 'SU' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+	{ title: 'Moz', initials: 'MO' },
+];
+
+const features = [
+	{ title: 'Keyword Mapping', desc: 'Assigning the right keywords to the right pages — avoiding cannibalisation and building topical coherence across the site.' },
+	{ title: 'Content Optimisation', desc: 'Aligning existing content with search intent, semantic relevance, and the signals that drive rankings in your category.' },
+	{ title: 'Internal Link Architecture', desc: 'Building a logical internal linking structure that distributes authority and guides both users and crawlers through your site.' },
+	{ title: 'Meta & Heading Structure', desc: 'Title tags, meta descriptions, H1–H3 hierarchy, and structured markup — the signals search engines read first.' },
+	{ title: 'Content Gap Analysis', desc: 'Identifying topics your competitors rank for that you do not — and building the content to close the gap.' },
+	{ title: 'Semantic Depth', desc: 'Ensuring pages cover topics comprehensively enough to satisfy search intent and establish topical authority.' },
+];
+
+const processSteps = [
+	{ title: 'Keyword & Intent Mapping', desc: 'Understanding what your target audience searches for and what they expect to find on each page.' },
+	{ title: 'Content Audit', desc: 'Reviewing existing pages for relevance, quality, and alignment with current ranking signals.' },
+	{ title: 'Optimisation', desc: 'Updating page structure, content, meta data, and internal links based on audit findings.' },
+	{ title: 'Monitoring & Iteration', desc: 'Tracking ranking changes and iterating based on performance data.' },
+];
+
+const deliverables = [
+	'Page-level audit report',
+	'Keyword and intent mapping document',
+	'Optimised page copy and structure',
+	'Internal link recommendations',
+	'Meta tag optimisation',
+	'Content gap analysis',
+	'Heading hierarchy review',
+	'Semantic entity recommendations',
+];
+
+const faqs = [
+	{
+		q: 'What is on-page SEO and what does it include?',
+		a: 'On-page SEO covers all the optimisations made directly on a webpage to improve its relevance and ranking potential. This includes title tags and meta descriptions, heading structure (H1–H3), keyword placement and density, internal linking, content quality and depth, image alt text, URL structure, and structured data markup. It is distinct from technical SEO (which covers site infrastructure) and off-page SEO (which covers external signals like backlinks). Growpha treats on-page optimisation as a continuous process — not a one-time task.',
+	},
+	{
+		q: 'How do I optimise a page for a specific keyword?',
+		a: 'Effective on-page optimisation starts with understanding the search intent behind the keyword — what the user actually wants to find. From there, the process involves placing the keyword naturally in the title tag, H1, and early in the body content; ensuring the page covers the topic comprehensively enough to satisfy intent; building relevant internal links to and from the page; and structuring the content with clear headings and logical flow. Growpha maps keywords to pages systematically to avoid cannibalisation and ensure each page has a clear, unambiguous focus.',
+	},
+	{
+		q: 'What is the difference between on-page SEO and content marketing?',
+		a: 'On-page SEO focuses on optimising existing pages for search — adjusting structure, meta data, and content to improve rankings. Content marketing involves creating new content assets designed to attract, engage, and convert an audience. The two disciplines overlap significantly: good content marketing requires on-page SEO thinking from the outset, and on-page SEO often involves improving or expanding existing content. Growpha integrates both into a unified content strategy so every piece of content is built to rank and built to convert.',
+	},
+	{
+		q: 'Does updating old content improve SEO?',
+		a: 'Yes — content refreshes are one of the highest-ROI activities in SEO. Pages that once ranked well can lose position as search intent evolves, competitors publish better content, or the information becomes outdated. Updating content with current information, improved structure, and stronger keyword alignment can recover lost rankings and drive significant traffic gains. Growpha conducts regular content audits to identify which pages have the most recovery potential and prioritises updates accordingly.',
+	},
+	{
+		q: 'How many keywords should I target per page?',
+		a: "Each page should have one primary keyword (the main topic the page is built around) and a cluster of semantically related secondary keywords that support the primary topic. Trying to rank a single page for dozens of unrelated keywords is counterproductive — it dilutes focus and confuses search engines about the page's purpose. Growpha uses a keyword mapping process to assign clear primary and secondary targets to each page, ensuring the site's content architecture is coherent and non-cannibalising.",
+	},
+];
+
+const related = [
+	{ label: 'Technical SEO', href: '/services/technical-seo' },
+	{ label: 'Content Marketing', href: '/services/content-marketing' },
+	{ label: 'Off-Page SEO', href: '/services/off-page-seo' },
+	{ label: 'AI / LLM SEO', href: '/services/ai-llm-seo' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="On-Page SEO | Growpha"
+			description="On-page SEO is where content strategy and technical precision meet — ensuring every page sends the right signals."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="On-Page SEO"
+				label="On-Page SEO"
+				title="Content structure that"
+				titleAccent="earns its rankings."
+				lead="On-page SEO is where content strategy and technical precision meet. It is about ensuring every page sends the right signals — through structure, relevance, internal architecture, and semantic depth."
+				primaryLabel="Get an On-Page Audit"
+				primaryHref="/request-audit"
+				secondaryLabel="← Back to SEO"
+				secondaryHref="/services/seo"
+			/>
+			<ToolsMarquee label="Tools & Platforms Used" tools={tools} />
+			<FeatureGrid label="What This Covers" title="Built for measurable outcomes," titleAccent="not activity metrics." features={features} />
+			<ProcessSteps label="The Process" title="How we approach" titleAccent="on-page seo." intro="Every engagement follows a structured process — audit first, strategy second, execution third. No guesswork, no assumptions." steps={processSteps} />
+			<Deliverables label="Deliverables & Outcomes" title="What you get from working with Growpha." intro="Clear outputs, documented processes, and measurable results — not activity reports that obscure whether anything is actually working." items={deliverables} ctaLabel="Discuss Your Project" />
+			<FaqAccordion items={faqs} />
+			<AuditBanner />
+			<RelatedServices items={related} />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+</style>

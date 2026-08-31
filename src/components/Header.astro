@@ -1,85 +1,856 @@
 ---
-import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
+import Logo from '../assets/brand/growpha-logo.png';
+import { Image } from 'astro:assets';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
+
+function icon(inner: string, size = 14) {
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+}
+
+const icons = {
+	chevron: icon('<path d="m6 9 6 6 6-6"></path>', 13),
+	search: icon('<circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>'),
+	bot: icon('<path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path>'),
+	fileText: icon('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path>'),
+	zap: icon('<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>'),
+	bookOpen: icon('<path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>'),
+	codeXml: icon('<path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path>'),
+	shoppingBag: icon('<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path>'),
+	layoutTemplate: icon('<rect width="18" height="7" x="3" y="3" rx="1"></rect><rect width="9" height="7" x="3" y="14" rx="1"></rect><rect width="5" height="7" x="16" y="14" rx="1"></rect>'),
+	shieldCheck: icon('<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path>', 12),
+	globe: icon('<circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path>', 12),
+	mapPin: icon('<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>', 12),
+	youtube: icon('<path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path>', 12),
+	earth: icon('<path d="M21.54 15H17a2 2 0 0 0-2 2v4.54"></path><path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17"></path><path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"></path><circle cx="12" cy="12" r="10"></circle>', 12),
+	menu: icon('<line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line>', 22),
+	close: icon('<path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>', 22),
+	arrowRight: icon('<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>', 14),
+};
+
+const seoItems = [
+	{ href: '/services/seo', icon: icons.search, title: 'SEO', desc: 'Technical foundations & authority building' },
+	{ href: '/services/ai-llm-seo', icon: icons.bot, title: 'AI / LLM SEO', desc: 'Visibility in AI-driven search systems' },
+];
+const seoSubItems = [
+	{ href: '/services/technical-seo', icon: icons.shieldCheck, title: 'Technical SEO' },
+	{ href: '/services/on-page-seo', icon: icons.layoutTemplate, title: 'On-Page SEO' },
+	{ href: '/services/off-page-seo', icon: icons.globe, title: 'Off-Page SEO' },
+	{ href: '/services/local-seo', icon: icons.mapPin, title: 'Local SEO' },
+	{ href: '/services/youtube-seo', icon: icons.youtube, title: 'YouTube SEO' },
+	{ href: '/services/international-seo', icon: icons.earth, title: 'International SEO' },
+];
+const growthItems = [
+	{ href: '/services/content-marketing', icon: icons.fileText, title: 'Content Marketing', desc: 'Topical authority & content systems' },
+	{ href: '/services/ai-automations', icon: icons.zap, title: 'AI Automations', desc: 'Workflows that remove manual bottlenecks' },
+	{ href: '/services/wikipedia-creation', icon: icons.bookOpen, title: 'Wikipedia Creation', desc: 'Notability research & editorial compliance' },
+];
+const devItems = [
+	{ href: '/services/web-development', icon: icons.codeXml, title: 'Web Development', desc: 'Performance-first, SEO-ready builds' },
+	{ href: '/services/shopify-development', icon: icons.shoppingBag, title: 'Shopify Development', desc: 'E-commerce performance & conversion' },
+	{ href: '/services/wordpress-development', icon: icons.layoutTemplate, title: 'WordPress Development', desc: 'Scalable, editorial-ready builds' },
+];
+const newsItems = [
+	{ href: '/blog', icon: icons.fileText, title: 'Blog', desc: 'Strategic insights & guides' },
+	{ href: '/news', icon: icons.zap, title: 'News', desc: 'Industry updates & commentary' },
+];
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+<header id="site-header">
+	<div class="container">
+		<div class="row">
+			<a href="/" class="brand">
+				<Image src={Logo} alt="Growpha" width={36} height={36} class="brand-logo" />
+			</a>
+
+			<nav class="nav">
+				<a href="/" class:list={['nav-link', { active: isActive('/') }]}>Home</a>
+
+				<div class="nav-item">
+					<button class:list={['nav-link', 'nav-btn', { active: isActive('/services') }]} data-menu-trigger="services">
+						Services
+						<span class="chevron" set:html={icons.chevron} />
+					</button>
+					<div class="mega-menu" data-menu="services">
+						<div class="mega-grid">
+							<div class="mega-col">
+								<div class="mega-label">Search &amp; Visibility</div>
+								<div class="mega-items">
+									{seoItems.map((item) => (
+										<a href={item.href} class="mega-item">
+											<span class="mega-item-icon" set:html={item.icon} />
+											<span>
+												<span class="mega-item-title">{item.title}</span>
+												<span class="mega-item-desc">{item.desc}</span>
+											</span>
+										</a>
+									))}
+								</div>
+								<div class="mega-sub">
+									<div class="mega-sub-label">Sub-services</div>
+									{seoSubItems.map((item) => (
+										<a href={item.href} class="sub-item">
+											<span class="sub-item-icon" set:html={item.icon} />
+											<span>{item.title}</span>
+										</a>
+									))}
+								</div>
+							</div>
+							<div class="mega-col">
+								<div class="mega-label">Content &amp; Growth</div>
+								<div class="mega-items">
+									{growthItems.map((item) => (
+										<a href={item.href} class="mega-item">
+											<span class="mega-item-icon" set:html={item.icon} />
+											<span>
+												<span class="mega-item-title">{item.title}</span>
+												<span class="mega-item-desc">{item.desc}</span>
+											</span>
+										</a>
+									))}
+								</div>
+							</div>
+							<div class="mega-col mega-col-last">
+								<div class="mega-label">Web Development</div>
+								<div class="mega-items">
+									{devItems.map((item) => (
+										<a href={item.href} class="mega-item">
+											<span class="mega-item-icon" set:html={item.icon} />
+											<span>
+												<span class="mega-item-title">{item.title}</span>
+												<span class="mega-item-desc">{item.desc}</span>
+											</span>
+										</a>
+									))}
+								</div>
+							</div>
+						</div>
+						<div class="mega-footer">
+							<div class="mega-footer-row mega-footer-orange">
+								<div>
+									<span class="mega-footer-title">Not sure where to start?</span>
+									<span class="mega-footer-sub">An audit will tell you exactly what to fix.</span>
+								</div>
+								<a href="/request-audit" class="mega-footer-btn">
+									Start with an audit <span set:html={icons.arrowRight} />
+								</a>
+							</div>
+							<div class="mega-footer-row">
+								<span class="mega-footer-sub">Ready to start a full engagement?</span>
+								<a href="/contact" class="mega-footer-link">
+									Let's talk <span set:html={icons.arrowRight} />
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<a href="/services/ai-llm-seo" class="nav-link">AI / LLM SEO</a>
+				<a href="/services/content-marketing" class="nav-link">Content</a>
+				<a href="/services/ai-automations" class="nav-link">AI Automations</a>
+
+				<div class="nav-item">
+					<button class:list={['nav-link', 'nav-btn', { active: isActive('/blog') || isActive('/news') }]} data-menu-trigger="news">
+						News
+						<span class="chevron" set:html={icons.chevron} />
+					</button>
+					<div class="dropdown-menu" data-menu="news">
+						{newsItems.map((item) => (
+							<a href={item.href} class="dropdown-item">
+								<span class="mega-item-icon" set:html={item.icon} />
+								<span>
+									<span class="mega-item-title">{item.title}</span>
+									<span class="mega-item-desc">{item.desc}</span>
+								</span>
+							</a>
+						))}
+					</div>
+				</div>
+
+				<a href="/who-am-i" class:list={['nav-link', { active: isActive('/who-am-i') }]}>Who am I</a>
+			</nav>
+
+			<div class="actions">
+				<a href="/request-audit" class="btn-audit">Request Audit</a>
+				<a href="/contact" class="btn-primary-header">
+					Let's Talk <span set:html={icons.arrowRight} />
+				</a>
+				<button class="mobile-toggle" aria-label="Toggle menu" data-mobile-toggle>
+					<span set:html={icons.menu} data-icon="menu" />
+					<span set:html={icons.close} data-icon="close" style="display:none" />
+				</button>
+			</div>
 		</div>
-		<div class="social-links">
-			<a href="https://m.webtoo.ls/@astro" target="_blank">
-				<span class="sr-only">Follow Astro on Mastodon</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"
-					></path></svg
-				>
-			</a>
-			<a href="https://twitter.com/astrodotbuild" target="_blank">
-				<span class="sr-only">Follow Astro on Twitter</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-					></path></svg
-				>
-			</a>
-			<a href="https://github.com/withastro/astro" target="_blank">
-				<span class="sr-only">Go to Astro's GitHub repo</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg
-				>
+	</div>
+
+	<div class="mobile-menu" data-mobile-menu>
+		<a href="/" class="mobile-link">Home</a>
+
+		<div class="mobile-accordion">
+			<button class="mobile-accordion-btn" data-accordion-trigger="m-services">
+				Services
+				<span class="chevron" set:html={icons.chevron} />
+			</button>
+			<div class="mobile-accordion-panel" data-accordion-panel="m-services">
+				<div class="mobile-accordion-group">
+					<div class="mobile-group-label">Search &amp; Visibility</div>
+					{seoItems.map((item) => (
+						<a href={item.href} class="mobile-sub-link">{item.title}</a>
+					))}
+					{seoSubItems.map((item) => (
+						<a href={item.href} class="mobile-sub-sub-link">{item.title}</a>
+					))}
+				</div>
+				<div class="mobile-accordion-group">
+					<div class="mobile-group-label">Content &amp; Growth</div>
+					{growthItems.map((item) => (
+						<a href={item.href} class="mobile-sub-link">{item.title}</a>
+					))}
+				</div>
+				<div class="mobile-accordion-group">
+					<div class="mobile-group-label">Web Development</div>
+					{devItems.map((item) => (
+						<a href={item.href} class="mobile-sub-link">{item.title}</a>
+					))}
+				</div>
+				<div class="mobile-audit-banner">
+					<span>Not sure where to start?</span>
+					<a href="/request-audit">
+						Start with an audit <span set:html={icons.arrowRight} />
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<a href="/services/ai-llm-seo" class="mobile-link">AI / LLM SEO</a>
+		<a href="/services/content-marketing" class="mobile-link">Content Marketing</a>
+		<a href="/services/ai-automations" class="mobile-link">AI Automations</a>
+		<a href="/services/wikipedia-creation" class="mobile-link">Wikipedia Creation</a>
+
+		<div class="mobile-accordion">
+			<button class="mobile-accordion-btn" data-accordion-trigger="m-news">
+				News
+				<span class="chevron" set:html={icons.chevron} />
+			</button>
+			<div class="mobile-accordion-panel" data-accordion-panel="m-news">
+				{newsItems.map((item) => (
+					<a href={item.href} class="mobile-sub-link">{item.title}</a>
+				))}
+			</div>
+		</div>
+
+		<a href="/who-am-i" class="mobile-link">Who am I</a>
+		<a href="/request-audit" class="mobile-link-audit">Request Audit</a>
+		<div class="mobile-cta-wrap">
+			<a href="/contact" class="btn-primary-header mobile-cta-btn">
+				Let's Talk <span set:html={icons.arrowRight} />
 			</a>
 		</div>
-	</nav>
+	</div>
 </header>
+
+<script>
+	const header = document.getElementById('site-header');
+
+	function onScroll() {
+		if (!header) return;
+		if (window.scrollY > 8) {
+			header.classList.add('scrolled');
+		} else {
+			header.classList.remove('scrolled');
+		}
+	}
+	onScroll();
+	window.addEventListener('scroll', onScroll, { passive: true });
+
+	const triggers = document.querySelectorAll('[data-menu-trigger]');
+	function closeAllMenus() {
+		document.querySelectorAll('[data-menu]').forEach((m) => m.classList.remove('open'));
+		triggers.forEach((t) => t.setAttribute('aria-expanded', 'false'));
+	}
+	triggers.forEach((trigger) => {
+		const key = trigger.getAttribute('data-menu-trigger');
+		const menu = document.querySelector(`[data-menu="${key}"]`);
+		trigger.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const isOpen = menu?.classList.contains('open');
+			closeAllMenus();
+			if (!isOpen) menu?.classList.add('open');
+		});
+	});
+	document.addEventListener('click', closeAllMenus);
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeAllMenus();
+	});
+
+	const mobileToggle = document.querySelector('[data-mobile-toggle]');
+	const mobileMenu = document.querySelector('[data-mobile-menu]');
+	mobileToggle?.addEventListener('click', () => {
+		const open = mobileMenu?.classList.toggle('open');
+		const menuIcon = mobileToggle.querySelector('[data-icon="menu"]') as HTMLElement;
+		const closeIcon = mobileToggle.querySelector('[data-icon="close"]') as HTMLElement;
+		if (menuIcon && closeIcon) {
+			menuIcon.style.display = open ? 'none' : '';
+			closeIcon.style.display = open ? '' : 'none';
+		}
+	});
+
+	const accordionTriggers = document.querySelectorAll('[data-accordion-trigger]');
+	accordionTriggers.forEach((trigger) => {
+		const key = trigger.getAttribute('data-accordion-trigger');
+		const panel = document.querySelector(`[data-accordion-panel="${key}"]`) as HTMLElement;
+		trigger.addEventListener('click', () => {
+			const isOpen = trigger.classList.toggle('open');
+			panel?.classList.toggle('open', isOpen);
+		});
+	});
+</script>
+
 <style>
 	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+		background: rgba(6, 11, 7, 0.75);
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+		border-bottom: 1px solid transparent;
+		transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
 	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+	header.scrolled {
+		background: #060b07eb;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
+	.container {
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 0 20px;
 	}
-	nav {
+	.row {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		height: 64px;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
+	@media (min-width: 1024px) {
+		.container {
+			padding: 0 40px;
+		}
+		.row {
+			height: 70px;
+		}
 	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
+
+	.brand {
 		display: flex;
+		align-items: center;
+		flex-shrink: 0;
 	}
-	@media (max-width: 720px) {
-		.social-links {
+	.brand-logo {
+		height: 36px;
+		width: 36px;
+		border-radius: 6px;
+		display: block;
+	}
+
+	.nav {
+		display: none;
+		align-items: center;
+		gap: 2px;
+	}
+	@media (min-width: 1024px) {
+		.nav {
+			display: flex;
+		}
+	}
+	.nav-item {
+		position: relative;
+	}
+	.nav-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 8px 12px;
+		border-radius: 6px;
+		color: var(--growpha-text-primary);
+		opacity: 0.82;
+		font-family: var(--font-heading);
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-decoration: none;
+		background: transparent;
+		border: 0;
+		cursor: pointer;
+		transition: opacity 0.2s, color 0.2s;
+	}
+	.nav-link:hover {
+		opacity: 1;
+	}
+	.nav-link.active {
+		opacity: 1;
+		color: #fff;
+	}
+	.chevron {
+		display: inline-flex;
+		transition: transform 0.2s;
+	}
+	.nav-item:has([data-menu].open) .chevron {
+		transform: rotate(180deg);
+	}
+
+	/* Dropdown / mega menu shell */
+	.mega-menu,
+	.dropdown-menu {
+		position: absolute;
+		top: calc(100% + 12px);
+		left: 50%;
+		transform: translateX(-50%) translateY(-6px);
+		background: #0a120bf7;
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		border-radius: 16px;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		z-index: 100;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.18s, transform 0.18s;
+	}
+	.mega-menu.open,
+	.dropdown-menu.open {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(-50%) translateY(0);
+	}
+	.mega-menu {
+		width: 720px;
+		max-width: 90vw;
+		overflow: hidden;
+	}
+	.dropdown-menu {
+		width: 220px;
+		padding: 8px;
+	}
+
+	.mega-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.mega-col {
+		padding: 20px;
+		border-right: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.mega-col-last {
+		border-right: none;
+	}
+	.mega-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--growpha-green-bright);
+		margin-bottom: 14px;
+		padding-left: 4px;
+	}
+	.mega-items {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+	.mega-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 10px;
+		border-radius: 12px;
+		text-decoration: none;
+		transition: background 0.15s;
+	}
+	.mega-item:hover {
+		background: rgba(34, 197, 94, 0.08);
+	}
+	.mega-item-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		border-radius: 7px;
+		flex-shrink: 0;
+		background: rgba(34, 197, 94, 0.1);
+		border: 1px solid rgba(34, 197, 94, 0.15);
+		color: var(--growpha-green-bright);
+		margin-top: 1px;
+	}
+	.mega-item-title {
+		display: block;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.875rem;
+		color: var(--growpha-text-primary);
+		line-height: 1.3;
+		margin-bottom: 2px;
+	}
+	.mega-item-desc {
+		display: block;
+		font-size: 0.75rem;
+		color: var(--growpha-text-muted);
+		line-height: 1.4;
+	}
+	.mega-sub {
+		margin-top: 12px;
+		padding-top: 12px;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.mega-sub-label {
+		font-size: 0.6875rem;
+		color: var(--growpha-text-muted);
+		font-family: var(--font-heading);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		margin-bottom: 8px;
+		padding-left: 4px;
+	}
+	.sub-item {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 6px 10px;
+		border-radius: 8px;
+		text-decoration: none;
+		color: var(--growpha-text-secondary);
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		transition: background 0.15s;
+	}
+	.sub-item:hover {
+		background: rgba(34, 197, 94, 0.08);
+	}
+	.sub-item-icon {
+		display: flex;
+		color: var(--growpha-text-muted);
+		flex-shrink: 0;
+	}
+
+	.mega-footer {
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.mega-footer-row {
+		padding: 12px 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+	}
+	.mega-footer-orange {
+		background: rgba(249, 115, 22, 0.06);
+		border-bottom: 1px solid rgba(249, 115, 22, 0.1);
+	}
+	.mega-footer-title {
+		font-size: 0.8125rem;
+		color: rgba(255, 255, 255, 0.7);
+		font-family: var(--font-heading);
+		font-weight: 600;
+	}
+	.mega-footer-sub {
+		font-size: 0.75rem;
+		color: rgba(255, 255, 255, 0.35);
+		margin-left: 8px;
+		font-family: var(--font-body);
+	}
+	.mega-footer-row:not(.mega-footer-orange) {
+		background: rgba(34, 197, 94, 0.04);
+	}
+	.mega-footer-row:not(.mega-footer-orange) .mega-footer-sub {
+		margin-left: 0;
+		color: var(--growpha-text-muted);
+	}
+	.mega-footer-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		flex-shrink: 0;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.8125rem;
+		color: var(--growpha-orange);
+		background: rgba(249, 115, 22, 0.1);
+		border: 1px solid rgba(249, 115, 22, 0.25);
+		padding: 6px 14px;
+		border-radius: 8px;
+		text-decoration: none;
+		transition: background 0.2s;
+	}
+	.mega-footer-btn:hover {
+		background: rgba(249, 115, 22, 0.18);
+	}
+	.mega-footer-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.8125rem;
+		color: var(--growpha-orange);
+		text-decoration: none;
+		transition: opacity 0.2s;
+	}
+	.mega-footer-link:hover {
+		opacity: 0.8;
+	}
+
+	.dropdown-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 10px 12px;
+		border-radius: 12px;
+		text-decoration: none;
+		transition: background 0.15s;
+	}
+	.dropdown-item:hover {
+		background: rgba(34, 197, 94, 0.08);
+	}
+
+	/* Actions */
+	.actions {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	.btn-audit {
+		display: none;
+		align-items: center;
+		gap: 6px;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.875rem;
+		padding: 8px 16px;
+		border-radius: 10px;
+		background: rgba(249, 115, 22, 0.1);
+		border: 1px solid rgba(249, 115, 22, 0.3);
+		color: var(--growpha-orange);
+		text-decoration: none;
+		transition: background 0.2s;
+	}
+	.btn-audit:hover {
+		background: rgba(249, 115, 22, 0.18);
+	}
+	.btn-primary-header {
+		display: none;
+		align-items: center;
+		gap: 6px;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.875rem;
+		padding: 10px 20px;
+		border-radius: 10px;
+		background: var(--growpha-orange);
+		color: #060b07;
+		text-decoration: none;
+		transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+	}
+	.btn-primary-header:hover {
+		background: var(--growpha-orange-dark);
+		transform: translateY(-1px);
+		box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
+	}
+	@media (min-width: 1024px) {
+		.btn-audit,
+		.btn-primary-header {
+			display: inline-flex;
+		}
+	}
+
+	.mobile-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 8px;
+		border-radius: 8px;
+		border: 0;
+		background: transparent;
+		color: var(--growpha-text-primary);
+		cursor: pointer;
+	}
+	@media (min-width: 1024px) {
+		.mobile-toggle {
 			display: none;
 		}
+	}
+
+	.mobile-menu {
+		position: fixed;
+		top: 64px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: calc(100vh - 64px);
+		z-index: 90;
+		background: #060b07fa;
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		display: flex;
+		flex-direction: column;
+		padding: 24px 20px;
+		gap: 4px;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-8px);
+		transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+		overflow-y: auto;
+	}
+	.mobile-menu.open {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+	@media (min-width: 1024px) {
+		.mobile-menu {
+			display: none;
+		}
+	}
+	.mobile-link {
+		display: block;
+		padding: 12px 16px;
+		border-radius: 8px;
+		color: var(--growpha-text-primary);
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 1rem;
+		text-decoration: none;
+		transition: background 0.15s;
+	}
+	.mobile-link:hover {
+		background: rgba(34, 197, 94, 0.08);
+	}
+	.mobile-link.active {
+		color: var(--growpha-green-bright);
+	}
+
+	/* Mobile accordions (Services / News) */
+	.mobile-accordion-btn {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 12px 16px;
+		border-radius: 8px;
+		background: transparent;
+		border: 0;
+		color: var(--growpha-text-primary);
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background 0.15s;
+	}
+	.mobile-accordion-btn:hover {
+		background: rgba(34, 197, 94, 0.08);
+	}
+	.mobile-accordion-btn .chevron {
+		transition: transform 0.2s;
+	}
+	.mobile-accordion-btn.open .chevron {
+		transform: rotate(180deg);
+	}
+	.mobile-accordion-panel {
+		display: none;
+		flex-direction: column;
+		gap: 2px;
+		margin: 4px 0 4px 16px;
+	}
+	.mobile-accordion-panel.open {
+		display: flex;
+	}
+	.mobile-group-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--growpha-green-bright);
+		padding: 8px 16px 4px;
+	}
+	.mobile-sub-link {
+		display: block;
+		padding: 8px 16px;
+		border-radius: 8px;
+		color: var(--growpha-text-secondary);
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.9rem;
+		text-decoration: none;
+		transition: background 0.15s;
+	}
+	.mobile-sub-link:hover {
+		background: rgba(34, 197, 94, 0.08);
+	}
+	.mobile-sub-sub-link {
+		display: block;
+		padding: 6px 24px;
+		border-radius: 8px;
+		color: var(--growpha-text-muted);
+		font-size: 0.825rem;
+		text-decoration: none;
+		transition: background 0.15s;
+	}
+	.mobile-sub-sub-link:hover {
+		background: rgba(34, 197, 94, 0.08);
+	}
+	.mobile-audit-banner {
+		margin: 8px 4px 0;
+		padding: 10px 12px;
+		border-radius: 12px;
+		background: rgba(249, 115, 22, 0.08);
+		border: 1px solid rgba(249, 115, 22, 0.15);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+	}
+	.mobile-audit-banner span:first-child {
+		font-size: 0.8125rem;
+		color: rgba(255, 255, 255, 0.6);
+		font-family: var(--font-body);
+	}
+	.mobile-audit-banner a {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		flex-shrink: 0;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.8125rem;
+		color: var(--growpha-orange);
+		text-decoration: none;
+	}
+
+	.mobile-link-audit {
+		display: block;
+		padding: 12px 16px;
+		border-radius: 8px;
+		color: var(--growpha-orange);
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1rem;
+		text-decoration: none;
+		transition: background 0.15s;
+	}
+	.mobile-link-audit:hover {
+		background: rgba(249, 115, 22, 0.08);
+	}
+	.mobile-cta-wrap {
+		padding-top: 16px;
+	}
+	.mobile-cta-btn {
+		display: flex !important;
+		width: 100%;
+		justify-content: center;
 	}
 </style>

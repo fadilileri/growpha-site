@@ -1,0 +1,121 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import Deliverables from '../../components/service/Deliverables.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+import RelatedServices from '../../components/service/RelatedServices.astro';
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+	{ title: 'Google Ads', src: 'https://cdn.simpleicons.org/googleads/ffffff' },
+];
+
+const features = [
+	{ title: 'Video Keyword Research', desc: 'Identifying the search terms your target audience uses on YouTube — and mapping them to video topics with ranking potential.' },
+	{ title: 'Metadata Optimisation', desc: "Titles, descriptions, tags, and chapters — optimised for both YouTube's algorithm and Google video search." },
+	{ title: 'Channel Structure', desc: 'Organising playlists, sections, and channel branding to improve watch time, session depth, and subscriber conversion.' },
+	{ title: 'Thumbnail & CTR Strategy', desc: 'Designing thumbnails and titles that maximise click-through rate — the primary signal YouTube uses to determine reach.' },
+	{ title: 'Transcript & Captions', desc: 'Accurate transcripts and closed captions that improve accessibility, watch time, and keyword indexing.' },
+	{ title: 'Cross-Platform Integration', desc: 'Connecting your YouTube content to your website, blog, and social channels to amplify reach and build backlinks.' },
+];
+
+const processSteps = [
+	{ title: 'Channel Audit', desc: 'Reviewing your existing channel for optimisation gaps, content performance, and audience retention patterns.' },
+	{ title: 'Keyword & Topic Strategy', desc: 'Building a video content plan around search terms with genuine ranking potential in your category.' },
+	{ title: 'Metadata & Structure Optimisation', desc: 'Optimising titles, descriptions, tags, playlists, and channel layout.' },
+	{ title: 'Monitoring & Iteration', desc: 'Tracking rankings, impressions, CTR, and watch time — and iterating based on performance data.' },
+];
+
+const deliverables = [
+	'YouTube channel audit',
+	'Video keyword research report',
+	'Content strategy and calendar',
+	'Metadata optimisation templates',
+	'Thumbnail brief and direction',
+	'Channel architecture recommendations',
+	'Cross-platform SEO integration plan',
+	'Monthly performance reporting',
+];
+
+const faqs = [
+	{
+		q: 'What is YouTube SEO and how is it different from Google SEO?',
+		a: "YouTube SEO is the process of optimising your videos and channel to rank in YouTube's search results and recommendations. While it shares principles with Google SEO — keyword research, content quality, authority signals — the ranking factors are different. YouTube's algorithm prioritises watch time, click-through rate, engagement (likes, comments, shares), and session depth. Google SEO focuses on backlinks, content relevance, and technical signals. Growpha builds YouTube SEO strategies that optimise for both platforms simultaneously.",
+	},
+	{
+		q: 'How do I get my YouTube videos to rank higher?',
+		a: 'Ranking on YouTube requires a combination of strong keyword targeting (in titles, descriptions, and tags), high click-through rates driven by compelling thumbnails and titles, strong watch time and audience retention, and engagement signals like comments and shares. The first 24–48 hours after publishing are critical — YouTube uses initial performance data to determine how widely to distribute a video. Growpha optimises every element of the upload process and helps build the channel authority that makes new videos rank faster over time.',
+	},
+	{
+		q: 'Does YouTube SEO help my Google rankings too?',
+		a: "Yes — YouTube videos frequently appear in Google's main search results, particularly for how-to, tutorial, and review queries. A well-optimised YouTube video can drive organic traffic from both YouTube search and Google search simultaneously. Additionally, embedding videos on your website can improve dwell time and engagement metrics that indirectly benefit your Google rankings. Growpha integrates YouTube SEO with broader content and SEO strategy to maximise cross-platform visibility.",
+	},
+	{
+		q: 'How important are thumbnails for YouTube SEO?',
+		a: 'Thumbnails are critical — they directly determine click-through rate (CTR), which is one of YouTube\'s primary ranking signals. A compelling thumbnail that stands out in search results and recommendations can double or triple the CTR of an otherwise identical video. YouTube tests multiple thumbnails and surfaces the one that performs best. Growpha provides thumbnail strategy guidance — including design principles, A/B testing approaches, and the psychological triggers that drive clicks in your specific category.',
+	},
+	{
+		q: 'How long does it take to see results from YouTube SEO?',
+		a: 'New channels typically take 3–6 months to build enough authority for consistent ranking. Established channels with existing subscribers and watch history can see results from optimisation within weeks. The timeline depends on your niche competitiveness, upload frequency, and the quality of your content. YouTube rewards consistency — channels that publish regularly and maintain high audience retention grow faster than those that publish sporadically. Growpha sets realistic expectations and tracks progress against agreed milestones.',
+	},
+];
+
+const related = [
+	{ label: 'Content Marketing', href: '/services/content-marketing' },
+	{ label: 'On-Page SEO', href: '/services/on-page-seo' },
+	{ label: 'AI / LLM SEO', href: '/services/ai-llm-seo' },
+	{ label: 'Off-Page SEO', href: '/services/off-page-seo' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="YouTube SEO | Growpha"
+			description="YouTube SEO builds a channel that ranks, retains viewers, and integrates with your broader search ecosystem."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="YouTube SEO"
+				label="YouTube SEO"
+				title="Video search visibility that"
+				titleAccent="compounds over time."
+				lead="YouTube is the world's second-largest search engine. YouTube SEO is about building a channel that ranks, retains viewers, and integrates with your broader search ecosystem — not just getting views."
+				primaryLabel="Get a YouTube SEO Audit"
+				primaryHref="/request-audit"
+				secondaryLabel="← Back to SEO"
+				secondaryHref="/services/seo"
+			/>
+			<ToolsMarquee label="Tools & Platforms Used" tools={tools} />
+			<FeatureGrid label="What This Covers" title="Built for measurable outcomes," titleAccent="not activity metrics." features={features} />
+			<ProcessSteps label="The Process" title="How we approach" titleAccent="youtube seo." intro="Every engagement follows a structured process — audit first, strategy second, execution third. No guesswork, no assumptions." steps={processSteps} />
+			<Deliverables label="Deliverables & Outcomes" title="What you get from working with Growpha." intro="Clear outputs, documented processes, and measurable results — not activity reports that obscure whether anything is actually working." items={deliverables} ctaLabel="Discuss Your Project" />
+			<FaqAccordion items={faqs} />
+			<AuditBanner />
+			<RelatedServices items={related} />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+</style>

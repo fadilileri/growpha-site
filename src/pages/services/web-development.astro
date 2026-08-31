@@ -1,0 +1,424 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import ClosingCta from '../../components/service/ClosingCta.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+
+const tools = [
+	{ title: 'Shopify', src: 'https://cdn.simpleicons.org/shopify/ffffff' },
+	{ title: 'WordPress', src: 'https://cdn.simpleicons.org/wordpress/ffffff' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+];
+
+const whatWeBuild = [
+	{ title: 'Performance-First Builds', desc: 'Every build is optimised for speed from the ground up — Core Web Vitals, server response times, and asset optimisation built in, not bolted on.' },
+	{ title: 'SEO-Ready Architecture', desc: 'URL structure, internal linking, schema markup, and technical SEO foundations baked into the build — not retrofitted after launch.' },
+	{ title: 'Clean CMS Structures', desc: 'CMS configurations that make content management straightforward — without the technical debt that slows teams down.' },
+	{ title: 'Conversion Support', desc: 'Page structures, CTAs, and user flows designed with conversion in mind — not just aesthetics.' },
+	{ title: 'Scalable Infrastructure', desc: 'Builds that can grow with your business — without requiring a full rebuild every time your needs change.' },
+	{ title: 'Maintainability', desc: 'Clean code, documented processes, and handover-ready builds that your team can manage without constant developer dependency.' },
+];
+
+const platforms = [
+	{ title: 'Shopify Development', desc: 'E-commerce performance, conversion optimisation, and technical cleanliness — built for stores that need to grow, not just look good.', href: '/services/shopify-development' },
+	{ title: 'WordPress Development', desc: "Flexible, editorially powerful, and technically robust — WordPress builds that don't look or feel like WordPress templates.", href: '/services/wordpress-development' },
+];
+
+const caseStudies = [
+	{ platform: 'Shopify', industry: 'Fashion & Apparel', metric: '+68%', metricLabel: 'Organic Revenue', title: 'Custom Shopify Theme for Fashion Brand', challenge: 'Existing theme was bloating page load times above 6 seconds and the product page structure was suppressing category rankings.', result: 'Rebuilt on a custom Liquid theme with lazy-loaded imagery and structured data. Core Web Vitals moved to "Good" across all metrics.' },
+	{ platform: 'Shopify', industry: 'Health & Supplements', metric: '-23pts', metricLabel: 'Cart Abandonment', title: 'Shopify Migration from WooCommerce', challenge: 'WooCommerce store was suffering from slow hosting, plugin conflicts, and a checkout abandonment rate above 74%.', result: 'Full migration to Shopify with redirect mapping, custom checkout flow, and subscription app integration. Abandonment rate dropped to 51%.' },
+	{ platform: 'Shopify', industry: 'Home & Interiors', metric: '3×', metricLabel: 'Trade Order Volume', title: 'Shopify B2B Trade Portal', challenge: 'Trade customers needed a separate pricing and ordering experience without a separate store instance.', result: 'Built a Shopify B2B portal using customer tags, metafields, and custom Liquid logic — no third-party app required.' },
+	{ platform: 'Shopify', industry: 'Sports & Outdoors', metric: '4', metricLabel: 'Markets Launched', title: 'Shopify Internationalisation', challenge: 'Single-market store needed to expand to 4 European markets with localised pricing, currency, and translated content.', result: 'Implemented Shopify Markets with hreflang, localised URLs, and currency conversion. Launched across UK, DE, FR, and NL simultaneously.' },
+	{ platform: 'WordPress', industry: 'Professional Services', metric: '1.4s', metricLabel: 'Page Load Time', title: 'WordPress Rebuild for Law Firm', challenge: 'Legacy WordPress site with 47 plugins, a 9-second load time, and no structured data was invisible in local search.', result: 'Rebuilt on a custom block theme with minimal plugin footprint. Load time dropped to 1.4 seconds. Local pack rankings appeared within 6 weeks.' },
+	{ platform: 'WordPress', industry: 'SaaS & Technology', metric: '100%', metricLabel: 'Editorial Autonomy', title: 'WordPress Headless CMS for SaaS', challenge: 'Marketing team needed editorial flexibility without developer involvement for every content update.', result: 'Built a headless WordPress setup with a React front end, custom Gutenberg blocks, and a structured content model. Editorial team now publishes independently.' },
+	{ platform: 'WordPress', industry: 'Healthcare', metric: '14', metricLabel: 'First-Page Rankings', title: 'GDPR-Compliant Healthcare WordPress Site', challenge: 'Healthcare provider needed a site that met GDPR and accessibility (WCAG 2.1 AA) requirements while ranking for high-intent local terms.', result: 'Built with a privacy-first architecture, no third-party tracking by default, and a full WCAG 2.1 AA audit. Achieved first-page rankings for 14 target terms.' },
+	{ platform: 'WordPress', industry: 'Education', metric: '8', metricLabel: 'Sites, One Dashboard', title: 'Multisite WordPress for Education Group', challenge: 'Group of 8 schools needed a unified brand presence with individual school sites, shared content, and centralised management.', result: 'WordPress Multisite with a shared parent theme, per-school child themes, and a centralised content hub. Managed from a single admin dashboard.' },
+];
+
+const industries = [
+	{ title: 'E-commerce & Retail', desc: 'Product-led architectures built for conversion — from single-product DTC brands to multi-category retailers.', tags: ['Shopify', 'WooCommerce'] },
+	{ title: 'Professional Services', desc: 'Authority-building sites for law firms, accountants, consultancies, and agencies — structured for local and national search.', tags: ['WordPress'] },
+	{ title: 'Healthcare & Wellness', desc: 'GDPR-compliant, accessible builds for clinics, practitioners, and health brands — WCAG 2.1 AA as standard.', tags: ['WordPress', 'Shopify'] },
+	{ title: 'Education & Training', desc: 'Course platforms, school sites, and training portals — built for content scale and student experience.', tags: ['WordPress'] },
+	{ title: 'SaaS & Technology', desc: 'Marketing sites and documentation hubs for software products — fast, editorially flexible, and conversion-optimised.', tags: ['WordPress', 'Custom'] },
+	{ title: 'Finance & Legal', desc: 'Compliance-aware builds with structured content, clear CTAs, and technical SEO foundations for regulated industries.', tags: ['WordPress'] },
+	{ title: 'Food & Hospitality', desc: 'Reservation-integrated, visually rich sites for restaurants, hotels, and food brands — built for local search dominance.', tags: ['WordPress', 'Shopify'] },
+	{ title: 'Sports & Fitness', desc: 'Membership sites, booking systems, and e-commerce for gyms, sports brands, and fitness equipment retailers.', tags: ['Shopify', 'WordPress'] },
+	{ title: 'Property & Real Estate', desc: 'Listing-integrated sites with local SEO architecture, schema markup, and lead capture flows for property businesses.', tags: ['WordPress'] },
+	{ title: 'Media & Publishing', desc: 'High-volume content sites with editorial workflows, ad integration, and performance architecture built for scale.', tags: ['WordPress'] },
+	{ title: 'Charity & Non-Profit', desc: 'Accessible, donation-integrated sites with clear mission communication and GDPR-compliant data handling.', tags: ['WordPress'] },
+	{ title: 'International & Multilingual', desc: 'Hreflang-correct, multi-market builds with localised content structures and currency/language switching.', tags: ['Shopify', 'WordPress'] },
+];
+
+const uiStyles = [
+	{ title: 'Dark Systems UI', desc: 'High-contrast dark backgrounds with structured panel layouts, monospace accents, and data-forward visual hierarchy. Ideal for SaaS, tech, and agencies.', tags: ['Dark backgrounds', 'Structured panels', 'Monospace type', 'Data-forward'] },
+	{ title: 'Clean Minimal', desc: 'Generous whitespace, restrained typography, and a single accent colour. Communicates trust and quality — common in professional services and healthcare.', tags: ['Generous whitespace', 'Restrained palette', 'Single accent', 'High trust'] },
+	{ title: 'Bold Editorial', desc: 'Large typographic statements, asymmetric layouts, and strong visual contrast. Works well for media, fashion, and brands with a strong point of view.', tags: ['Large type', 'Asymmetric layout', 'Strong contrast', 'Brand-forward'] },
+	{ title: 'Warm Organic', desc: 'Earthy tones, rounded forms, and textured backgrounds. Suited to food, wellness, lifestyle, and brands that want to feel approachable and human.', tags: ['Earthy palette', 'Rounded forms', 'Textured BGs', 'Approachable'] },
+	{ title: 'Corporate Structured', desc: 'Grid-based layouts, conservative typography, and a professional colour palette. Appropriate for finance, legal, and enterprise clients.', tags: ['Grid-based', 'Conservative type', 'Professional palette', 'Enterprise-ready'] },
+	{ title: 'Vibrant Consumer', desc: 'High-energy colour, playful illustration, and motion-forward design. Effective for consumer brands, sports, and products targeting younger audiences.', tags: ['High-energy colour', 'Illustration', 'Motion-forward', 'Consumer-facing'] },
+];
+
+const faqs = [
+	{ q: 'How long does it take to build a website?', a: 'A typical business website takes 4–8 weeks from kickoff to launch, depending on scope, content readiness, and feedback cycles. Shopify and WordPress builds with existing themes can be faster; custom builds with complex functionality take longer. We provide a clear timeline at the start of every project so you know exactly what to expect.' },
+	{ q: 'Should I use Shopify or WordPress for my website?', a: 'Shopify is the better choice for e-commerce businesses that need a reliable, scalable storefront with built-in payments, inventory, and checkout. WordPress is better suited for content-heavy sites, service businesses, and projects that need flexible custom functionality. Both platforms are SEO-capable when built correctly — the right choice depends on your business model and long-term goals.' },
+	{ q: 'Will my website be optimised for SEO from the start?', a: 'Yes. SEO-ready architecture is built into every project from day one — not added as an afterthought. This includes clean URL structures, proper heading hierarchy, schema markup, Core Web Vitals optimisation, mobile responsiveness, and a CMS configuration that makes ongoing content management straightforward. A technically sound build is the foundation for everything that comes after.' },
+	{ q: 'What happens after the website is launched?', a: 'We provide a handover document, a walkthrough of the CMS, and a post-launch support window to address any issues. After that, you can manage the site independently, engage us for ongoing SEO or content work, or retain us for technical maintenance. We build sites that are genuinely manageable — not ones that require constant developer involvement to update a paragraph.' },
+	{ q: 'How much does a website cost?', a: 'Web development pricing depends on the platform, number of pages, custom functionality, and integration requirements. A straightforward Shopify or WordPress build typically starts from £3,000–£5,000. More complex projects with custom features, API integrations, or large-scale migrations are scoped and priced individually. We provide a detailed proposal before any work begins so there are no surprises.' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Web Development | Growpha"
+			description="Websites built for performance, not just presence — fast, technically clean, SEO-ready from day one, and structured to convert."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="Web Development"
+				label="Web Development"
+				title="Websites built for"
+				titleAccent="performance, not just presence."
+				lead="Growpha builds websites that are fast, technically clean, SEO-ready from day one, and structured to convert — not just look good in a Figma file."
+				primaryLabel="Discuss Your Build"
+				secondaryLabel="Shopify Development"
+				secondaryHref="/services/shopify-development"
+			/>
+			<ToolsMarquee label="Platforms & Tools We Build With" tools={tools} />
+			<FeatureGrid label="What We Build" title="Performance engineering," titleAccent="not template assembly." features={whatWeBuild} />
+
+			<section class="platforms-section">
+				<div class="gp-container">
+					<div class="section-label">Platforms</div>
+					<h2 class="platforms-h2">Two platforms.<br /><span class="text-gradient-orange">Both done properly.</span></h2>
+					<div class="platforms-grid">
+						{
+							platforms.map((p) => (
+								<a href={p.href} class="growpha-card platforms-card">
+									<h3 class="platforms-title">{p.title}</h3>
+									<p class="platforms-desc">{p.desc}</p>
+									<span class="platforms-link">Explore {p.title} →</span>
+								</a>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="case-section">
+				<div class="gp-container">
+					<div class="section-label">Case Studies</div>
+					<h2 class="case-h2">Projects that moved<br /><span class="text-gradient-orange">the needle.</span></h2>
+					<div class="case-totals">
+						<div><span class="case-total-value">10+</span><span class="case-total-label">Shopify Stores Built</span></div>
+						<div><span class="case-total-value">20+</span><span class="case-total-label">WordPress Sites Delivered</span></div>
+					</div>
+					<div class="case-grid">
+						{
+							caseStudies.map((c) => (
+								<div class="growpha-card case-card">
+									<div class="case-tags">
+										<span class="case-platform">{c.platform}</span>
+										<span class="case-industry">{c.industry}</span>
+									</div>
+									<div class="case-metric text-gradient-orange">{c.metric}</div>
+									<div class="case-metric-label">{c.metricLabel}</div>
+									<h3 class="case-title">{c.title}</h3>
+									<div class="case-block"><span>Challenge</span><p>{c.challenge}</p></div>
+									<div class="case-block"><span>Result</span><p>{c.result}</p></div>
+								</div>
+							))
+						}
+					</div>
+					<a href="/contact" class="ghero-btn-ghost">Discuss your project</a>
+				</div>
+			</section>
+
+			<section class="industry-section">
+				<div class="gp-container">
+					<div class="section-label">Industry Expertise</div>
+					<h2 class="industry-h2">Built across industries.<br /><span class="text-gradient-orange">Fluent in each one.</span></h2>
+					<p class="industry-intro">Every industry has different user expectations, compliance requirements, and conversion patterns. We bring sector-specific knowledge to every build.</p>
+					<div class="industry-grid">
+						{
+							industries.map((ind) => (
+								<div class="growpha-card industry-card">
+									<h3 class="industry-title">{ind.title}</h3>
+									<p class="industry-desc">{ind.desc}</p>
+									<div class="industry-tags-row">
+										{ind.tags.map((t) => <span class="industry-tag">{t}</span>)}
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="ui-section">
+				<div class="gp-container">
+					<div class="section-label">UI Design Styles</div>
+					<h2 class="ui-h2">Any visual direction.<br /><span class="text-gradient-orange">Executed with precision.</span></h2>
+					<p class="ui-intro">We don't have a house style that gets applied to every project. We match the visual language to the brand, audience, and conversion objective.</p>
+					<div class="ui-grid">
+						{
+							uiStyles.map((s) => (
+								<div class="growpha-card ui-card">
+									<h3 class="ui-title">{s.title}</h3>
+									<p class="ui-desc">{s.desc}</p>
+									<div class="ui-tags-row">
+										{s.tags.map((t) => <span class="industry-tag">{t}</span>)}
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<FaqAccordion items={faqs} />
+			<ClosingCta
+				label="Start the Build"
+				title="A website that performs"
+				titleAccent="from the first day it's live."
+				intro="Tell us what you need to build, what platform you're on, and what the current problems are. We'll take it from there."
+				ctaLabel="Discuss Your Project"
+			/>
+			<AuditBanner />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.platforms-section,
+	.case-section,
+	.industry-section,
+	.ui-section {
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.platforms-section {
+		background: var(--growpha-surface-2);
+	}
+	.case-section {
+		background: var(--growpha-surface-1);
+	}
+	.industry-section {
+		background: var(--growpha-surface-2);
+	}
+	.ui-section {
+		background: var(--growpha-surface-1);
+	}
+	.platforms-h2,
+	.case-h2,
+	.industry-h2,
+	.ui-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 16px 0 20px;
+		color: var(--growpha-text-primary);
+	}
+	.industry-intro,
+	.ui-intro {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.7;
+		max-width: 640px;
+		margin: 0 0 32px;
+	}
+	.platforms-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	@media (min-width: 768px) {
+		.platforms-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.platforms-card {
+		text-decoration: none;
+	}
+	.platforms-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.25rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 10px;
+	}
+	.platforms-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.9375rem;
+		line-height: 1.6;
+		margin: 0 0 16px;
+	}
+	.platforms-link {
+		color: var(--growpha-orange);
+		font-size: 0.875rem;
+		font-weight: 600;
+	}
+
+	.case-totals {
+		display: flex;
+		gap: 40px;
+		margin-bottom: 32px;
+	}
+	.case-totals > div {
+		display: flex;
+		flex-direction: column;
+	}
+	.case-total-value {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2rem;
+		color: var(--growpha-green-bright);
+	}
+	.case-total-label {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.case-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+		margin-bottom: 32px;
+	}
+	@media (min-width: 768px) {
+		.case-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.case-tags {
+		display: flex;
+		gap: 8px;
+		margin-bottom: 16px;
+	}
+	.case-platform {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--growpha-green-bright);
+		background: rgba(34, 197, 94, 0.1);
+		border: 1px solid rgba(34, 197, 94, 0.2);
+		border-radius: 999px;
+		padding: 4px 10px;
+	}
+	.case-industry {
+		font-size: 0.6875rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--growpha-text-muted);
+		align-self: center;
+	}
+	.case-metric {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2rem;
+		letter-spacing: -0.03em;
+	}
+	.case-metric-label {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin-bottom: 16px;
+	}
+	.case-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 16px;
+	}
+	.case-block {
+		margin-bottom: 12px;
+	}
+	.case-block span {
+		display: block;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--growpha-text-muted);
+		margin-bottom: 4px;
+	}
+	.case-block p {
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	.industry-grid,
+	.ui-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	@media (min-width: 640px) {
+		.industry-grid,
+		.ui-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 1024px) {
+		.industry-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	.industry-title,
+	.ui-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 10px;
+	}
+	.industry-desc,
+	.ui-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.875rem;
+		line-height: 1.6;
+		margin: 0 0 14px;
+	}
+	.industry-tags-row,
+	.ui-tags-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	.industry-tag {
+		font-size: 0.6875rem;
+		font-weight: 600;
+		color: var(--growpha-text-secondary);
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 999px;
+		padding: 3px 10px;
+	}
+</style>

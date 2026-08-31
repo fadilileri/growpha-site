@@ -1,0 +1,236 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import ClosingCta from '../../components/service/ClosingCta.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+
+const requirements = [
+	'Genuine notability with verifiable sources',
+	'Independent secondary coverage',
+	'No conflict of interest in sourcing',
+	'Willingness to follow editorial guidelines',
+];
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'Notion', src: 'https://cdn.simpleicons.org/notion/ffffff' },
+];
+
+const features = [
+	{ title: 'Notability Research', desc: "Assessing whether your subject meets Wikipedia's notability guidelines — and identifying the sources needed to demonstrate it." },
+	{ title: 'Source & Citation Strategy', desc: "Identifying and organising reliable, independent secondary sources that meet Wikipedia's verifiability standards." },
+	{ title: 'Editorial Standards Compliance', desc: "Writing in a neutral, encyclopaedic tone that meets Wikipedia's editorial guidelines — not promotional content." },
+	{ title: 'Reputation Management Context', desc: 'Understanding how a Wikipedia presence supports broader brand authority, entity recognition, and AI search visibility.' },
+];
+
+const processSteps = [
+	{ title: 'Notability Assessment', desc: "A thorough review of whether your subject meets Wikipedia's notability criteria — before any work begins. Honest assessment, no false promises." },
+	{ title: 'Source Research & Verification', desc: 'Identifying reliable, independent secondary sources from credible publications, press, and industry references.' },
+	{ title: 'Article Drafting', desc: "Writing a neutral, encyclopaedic article that meets Wikipedia's tone, structure, and citation requirements." },
+	{ title: 'Submission & Monitoring', desc: 'Submitting through the appropriate Wikipedia process and monitoring for editorial feedback or revisions.' },
+];
+
+const faqs = [
+	{
+		q: 'Can anyone create a Wikipedia article about their business?',
+		a: 'No — Wikipedia has strict notability requirements that must be met before an article can be created and maintained. A subject must have received significant coverage in reliable, independent, secondary sources — such as major news publications, industry journals, or authoritative reference works. Coverage in press releases, company-owned content, or minor blogs does not count. Growpha conducts a notability assessment before any Wikipedia engagement to determine whether the evidence base is sufficient and what additional coverage may be needed before a submission is viable.',
+	},
+	{
+		q: "What are Wikipedia's notability requirements for businesses?",
+		a: 'For companies and organisations, Wikipedia requires that the subject has received substantial coverage in reliable sources that are independent of the subject. This typically means multiple articles in nationally recognised newspapers, major industry publications, or other authoritative sources — not just mentions, but substantive coverage. The sources must be secondary (written by journalists or analysts, not the company itself) and must discuss the company directly rather than simply listing it. Growpha maps your existing coverage against Wikipedia\'s standards and identifies gaps before any submission is made.',
+	},
+	{
+		q: 'Why do Wikipedia articles get deleted?',
+		a: "Wikipedia articles are deleted for several reasons: insufficient notability evidence, promotional tone or language, reliance on non-independent sources, original research, or failure to comply with Wikipedia's content policies. Articles created by or on behalf of the subject are particularly scrutinised for conflicts of interest. A poorly constructed article is often worse than no article at all, as a failed submission can make future attempts more difficult. Growpha's approach prioritises editorial compliance and long-term survivability over speed of publication.",
+	},
+	{
+		q: 'How long does it take to get a Wikipedia article published?',
+		a: 'The timeline for a Wikipedia article depends on the strength of the existing source base, the complexity of the subject, and the volume of articles in the Wikipedia review queue. A well-sourced article submitted through the Articles for Creation process typically takes 4 to 12 weeks to be reviewed. If additional sourcing work is required before submission, the overall timeline may be 3 to 6 months. Growpha manages the full process — from source research and drafting to submission and post-publication monitoring — with realistic timelines communicated at every stage.',
+	},
+	{
+		q: 'Can I edit my own Wikipedia article after it is published?',
+		a: "Wikipedia discourages direct editing by subjects or their representatives due to conflict of interest policies. You can flag factual errors or suggest corrections on the article's talk page, but direct editing of content about yourself or your organisation is considered a conflict of interest and may result in your edits being reverted or your account being flagged. Growpha provides guidance on the appropriate channels for requesting corrections and can manage ongoing monitoring and compliant update requests on your behalf.",
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Wikipedia Creation | Growpha"
+			description="A Wikipedia presence demands editorial rigour, genuine notability, and compliance with strict guidelines. Growpha handles this with the care it requires."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="Wikipedia Creation"
+				label="Wikipedia Creation"
+				title="Wikipedia done properly."
+				titleAccent="Not done quickly."
+				lead="A Wikipedia presence is one of the most powerful credibility signals available — but it demands editorial rigour, genuine notability, and compliance with strict guidelines. Growpha handles this with the care it requires."
+				primaryLabel="Discuss Your Wikipedia Project"
+			/>
+
+			<section class="honest-section">
+				<div class="gp-container">
+					<div class="honest-box">
+						<div class="honest-label">An honest note</div>
+						<p class="honest-text">
+							Not every subject qualifies for a Wikipedia article. If your subject does not meet
+							notability guidelines, we will tell you — before taking any fee. We do not create
+							articles that will be deleted.
+						</p>
+					</div>
+					<div class="requirements">
+						<div class="requirements-label">What We Require</div>
+						<ul class="requirements-list">
+							{requirements.map((r) => <li>{r}</li>)}
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<ToolsMarquee label="Research & SEO Tools We Use" tools={tools} />
+
+			<section class="why-matters">
+				<div class="gp-container">
+					<div class="section-label">Why It Matters</div>
+					<h2 class="why-h2">Wikipedia is not just<br /><span class="text-gradient-orange">an encyclopaedia entry.</span></h2>
+					<p class="why-p">
+						A Wikipedia presence is a powerful entity signal — used by Google's Knowledge Graph, AI
+						search systems, and brand verification processes. It contributes to how AI systems
+						understand and represent your brand.
+					</p>
+					<p class="why-p">
+						It also builds genuine credibility with audiences who encounter your brand for the first
+						time — a neutral, encyclopaedic reference that no amount of marketing budget can replicate.
+					</p>
+				</div>
+			</section>
+
+			<FeatureGrid features={features} columns={2} />
+
+			<ProcessSteps label="The Process" title="Methodical. Compliant." titleAccent="Built to last." steps={processSteps} />
+
+			<FaqAccordion items={faqs} />
+			<ClosingCta
+				label="Start With an Assessment"
+				title="Find out if your subject"
+				titleAccent="qualifies — before anything else."
+				intro="The first step is always a notability assessment. No commitment, no fee — just an honest answer about whether a Wikipedia article is achievable for your subject."
+				ctaLabel="Request a Notability Assessment"
+			/>
+			<AuditBanner />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.honest-section {
+		background: var(--growpha-surface-1);
+		padding: 0 0 32px;
+	}
+	.honest-section .gp-container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	@media (min-width: 768px) {
+		.honest-section .gp-container {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	.honest-box {
+		background: rgba(249, 115, 22, 0.06);
+		border: 1px solid rgba(249, 115, 22, 0.15);
+		border-radius: 12px;
+		padding: 20px 24px;
+	}
+	.honest-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.8125rem;
+		color: var(--growpha-orange);
+		margin-bottom: 8px;
+	}
+	.honest-text {
+		font-size: 0.9375rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.65;
+		margin: 0;
+	}
+	.requirements-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-bottom: 12px;
+	}
+	.requirements-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+	.requirements-list li {
+		font-size: 0.9375rem;
+		color: var(--growpha-text-secondary);
+		padding-left: 18px;
+		position: relative;
+	}
+	.requirements-list li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		color: var(--growpha-green-bright);
+		font-weight: 700;
+	}
+
+	.why-matters {
+		background: var(--growpha-surface-2);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.why-matters .section-label {
+		margin-bottom: 16px;
+	}
+	.why-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 0 0 16px;
+		color: var(--growpha-text-primary);
+		max-width: 560px;
+	}
+	.why-p {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.75;
+		max-width: 640px;
+		margin: 0 0 12px;
+	}
+</style>

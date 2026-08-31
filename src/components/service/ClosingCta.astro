@@ -1,0 +1,59 @@
+---
+interface Props {
+	label: string;
+	title: string;
+	titleAccent: string;
+	intro: string;
+	ctaLabel: string;
+	ctaHref?: string;
+}
+const { label, title, titleAccent, intro, ctaLabel, ctaHref = '/contact' } = Astro.props;
+const arrowRight =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>';
+---
+
+<section class="ccta-section">
+	<div class="gp-container">
+		<div class="ccta-inner">
+			<div class="section-label">{label}</div>
+			<h2 class="ccta-h2">
+				{title}<br />
+				<span class="text-gradient-orange">{titleAccent}</span>
+			</h2>
+			<p class="ccta-intro">{intro}</p>
+			<a href={ctaHref} target={ctaHref.startsWith('http') ? '_blank' : undefined} class="ghero-btn-primary">
+				{ctaLabel}
+				<span set:html={arrowRight} />
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.ccta-section {
+		background: var(--growpha-surface-3);
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		padding: 40px 0;
+	}
+	.ccta-inner {
+		max-width: 620px;
+	}
+	.ccta-inner .section-label {
+		margin-bottom: 20px;
+	}
+	.ccta-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 0 0 20px;
+		color: var(--growpha-text-primary);
+	}
+	.ccta-intro {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.75;
+		margin: 0 0 32px;
+	}
+</style>

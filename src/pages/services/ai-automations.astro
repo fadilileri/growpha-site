@@ -1,0 +1,281 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import ClosingCta from '../../components/service/ClosingCta.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+
+const tools = [
+	{ title: 'n8n', src: 'https://cdn.simpleicons.org/n8n/ffffff' },
+	{ title: 'Make', src: 'https://cdn.simpleicons.org/make/ffffff' },
+	{ title: 'Zapier', src: 'https://cdn.simpleicons.org/zapier/ffffff' },
+	{ title: 'OpenAI', initials: 'AI' },
+	{ title: 'Claude', initials: 'CL' },
+	{ title: 'Notion', src: 'https://cdn.simpleicons.org/notion/ffffff' },
+	{ title: 'Slack', initials: 'SL' },
+];
+
+const flow = [
+	{ label: 'Trigger', desc: 'Data event or schedule' },
+	{ label: 'Process', desc: 'AI analysis & logic' },
+	{ label: 'Output', desc: 'Report, alert, or action' },
+];
+
+const automationTypes = [
+	{
+		title: 'SEO Reporting Automation',
+		desc: 'Automated weekly and monthly SEO reports pulling from Search Console, Analytics, and rank tracking tools — delivered without manual effort.',
+		bullets: ['Automated rank tracking', 'Traffic trend reports', 'Competitor monitoring alerts'],
+	},
+	{
+		title: 'Content Operations Automation',
+		desc: 'AI-assisted content briefing, first-draft generation, and QA workflows that accelerate production without sacrificing quality.',
+		bullets: ['Automated content briefs', 'AI-assisted drafting', 'Quality assurance workflows'],
+	},
+	{
+		title: 'AI-Powered QA Systems',
+		desc: 'Automated quality checks for content, metadata, internal links, and technical SEO signals — catching issues before they go live.',
+		bullets: ['Pre-publish content checks', 'Technical SEO monitoring', 'Broken link detection'],
+	},
+	{
+		title: 'Marketing Reporting Systems',
+		desc: 'Unified reporting dashboards that pull data from multiple channels and present it in a format that actually supports decision-making.',
+		bullets: ['Multi-channel dashboards', 'Automated data pulls', 'Executive summary generation'],
+	},
+	{
+		title: 'Monitoring & Alert Systems',
+		desc: 'Automated monitoring for ranking drops, traffic anomalies, site errors, and competitor movements — with instant alerts when something needs attention.',
+		bullets: ['Ranking drop alerts', 'Traffic anomaly detection', 'Competitor rank monitoring'],
+	},
+	{
+		title: 'Workflow Integrations',
+		desc: 'Connecting your existing tools — CMS, CRM, analytics, and project management — into automated workflows that remove manual handoffs.',
+		bullets: ['CMS integrations', 'CRM data flows', 'Project management automation'],
+	},
+];
+
+const faqs = [
+	{
+		q: 'What are AI automations and how can they help my business?',
+		a: 'AI automations are workflows that use artificial intelligence to perform tasks that would otherwise require manual effort — such as generating SEO reports, producing content briefs, monitoring rankings, qualifying leads, or processing data. For digital marketing and SEO specifically, AI automations can dramatically reduce the time spent on repetitive analysis and reporting tasks, freeing your team to focus on strategy and execution. Growpha builds custom automation systems tailored to your specific workflows, using AI tools and APIs that integrate with your existing stack.',
+	},
+	{
+		q: 'What tasks can be automated with AI in SEO and content marketing?',
+		a: 'A wide range of SEO and content marketing tasks are well-suited to AI automation: keyword clustering and opportunity identification, content brief generation, meta tag and schema markup production, rank tracking and performance reporting, technical SEO audit scheduling, competitor monitoring, internal linking recommendations, and content QA checks. Growpha maps your current manual workflows and identifies the highest-value automation opportunities — prioritising tasks where AI can save the most time without sacrificing quality or strategic judgement.',
+	},
+	{
+		q: 'Do I need technical expertise to use AI automations?',
+		a: 'Not necessarily. Growpha designs automation systems with usability in mind — the goal is to reduce manual work, not to create new technical complexity. Most automations are delivered as simple interfaces, scheduled reports, or integrations with tools you already use (such as Google Sheets, Slack, or your CMS). Where custom development is required, Growpha handles the build and provides documentation so your team can operate the system independently after handover.',
+	},
+	{
+		q: 'How is AI automation different from using ChatGPT directly?',
+		a: 'Using ChatGPT or similar tools directly requires manual prompting, copy-pasting, and human orchestration for every task. AI automation connects these capabilities into structured workflows that run with minimal human input — triggered by schedules, events, or data inputs. For example, instead of manually asking ChatGPT to write a content brief each week, an automated system can pull keyword data, generate the brief, and deliver it to your team automatically. Growpha builds the infrastructure that turns AI capabilities into reliable, repeatable business processes.',
+	},
+	{
+		q: 'What is the ROI of investing in AI automations for SEO?',
+		a: 'The ROI of AI automation in SEO comes from two sources: time savings and output quality. Tasks that previously took hours — such as producing a full site audit report or generating 50 content briefs — can be completed in minutes with well-designed automation. This either frees your team for higher-value work or reduces the headcount required to execute at scale. Growpha quantifies the time cost of your current manual processes before building automations, so the efficiency gains are measurable from day one.',
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="AI Automations | Growpha"
+			description="AI-powered workflows that replace manual bottlenecks in your SEO, content, and marketing operations."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="AI Automations"
+				label="Systems-Driven"
+				title="Remove the manual."
+				titleAccent="Scale what matters."
+				lead="Growpha builds AI-powered workflows that replace manual bottlenecks in your SEO, content, and marketing operations — so your team spends time on strategy, not spreadsheets."
+				primaryLabel="Discuss Automation Needs"
+				secondaryLabel="SEO Services"
+				secondaryHref="/services/seo"
+			/>
+			<ToolsMarquee label="Automation Platforms We Work With" tools={tools} />
+
+			<section class="flow-section">
+				<div class="gp-container">
+					<div class="section-label">How Automation Works</div>
+					<div class="flow-row">
+						{
+							flow.map((f, i) => (
+								<>
+									<div class="flow-step">
+										<div class="flow-label">{f.label}</div>
+										<div class="flow-desc">{f.desc}</div>
+									</div>
+									{i < flow.length - 1 && <div class="flow-arrow">→</div>}
+								</>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="types-section">
+				<div class="gp-container">
+					<div class="types-header">
+						<div class="section-label">Automation Types</div>
+						<h2 class="types-h2">Six automation systems<br /><span class="text-gradient-orange">built for growth operations.</span></h2>
+					</div>
+					<div class="types-grid">
+						{
+							automationTypes.map((t) => (
+								<div class="growpha-card types-card">
+									<h3 class="types-title">{t.title}</h3>
+									<p class="types-desc">{t.desc}</p>
+									<ul class="types-bullets">
+										{t.bullets.map((b) => <li>{b}</li>)}
+									</ul>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<FaqAccordion items={faqs} />
+			<ClosingCta
+				label="Build Your Automation Stack"
+				title="Stop doing manually"
+				titleAccent="what a system can do better."
+				intro="Every automation engagement starts with understanding your current workflow — what is manual, what is slow, and where AI can create the most leverage."
+				ctaLabel="Map Your Automation Opportunities"
+			/>
+			<AuditBanner />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.flow-section {
+		background: var(--growpha-surface-2);
+		padding: 32px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.flow-section .section-label {
+		margin-bottom: 20px;
+	}
+	.flow-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 16px;
+	}
+	.flow-step {
+		background: var(--growpha-surface-3);
+		border: 1px solid rgba(255, 255, 255, 0.07);
+		border-radius: 12px;
+		padding: 16px 24px;
+		flex: 1;
+		min-width: 160px;
+	}
+	.flow-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1rem;
+		color: var(--growpha-green-bright);
+		margin-bottom: 4px;
+	}
+	.flow-desc {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.flow-arrow {
+		color: var(--growpha-text-muted);
+		font-size: 1.25rem;
+		flex-shrink: 0;
+	}
+
+	.types-section {
+		background: var(--growpha-surface-1);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.types-header {
+		max-width: 640px;
+		margin-bottom: 40px;
+	}
+	.types-header .section-label {
+		margin-bottom: 16px;
+	}
+	.types-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 0;
+		color: var(--growpha-text-primary);
+	}
+	.types-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	@media (min-width: 640px) {
+		.types-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 1024px) {
+		.types-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	.types-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 10px;
+	}
+	.types-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.875rem;
+		line-height: 1.65;
+		margin: 0;
+	}
+	.types-bullets {
+		list-style: none;
+		margin: 14px 0 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+	.types-bullets li {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		padding-left: 14px;
+		position: relative;
+	}
+	.types-bullets li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.55em;
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: var(--growpha-green-bright);
+	}
+</style>

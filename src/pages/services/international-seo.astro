@@ -1,0 +1,125 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import Deliverables from '../../components/service/Deliverables.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+import RelatedServices from '../../components/service/RelatedServices.astro';
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+	{ title: 'Screaming Frog', initials: 'SF' },
+	{ title: 'Moz', initials: 'MO' },
+];
+
+const features = [
+	{ title: 'Hreflang Implementation', desc: 'Correct hreflang tag implementation to signal language and country targeting to Google — avoiding duplicate content and cannibalisation across markets.' },
+	{ title: 'Market Keyword Research', desc: 'Language-specific keyword research that reflects how users in each target market actually search — not just translated keywords.' },
+	{ title: 'Site Structure Strategy', desc: 'Choosing the right international site structure (ccTLDs, subdirectories, or subdomains) based on your resources, goals, and competitive landscape.' },
+	{ title: 'International Link Building', desc: 'Acquiring market-specific backlinks from authoritative local sources to build domain authority in each target country.' },
+	{ title: 'Content Localisation', desc: 'Adapting content for cultural relevance and local search intent — beyond literal translation.' },
+	{ title: 'Geotargeting Setup', desc: 'Configuring Google Search Console geotargeting settings and ensuring server location or CDN configuration supports international performance.' },
+];
+
+const processSteps = [
+	{ title: 'International Audit', desc: 'Reviewing your current international setup — hreflang, site structure, and market-specific rankings.' },
+	{ title: 'Market & Keyword Research', desc: 'Understanding search behaviour in each target market and mapping content requirements.' },
+	{ title: 'Technical Implementation', desc: 'Implementing hreflang, site structure, and geotargeting configurations.' },
+	{ title: 'Content & Authority Building', desc: 'Localising content and building market-specific authority through targeted link acquisition.' },
+];
+
+const deliverables = [
+	'International SEO audit report',
+	'Hreflang implementation (or fix specification)',
+	'Site structure recommendation per market',
+	'Market-specific keyword research',
+	'Localised content strategy framework',
+	'Geo-targeting configuration',
+	'International link building plan',
+	'GSC country targeting setup',
+	'Ongoing market performance reporting',
+	'Competitor analysis per target market',
+];
+
+const faqs = [
+	{
+		q: 'What is international SEO and when do I need it?',
+		a: 'International SEO is the process of optimising your website to rank in multiple countries and/or languages. You need it when you are actively targeting customers in more than one country, when you have content in multiple languages, or when your analytics show significant traffic from international markets that you are not currently converting. Without proper international SEO, you risk serving the wrong content to the wrong audience, creating duplicate content issues, and missing ranking opportunities in markets where your competitors are already established.',
+	},
+	{
+		q: 'What is hreflang and why is it important?',
+		a: 'Hreflang is an HTML attribute that tells Google which language and country version of a page to show to users in different locations. Without correct hreflang implementation, Google may show your English page to French users, your US page to UK users, or index the wrong version of your content entirely. Hreflang errors are among the most common and damaging international SEO issues — they can result in the wrong pages ranking in the wrong markets, duplicate content penalties, and significant traffic loss. Growpha audits and implements hreflang as a core part of every international SEO engagement.',
+	},
+	{
+		q: 'Should I use subdomains, subdirectories, or ccTLDs for international SEO?',
+		a: 'Each approach has trade-offs. Country-code top-level domains (ccTLDs) like .de or .fr send the strongest geotargeting signal but require building domain authority separately for each. Subdirectories (example.com/de/) consolidate domain authority and are easier to manage but send a weaker country signal. Subdomains (de.example.com) sit between the two but are often treated as separate sites by Google. For most businesses, subdirectories offer the best balance of SEO performance and operational simplicity. Growpha recommends the right structure based on your specific goals, resources, and competitive landscape.',
+	},
+	{
+		q: 'Do I need separate content for each country or just translated pages?',
+		a: 'Translated pages are a starting point, but they are rarely sufficient for competitive international markets. Search intent, cultural context, and the specific language users use to search vary significantly between countries — even between countries that share a language (UK vs US English, for example). Localised content that reflects how users in each market actually think and search will consistently outperform direct translations. Growpha builds localisation strategies that go beyond translation to create genuinely market-relevant content.',
+	},
+	{
+		q: 'How long does international SEO take to show results?',
+		a: 'International SEO timelines are typically longer than domestic SEO because you are building authority in new markets from a lower starting point. Technical fixes (hreflang, site structure) can show results within weeks. Content and authority building in new markets typically takes 6–12 months to produce significant ranking improvements. The timeline depends on the competitiveness of the target market, the strength of your existing domain, and the volume of localised content you can produce. Growpha provides market-specific forecasts and tracks progress against agreed milestones.',
+	},
+];
+
+const related = [
+	{ label: 'Technical SEO', href: '/services/technical-seo' },
+	{ label: 'On-Page SEO', href: '/services/on-page-seo' },
+	{ label: 'Content Marketing', href: '/services/content-marketing' },
+	{ label: 'AI / LLM SEO', href: '/services/ai-llm-seo' },
+	{ label: 'Off-Page SEO', href: '/services/off-page-seo' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="International SEO | Growpha"
+			description="Hreflang architecture, country targeting, localised content strategy, and market-specific authority building."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="International SEO"
+				label="International SEO"
+				title="Rank in every market you"
+				titleAccent="actually want to win."
+				lead="International SEO is not about translating your existing pages and hoping for the best. It is a technical and strategic discipline — hreflang architecture, country targeting, localised content strategy, and market-specific authority building — that determines whether your site is visible to the right audience in the right country, in the right language."
+				primaryLabel="Get an International SEO Audit"
+				primaryHref="/request-audit"
+				secondaryLabel="← Back to SEO"
+				secondaryHref="/services/seo"
+			/>
+			<ToolsMarquee label="Tools & Platforms Used" tools={tools} />
+			<FeatureGrid label="What This Covers" title="Built for measurable outcomes," titleAccent="not activity metrics." features={features} />
+			<ProcessSteps label="The Process" title="How we approach" titleAccent="international seo." intro="Every engagement follows a structured process — audit first, strategy second, execution third. No guesswork, no assumptions." steps={processSteps} />
+			<Deliverables label="Deliverables & Outcomes" title="What you get from working with Growpha." intro="Clear outputs, documented processes, and measurable results — not activity reports that obscure whether anything is actually working." items={deliverables} ctaLabel="Discuss Your Project" />
+			<FaqAccordion items={faqs} />
+			<AuditBanner />
+			<RelatedServices items={related} />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+</style>

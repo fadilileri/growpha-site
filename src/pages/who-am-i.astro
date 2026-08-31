@@ -1,0 +1,708 @@
+---
+import { Image } from 'astro:assets';
+import avatar from '../assets/brand/fadil-avatar.png';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ToolsMarquee from '../components/service/ToolsMarquee.astro';
+
+const stats = [
+	{ value: '10+', label: 'Years in technical SEO and digital growth' },
+	{ value: '47+', label: 'Clients across e-commerce, SaaS, finance, and enterprise' },
+	{ value: '312%', label: 'Average organic traffic increase for SEO clients' },
+	{ value: '#1', label: 'Rankings achieved in highly competitive categories' },
+];
+
+const howFadilWorks = [
+	'Technical audit before any strategy recommendation',
+	'Evidence-led decisions grounded in real data',
+	'AI and automation to speed up analysis and delivery',
+	'Actionable output — not reports that sit unread',
+	'Small client roster — full attention, not divided focus',
+	'Honest about what is achievable and what is not',
+];
+
+const coreExpertise = [
+	'Technical SEO & site architecture',
+	'E-commerce SEO (Shopify, Magento, SAP)',
+	'Crawl, indexation & canonical strategy',
+	'Hreflang & international SEO',
+	'Core Web Vitals & rendering',
+	'Site migrations',
+	'Structured data & schema markup',
+	'AI / LLM search visibility',
+	'Content strategy & topical authority',
+	'SEO automation & Python workflows',
+	'Google Search Console & GA4 analysis',
+	'Screaming Frog & log file analysis',
+];
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+	{ title: 'n8n', src: 'https://cdn.simpleicons.org/n8n/ffffff' },
+	{ title: 'Make', src: 'https://cdn.simpleicons.org/make/ffffff' },
+	{ title: 'Shopify', src: 'https://cdn.simpleicons.org/shopify/ffffff' },
+	{ title: 'WordPress', src: 'https://cdn.simpleicons.org/wordpress/ffffff' },
+	{ title: 'OpenAI', initials: 'AI' },
+	{ title: 'Screaming Frog', initials: 'SF' },
+];
+
+const sectors = [
+	{ title: 'E-commerce & Retail', desc: 'Shopify, Magento, SAP Commerce, custom builds' },
+	{ title: 'Finance & Crypto', desc: 'Regulated environments, YMYL content strategy' },
+	{ title: 'Automotive', desc: 'Large-scale inventory SEO, structured data' },
+	{ title: 'Real Estate', desc: 'Local SEO, UAE & GCC market positioning' },
+	{ title: 'Fashion & Luxury Retail', desc: 'International SEO, hreflang, faceted navigation' },
+	{ title: 'SaaS & B2B', desc: 'Topical authority, content-led growth systems' },
+	{ title: 'Corporate & Enterprise', desc: 'Sitecore, Umbraco, custom CMS migrations' },
+	{ title: 'Dubai & UAE SMEs', desc: 'Audit, local SEO, content strategy, fast growth' },
+];
+
+const philosophy = [
+	{ num: '01', title: 'Technical foundations first.', desc: 'Every growth strategy starts with understanding what is actually happening under the surface. Before recommendations, before strategy, before content — there is a thorough technical assessment. Most SEO problems have technical roots.' },
+	{ num: '02', title: 'Evidence over assumption.', desc: 'Opinions are cheap. Data is not. Every recommendation I make is grounded in evidence — Search Console data, crawl analysis, log file review, competitor research, and real performance metrics. I do not guess.' },
+	{ num: '03', title: 'Systems over campaigns.', desc: 'Campaigns end. Systems compound. I build growth infrastructure — automation workflows, content systems, technical architecture — that continues to generate returns long after the initial investment.' },
+	{ num: '04', title: 'Honest about what is possible.', desc: 'I will not promise results I cannot deliver, take on clients whose problems I cannot solve, or recommend services that do not fit the situation. Honest assessment is the foundation of every engagement.' },
+];
+
+const whyWork = [
+	{ title: 'Direct access to Fadil', desc: 'You work with the founder directly — not a junior account manager.' },
+	{ title: 'Technical depth', desc: 'Every recommendation is grounded in technical analysis, crawl data, and real evidence.' },
+	{ title: 'AI & automation advantage', desc: 'Fadil uses AI tools and Python automation to deliver faster analysis and more actionable output.' },
+	{ title: 'Strategic coherence', desc: 'SEO, content, automation, and development are treated as a connected system, not isolated services.' },
+	{ title: 'Honest assessment', desc: 'If something is not working, you will hear it — with a clear explanation of why and what to do.' },
+	{ title: 'Long-term thinking', desc: 'Growth that compounds over time, not traffic spikes that disappear after a campaign ends.' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Who Am I | Growpha"
+			description="Fadil İleri — Dubai-based technical SEO and digital growth strategist, founder of Growpha."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="wai-hero">
+				<div class="gp-container">
+					<div class="svc-breadcrumb">
+						<a href="/">Home</a>
+						<span>›</span>
+						<span>Who Am I</span>
+					</div>
+					<div class="wai-hero-grid">
+						<div class="wai-hero-copy">
+							<div class="section-label"><span class="status-dot"></span>Founder &amp; Principal — Based in Dubai, UAE</div>
+							<h1 class="wai-h1">Fadil İleri</h1>
+							<p class="wai-role">Technical SEO &amp; <span class="text-gradient-orange">Digital Growth Strategist.</span></p>
+							<p class="wai-lead">
+								I am Fadil İleri — the founder of Growpha. I am a Dubai-based technical SEO and digital growth
+								strategist with over 10 years of experience working with e-commerce brands, enterprise websites,
+								SaaS companies, and UAE businesses. I combine deep technical SEO expertise with AI tools, Python
+								automation, and data-driven analysis to build growth systems that are measurable, scalable, and
+								built to last.
+							</p>
+							<div class="wai-hero-actions">
+								<a href="/contact" class="ghero-btn-primary">Work with Fadil</a>
+								<a href="/services/seo" class="ghero-btn-ghost">View Services</a>
+							</div>
+						</div>
+						<div class="wai-portrait-card">
+							<Image src={avatar} alt="Fadil İleri, founder of Growpha" width={420} height={420} class="wai-portrait-img" />
+							<div class="wai-portrait-caption">
+								<span class="wai-portrait-name">Fadil İleri</span>
+								<span class="wai-portrait-role">Founder, Growpha</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="wai-stats">
+				<div class="gp-container wai-stats-grid">
+					{stats.map((s) => (
+						<div class="wai-stat">
+							<div class="wai-stat-value">{s.value}</div>
+							<div class="wai-stat-label">{s.label}</div>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section class="wai-background">
+				<div class="gp-container wai-bg-grid">
+					<div>
+						<div class="section-label">Background</div>
+						<h2 class="wai-h2">Over a decade of<br /><span class="text-gradient-green">technical growth work.</span></h2>
+						<p class="wai-p">
+							I am Fadil İleri. I have been working in technical SEO and digital growth for over ten years —
+							across e-commerce, finance, crypto, automotive, real estate, fashion, SaaS, and enterprise. I have
+							worked in-house, in agencies, and independently, which means I understand how growth decisions are
+							made from inside an organisation, not just from a consultant's perspective.
+						</p>
+						<p class="wai-p">
+							My experience spans large-scale, technically complex websites — platforms with hundreds of
+							thousands of URLs, multi-language and multi-country setups, site migrations, and deep rendering and
+							crawlability challenges. I have managed SEO on Shopify, WordPress, SAP Commerce, Sitecore, Umbraco,
+							and custom-built platforms.
+						</p>
+						<p class="wai-p">
+							Now based in Dubai, I founded Growpha to work directly with UAE businesses, free zone operators,
+							and international brands targeting the GCC market. I also work with SMEs who need fast, focused
+							growth — audit, content strategy, and local SEO delivered without the overhead of a large agency.
+						</p>
+						<p class="wai-p wai-p-last">
+							I use AI tools, Python automation, Screaming Frog, Google Search Console, GA4, and a range of SEO
+							platforms to analyse faster, prioritise more clearly, and build strategies that are actually
+							implementable — not 80-page reports that sit unread.
+						</p>
+					</div>
+					<div class="wai-bg-side">
+						<div class="wai-quote-card">
+							<p class="wai-quote-text">
+								"I see SEO not just as keywords, content, and a technical checklist — but as the intersection of
+								product, user experience, data, technology, and growth strategy. The goal is not to rank. The goal
+								is to build a search presence that drives real business outcomes."
+							</p>
+							<div class="wai-quote-attr">— Fadil İleri, Founder of Growpha</div>
+						</div>
+						<div class="wai-works-card">
+							<div class="wai-works-label">How Fadil Works</div>
+							{howFadilWorks.map((item) => (
+								<div class="check-row check-row-bordered">
+									<span class="check-icon">✓</span>
+									<span>{item}</span>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="wai-expertise">
+				<div class="gp-container wai-expertise-grid">
+					<div>
+						<div class="section-label">Core Expertise</div>
+						<h2 class="wai-h2">Technical depth across<br /><span class="text-gradient-orange">every layer of search.</span></h2>
+						<div class="wai-expertise-list">
+							{coreExpertise.map((item) => (
+								<div class="check-row">
+									<span class="check-icon">✓</span>
+									<span>{item}</span>
+								</div>
+							))}
+						</div>
+					</div>
+					<div>
+						<ToolsMarquee label="Platforms & Tools" tools={tools} />
+						<div class="wai-sectors-label">Sectors</div>
+						<div class="wai-sectors-list">
+							{sectors.map((s) => (
+								<div class="check-card">
+									<span class="check-icon">✓</span>
+									<div>
+										<span class="check-card-title">{s.title}</span>
+										<span class="check-card-desc"> — {s.desc}</span>
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="wai-philosophy">
+				<div class="gp-container">
+					<div class="section-label">Working Philosophy</div>
+					<h2 class="wai-h2 wai-h2-wide">Four principles that<br /><span class="text-gradient-orange">guide every engagement.</span></h2>
+					<div class="wai-phil-grid">
+						{philosophy.map((p) => (
+							<div class="wai-phil-card">
+								<div class="wai-phil-num">{p.num}</div>
+								<h3 class="wai-phil-title">{p.title}</h3>
+								<p class="wai-phil-desc">{p.desc}</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<section class="wai-why">
+				<div class="gp-container wai-why-grid">
+					<div>
+						<div class="section-label">Why Work with Fadil</div>
+						<h2 class="wai-h2">Not the biggest agency.<br /><span class="text-gradient-green">The most focused one.</span></h2>
+						<p class="wai-p">
+							Clients come to Fadil because they have had the experience of working with large agencies and
+							getting a junior team, a templated strategy, and a monthly report that tells them what happened but
+							not what to do about it.
+						</p>
+						<p class="wai-p wai-p-last">
+							When you work with Growpha, you work directly with Fadil İleri. The strategy is his. The analysis is
+							his. The recommendations are his. There is no account management layer between you and the person
+							doing the work.
+						</p>
+						<a href="/contact" class="ghero-btn-primary">Start a Conversation</a>
+					</div>
+					<div class="wai-why-list">
+						{whyWork.map((item) => (
+							<div class="check-card">
+								<span class="check-icon">✓</span>
+								<div>
+									<div class="check-card-title-block">{item.title}</div>
+									<div class="check-card-desc-block">{item.desc}</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<section class="wai-cta">
+				<div class="gp-container wai-cta-inner">
+					<div class="section-label">Let's Work Together</div>
+					<h2 class="wai-h2">If you want serious growth,<br /><span class="text-gradient-orange">let's have a serious conversation.</span></h2>
+					<p class="wai-p wai-p-last">
+						Fadil İleri works with a small number of clients at any one time. Based in Dubai, he works directly
+						with UAE businesses, free zone operators, and international brands targeting the GCC market. If you
+						are looking for a technical growth partner who will give your business genuine attention and honest
+						advice, get in touch.
+					</p>
+					<div class="wai-cta-actions">
+						<a href="/contact" class="ghero-btn-primary">Get in Touch with Fadil</a>
+						<a href="/request-audit" class="ghero-btn-ghost">Request an Audit</a>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.svc-breadcrumb {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 24px;
+	}
+	.svc-breadcrumb a {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		text-decoration: none;
+	}
+	.svc-breadcrumb span {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+	}
+
+	.wai-hero {
+		position: relative;
+		background: var(--growpha-surface-1);
+		padding: 40px 0 48px;
+		overflow: hidden;
+	}
+	.wai-hero-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 40px;
+		align-items: start;
+	}
+	@media (min-width: 1024px) {
+		.wai-hero-grid {
+			grid-template-columns: 7fr 5fr;
+		}
+	}
+	.wai-hero-copy .section-label {
+		margin-bottom: 20px;
+	}
+	.wai-h1 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(2.5rem, 5vw, 3.75rem);
+		letter-spacing: -0.03em;
+		line-height: 1.06;
+		margin: 0 0 8px;
+		color: var(--growpha-text-primary);
+	}
+	.wai-role {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+		letter-spacing: -0.02em;
+		line-height: 1.2;
+		margin: 0 0 24px;
+		color: var(--growpha-text-primary);
+	}
+	.wai-lead {
+		color: var(--growpha-text-secondary);
+		font-size: 1.0625rem;
+		line-height: 1.75;
+		max-width: 560px;
+		margin: 0 0 36px;
+	}
+	.wai-hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+	.wai-portrait-card {
+		border-radius: 16px;
+		background: var(--growpha-surface-3);
+		border: 1.5px solid rgba(249, 115, 22, 0.25);
+		overflow: hidden;
+		position: relative;
+		min-height: 360px;
+	}
+	.wai-portrait-img {
+		width: 100%;
+		height: 100%;
+		min-height: 360px;
+		object-fit: cover;
+		display: block;
+	}
+	.wai-portrait-caption {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		padding: 20px;
+		background: linear-gradient(180deg, transparent 0%, rgba(6, 11, 7, 0.85) 100%);
+	}
+	.wai-portrait-name {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1rem;
+		color: #fff;
+	}
+	.wai-portrait-role {
+		font-size: 0.8125rem;
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	.wai-stats {
+		background: var(--growpha-surface-3);
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		padding: 32px 0;
+	}
+	.wai-stats-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+	}
+	@media (min-width: 768px) {
+		.wai-stats-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	.wai-stat {
+		text-align: center;
+	}
+	.wai-stat-value {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2.25rem;
+		color: var(--growpha-orange);
+		margin-bottom: 8px;
+	}
+	.wai-stat-label {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.5;
+	}
+
+	.wai-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 0 0 20px;
+		color: var(--growpha-text-primary);
+	}
+	.wai-h2-wide {
+		margin-bottom: 40px;
+	}
+	.wai-p {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.8;
+		margin: 0 0 20px;
+	}
+	.wai-p-last {
+		margin-bottom: 32px;
+	}
+
+	.wai-background {
+		background: var(--growpha-surface-1);
+		padding: 48px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.wai-bg-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 40px;
+		align-items: start;
+	}
+	@media (min-width: 1024px) {
+		.wai-bg-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 56px;
+		}
+	}
+	.wai-bg-side {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	.wai-quote-card {
+		background: var(--growpha-surface-3);
+		border: 1px solid rgba(255, 255, 255, 0.07);
+		border-radius: 16px;
+		padding: 28px;
+		position: relative;
+	}
+	.wai-quote-text {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-style: italic;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		line-height: 1.65;
+		margin: 0 0 20px;
+	}
+	.wai-quote-attr {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.875rem;
+		color: var(--growpha-text-muted);
+	}
+	.wai-works-card {
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 12px;
+		padding: 24px;
+	}
+	.wai-works-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-bottom: 14px;
+	}
+
+	.check-row {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 8px 12px;
+		border-radius: 8px;
+		transition: background 0.15s;
+	}
+	.check-row:hover {
+		background: rgba(34, 197, 94, 0.06);
+	}
+	.check-row-bordered {
+		padding: 8px 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 0;
+	}
+	.check-row-bordered:hover {
+		background: transparent;
+	}
+	.check-row span:last-child,
+	.check-row-bordered span:last-child {
+		font-size: 0.9375rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.5;
+	}
+	.check-icon {
+		flex-shrink: 0;
+		color: var(--growpha-green-bright);
+		font-weight: 700;
+		font-size: 0.875rem;
+	}
+
+	.wai-expertise {
+		background: var(--growpha-surface-2);
+		padding: 48px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.wai-expertise-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 40px;
+		align-items: start;
+	}
+	.wai-expertise-grid > div {
+		min-width: 0;
+	}
+	@media (min-width: 1024px) {
+		.wai-expertise-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 56px;
+		}
+	}
+	.wai-expertise-list {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2px;
+	}
+	.wai-sectors-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-bottom: 14px;
+	}
+	.wai-sectors-label {
+		margin-top: 28px;
+	}
+	.wai-sectors-list {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.check-card {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+		padding: 14px;
+		border-radius: 12px;
+		background: var(--growpha-surface-3);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+	}
+	.check-card .check-icon {
+		margin-top: 3px;
+	}
+	.check-card-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.875rem;
+		color: var(--growpha-text-primary);
+	}
+	.check-card-desc {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.check-card-title-block {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.9375rem;
+		color: var(--growpha-text-primary);
+		margin-bottom: 4px;
+	}
+	.check-card-desc-block {
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.55;
+	}
+
+	.wai-philosophy {
+		background: var(--growpha-surface-1);
+		padding: 48px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.wai-phil-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	@media (min-width: 768px) {
+		.wai-phil-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.wai-phil-card {
+		background: var(--growpha-surface-3);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 12px;
+		padding: 24px;
+	}
+	.wai-phil-num {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 3rem;
+		line-height: 1;
+		margin-bottom: 16px;
+		background: linear-gradient(135deg, var(--growpha-green-bright), var(--growpha-orange));
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		opacity: 0.9;
+	}
+	.wai-phil-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.0625rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 10px;
+		letter-spacing: -0.01em;
+	}
+	.wai-phil-desc {
+		color: var(--growpha-text-secondary);
+		font-size: 0.9375rem;
+		line-height: 1.7;
+		margin: 0;
+	}
+
+	.wai-why {
+		background: var(--growpha-surface-2);
+		padding: 48px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.wai-why-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 40px;
+		align-items: center;
+	}
+	@media (min-width: 1024px) {
+		.wai-why-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 56px;
+		}
+	}
+	.wai-why-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.wai-cta {
+		background: var(--growpha-surface-3);
+		padding: 48px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.wai-cta-inner {
+		max-width: 680px;
+	}
+	.wai-cta .section-label {
+		margin-bottom: 20px;
+	}
+	.wai-cta-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+</style>

@@ -1,0 +1,177 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import ClosingCta from '../../components/service/ClosingCta.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+
+const notList = [
+	'A blog with no search strategy',
+	'Articles written for word count',
+	'Social posts disguised as strategy',
+	'Content that ignores the buyer journey',
+	'Publishing without distribution',
+];
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Surfer SEO', initials: 'SU' },
+	{ title: 'Notion', src: 'https://cdn.simpleicons.org/notion/ffffff' },
+	{ title: 'OpenAI', initials: 'AI' },
+	{ title: 'Claude', initials: 'CL' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+];
+
+const pillars = [
+	{ title: 'Topical Authority Systems', desc: 'Building comprehensive content coverage across your topic cluster — so search engines and AI systems recognise you as the authoritative source in your category.' },
+	{ title: 'Content Operations', desc: 'Scalable processes for briefing, production, QA, and publication — so content output is consistent, on-brand, and search-aligned without constant manual oversight.' },
+	{ title: 'Distribution Logic', desc: 'Getting content in front of the right audiences through organic search, social amplification, email, and syndication — not just publishing and hoping.' },
+	{ title: 'Measurable Outcomes', desc: 'Tracking content performance against business metrics — not vanity numbers. Organic traffic, lead quality, and revenue attribution are the measures that matter.' },
+	{ title: 'AI-Assisted Production', desc: 'Using AI tools to accelerate research, first drafts, and optimisation — while maintaining editorial quality and strategic direction throughout.' },
+	{ title: 'Content Audit & Gap Analysis', desc: 'Understanding what you already have, what is working, what needs updating, and where the gaps are that competitors are exploiting.' },
+];
+
+const processSteps = [
+	{ title: 'Content Audit & Competitor Analysis', desc: 'Understanding what exists, what is working, and where the gaps are.' },
+	{ title: 'Topical Authority Mapping', desc: 'Building a comprehensive topic cluster strategy aligned to search demand and business goals.' },
+	{ title: 'Content Brief Development', desc: 'Detailed briefs that ensure every piece of content is search-aligned, on-brand, and commercially useful.' },
+	{ title: 'Production & QA', desc: 'Content produced to brief, reviewed for accuracy, and optimised before publication.' },
+	{ title: 'Distribution & Amplification', desc: 'Getting content in front of the right audiences through the right channels.' },
+	{ title: 'Performance Review & Iteration', desc: 'Tracking what works and updating the strategy based on real performance data.' },
+];
+
+const faqs = [
+	{
+		q: 'What is content marketing and how is it different from blogging?',
+		a: 'Content marketing is a strategic discipline focused on creating and distributing content that attracts, engages, and converts a defined audience — with measurable business outcomes as the goal. Blogging is one tactic within content marketing, but a content marketing strategy also encompasses topical authority planning, content operations, distribution, repurposing, and performance analysis. Growpha builds content systems rather than content calendars, ensuring every piece of content serves a defined role in building organic visibility and audience trust.',
+	},
+	{
+		q: 'How long does content marketing take to produce results?',
+		a: 'Content marketing is a compounding strategy — results build over time rather than arriving immediately. Most businesses begin to see meaningful organic traffic growth from content within 3 to 6 months, with significant authority and revenue impact typically visible at the 9 to 18 month mark. The timeline depends on domain authority, content quality, publishing frequency, and the competitiveness of target topics. Growpha sets realistic expectations from the outset and tracks leading indicators — rankings, impressions, and topical coverage — before traffic and conversions follow.',
+	},
+	{
+		q: 'What is topical authority and why does it matter for SEO?',
+		a: "Topical authority is the degree to which search engines recognise your website as a comprehensive, reliable source on a specific subject. Google's systems reward sites that cover a topic in depth and breadth over sites that publish isolated articles. Building topical authority requires a structured content architecture — pillar pages, supporting cluster content, and internal linking — that signals comprehensive coverage of a subject area. Growpha designs topical authority frameworks before writing a single word, ensuring content investment compounds rather than fragments.",
+	},
+	{
+		q: 'How do I measure whether content marketing is working?',
+		a: 'Effective content marketing measurement tracks a progression of metrics: impressions and keyword rankings (visibility), organic sessions and engagement (traffic quality), lead form completions and conversions (commercial impact), and assisted revenue attribution (business value). Vanity metrics like page views in isolation are insufficient. Growpha builds a measurement framework for each engagement that connects content performance to business outcomes, making it clear what is working, what needs iteration, and where to invest next.',
+	},
+	{
+		q: 'Should I produce content in-house or outsource it?',
+		a: 'The right model depends on your internal expertise, bandwidth, and the type of content your strategy requires. In-house teams often have deeper subject matter knowledge and brand voice consistency, but may lack the SEO expertise and production capacity to execute at scale. Outsourcing to a specialist like Growpha brings strategic direction, keyword research, content architecture, and quality control — while your internal team can contribute subject matter expertise and review. Many clients use a hybrid model, with Growpha leading strategy and production and internal teams providing input and approval.',
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Content Marketing | Growpha"
+			description="Structured, search-aligned content operations that compound over time and drive measurable business outcomes."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="Content Marketing"
+				label="Content Marketing"
+				title="Content that builds"
+				titleAccent="authority, not just traffic."
+				lead="Content marketing at Growpha is not about publishing volume. It is about building topical authority systems — structured, search-aligned content operations that compound over time and drive measurable business outcomes."
+				primaryLabel="Discuss Your Content Strategy"
+				secondaryLabel="SEO Services"
+				secondaryHref="/services/seo"
+			/>
+
+			<section class="not-section">
+				<div class="gp-container">
+					<div class="not-label">What Content Marketing Is Not</div>
+					<div class="not-grid">
+						{
+							notList.map((item) => (
+								<div class="not-item">
+									<span class="not-x">✕</span>
+									<span>{item}</span>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<ToolsMarquee label="Content & SEO Tools We Use" tools={tools} />
+			<FeatureGrid label="The Content System" title="Six pillars of a" titleAccent="content system that works." features={pillars} />
+			<ProcessSteps
+				label="The Process"
+				title="Strategy before"
+				titleAccent="a single word is written."
+				intro="Content without strategy is noise. Every content engagement starts with a clear understanding of your market, your gaps, and the specific topics that will drive qualified traffic and business outcomes."
+				steps={processSteps}
+				columns={3}
+				ctaLabel="Start with a Content Audit"
+				ctaHref="/request-audit"
+			/>
+			<FaqAccordion items={faqs} />
+			<ClosingCta
+				label="Build the System"
+				title="Content that compounds."
+				titleAccent="Not content that expires."
+				intro="The best content investments pay dividends for years. Let's build a system that does exactly that."
+				ctaLabel="Get in Touch"
+			/>
+			<AuditBanner />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.not-section {
+		background: var(--growpha-surface-1);
+		padding: 32px 0;
+	}
+	.not-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-bottom: 20px;
+	}
+	.not-grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+	.not-item {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		background: rgba(239, 68, 68, 0.06);
+		border: 1px solid rgba(239, 68, 68, 0.15);
+		border-radius: 999px;
+		padding: 8px 16px;
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+	}
+	.not-x {
+		color: #ef4444;
+		font-size: 0.75rem;
+	}
+</style>

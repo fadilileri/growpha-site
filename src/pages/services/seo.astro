@@ -1,0 +1,300 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import ClosingCta from '../../components/service/ClosingCta.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+	{ title: 'Screaming Frog', initials: 'SF' },
+	{ title: 'Moz', initials: 'MO' },
+	{ title: 'Surfer SEO', initials: 'SU' },
+];
+
+const stats = [
+	{ value: '312%', label: 'Average organic traffic increase within 12 months' },
+	{ value: '47+', label: 'Clients across e-commerce, SaaS, and professional services' },
+	{ value: '#1', label: 'Rankings achieved in highly competitive categories' },
+	{ value: '10+', label: 'Years of technical SEO experience' },
+];
+
+const systemSteps = [
+	'Technical Audit & Architecture Review',
+	'Keyword & Topical Authority Mapping',
+	'On-Page Structure & Content Alignment',
+	'Authority & Link Profile Development',
+	'Reporting, Iteration & Growth Scaling',
+];
+
+function icon(inner: string) {
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+}
+
+const disciplines = [
+	{
+		icon: icon('<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path>'),
+		title: 'Technical SEO',
+		desc: 'Site architecture, crawl efficiency, Core Web Vitals, structured data, indexing control, and canonical logic.',
+		bullets: ['Crawl budget optimisation', 'Schema markup', 'Page speed & CWV', 'Log file analysis'],
+		href: '/services/technical-seo',
+		linkLabel: 'Explore Technical SEO',
+	},
+	{
+		icon: icon('<rect width="18" height="7" x="3" y="3" rx="1"></rect><rect width="9" height="7" x="3" y="14" rx="1"></rect><rect width="5" height="7" x="16" y="14" rx="1"></rect>'),
+		title: 'On-Page SEO',
+		desc: 'Content structure, semantic relevance, internal linking architecture, and on-page signal alignment.',
+		bullets: ['Keyword mapping', 'Content optimisation', 'Internal link strategy', 'Meta & heading structure'],
+		href: '/services/on-page-seo',
+		linkLabel: 'Explore On-Page SEO',
+	},
+	{
+		icon: icon('<circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path>'),
+		title: 'Off-Page SEO',
+		desc: 'Authority acquisition, digital PR, link profile management, and brand signal development.',
+		bullets: ['Link acquisition', 'Digital PR', 'Brand mentions', 'Competitor gap analysis'],
+		href: '/services/off-page-seo',
+		linkLabel: 'Explore Off-Page SEO',
+	},
+	{
+		icon: icon('<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>'),
+		title: 'Local SEO',
+		desc: 'Local pack visibility, Google Business Profile optimisation, citation consistency, and local content strategy.',
+		bullets: ['GBP optimisation', 'Citation building', 'Local content', 'Review strategy'],
+		href: '/services/local-seo',
+		linkLabel: 'Explore Local SEO',
+	},
+	{
+		icon: icon('<path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path>'),
+		title: 'YouTube SEO',
+		desc: 'Video search visibility, channel architecture, metadata optimisation, and cross-platform search integration.',
+		bullets: ['Video keyword research', 'Metadata optimisation', 'Channel structure', 'Thumbnail & CTR strategy'],
+		href: '/services/youtube-seo',
+		linkLabel: 'Explore YouTube SEO',
+	},
+	{
+		icon: icon('<path d="M21.54 15H17a2 2 0 0 0-2 2v4.54"></path><path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17"></path><path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"></path><circle cx="12" cy="12" r="10"></circle>'),
+		title: 'International SEO',
+		desc: 'Hreflang architecture, market-specific keyword research, international site structure, and cross-border authority building.',
+		bullets: ['Hreflang implementation', 'Market keyword research', 'Site structure strategy', 'International link building'],
+		href: '/services/international-seo',
+		linkLabel: 'Explore International SEO',
+	},
+];
+
+const faqs = [
+	{
+		q: 'How long does SEO take to show results?',
+		a: "SEO is a compounding investment, not a quick fix. Most websites begin to see measurable improvements in organic traffic within 3 to 6 months, with significant results typically appearing between 6 and 12 months. The timeline depends on your site's current technical health, the competitiveness of your target keywords, and how consistently the strategy is executed. Growpha focuses on building sustainable growth that holds rather than short-term spikes.",
+	},
+	{
+		q: 'What is the difference between technical SEO and content SEO?',
+		a: 'Technical SEO addresses the infrastructure of your website — crawlability, indexing, site speed, structured data, and architecture — ensuring search engines can access and understand your content. Content SEO focuses on the relevance, depth, and authority of the information on your pages. Both are essential: technical SEO creates the foundation, while content SEO builds the topical authority that drives rankings. Growpha treats both as interconnected systems, not separate activities.',
+	},
+	{
+		q: 'How much does SEO cost for a small business?',
+		a: 'SEO investment varies significantly based on the scope of work, the competitiveness of your market, and whether you need technical fixes, content production, or link acquisition. For small businesses, monthly retainers typically range from £500 to £3,000 depending on the level of service required. Growpha provides a clear audit and growth plan before any engagement so you understand exactly what is needed and why — no vague retainers or inflated scopes.',
+	},
+	{
+		q: 'Can I do SEO myself, or do I need an agency?',
+		a: 'Many foundational SEO tasks — such as optimising page titles, improving internal linking, and publishing quality content — can be handled in-house with the right guidance. However, technical SEO audits, competitive analysis, structured data implementation, and authority building typically require specialist expertise and tooling. Growpha works with businesses at any stage, whether that means full management or a one-time audit and strategy that your team executes.',
+	},
+	{
+		q: 'Does SEO still work in 2025 with AI search growing?',
+		a: "Yes — organic search remains one of the highest-ROI digital channels, and AI-powered search features like Google's AI Overviews have increased the importance of authoritative, well-structured content rather than diminishing it. Sites with strong topical authority, clear E-E-A-T signals, and technically sound infrastructure are being cited and surfaced more frequently in AI-generated responses. Growpha's approach is built for this environment, combining traditional SEO fundamentals with AI and LLM visibility strategies.",
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="SEO Services | Growpha"
+			description="A structured, evidence-led SEO system that builds search visibility as a compounding business asset — from technical foundations through to authority and content architecture."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="SEO"
+				label="Search Engine Optimisation"
+				title="SEO as technical"
+				titleAccent="growth infrastructure."
+				lead="Not a monthly report. Not keyword stuffing. A structured, evidence-led system that builds search visibility as a compounding business asset — from technical foundations through to authority and content architecture."
+				primaryLabel="Request an Audit"
+				primaryHref="/request-audit"
+				secondaryLabel="Technical SEO"
+				secondaryHref="/services/technical-seo"
+			/>
+			<ToolsMarquee label="SEO Tools We Use" tools={tools} />
+
+			<section class="stats-section">
+				<div class="gp-container">
+					<div class="stats-grid">
+						{
+							stats.map((s) => (
+								<div class="stat-item">
+									<div class="stat-value text-gradient-orange">{s.value}</div>
+									<div class="stat-label">{s.label}</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="system-section">
+				<div class="gp-container">
+					<div class="system-header">
+						<div class="section-label">The Growpha SEO System</div>
+						<h2 class="system-h2">
+							Five disciplines.<br />
+							<span class="text-gradient-orange">One coherent system.</span>
+						</h2>
+						<p class="system-intro">
+							Most SEO fails because it treats technical, content, and authority as separate workstreams.
+							They aren't. Every ranking signal is connected. Growpha builds SEO as an integrated system —
+							where technical health enables content performance, and content performance drives authority.
+						</p>
+						<p class="system-intro">
+							The result is compounding growth — not traffic spikes that disappear when a campaign ends.
+						</p>
+					</div>
+					<div class="system-steps">
+						{
+							systemSteps.map((step, i) => (
+								<div class="system-step">
+									<span class="system-step-num">{String(i + 1).padStart(2, '0')}</span>
+									<span class="system-step-title">{step}</span>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<FeatureGrid
+				label="SEO Disciplines"
+				title="Every angle of search,"
+				titleAccent="covered with depth."
+				features={disciplines}
+			/>
+
+			<FaqAccordion title="Frequently Asked Questions About SEO" intro="Common questions from businesses investing in search engine optimisation — answered clearly." items={faqs} />
+
+			<ClosingCta
+				label="Start Here"
+				title="A technical audit is the"
+				titleAccent="honest starting point."
+				intro="Before strategy, before content, before links — we need to know what we're working with. A Growpha audit gives you a clear picture of what is holding your site back and what the realistic growth path looks like."
+				ctaLabel="Request Your Audit"
+				ctaHref="/request-audit"
+			/>
+			<AuditBanner />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.stats-section {
+		background: var(--growpha-surface-2);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		padding: 40px 0;
+	}
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+	}
+	@media (min-width: 768px) {
+		.stats-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	.stat-item {
+		text-align: center;
+	}
+	.stat-value {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2.5rem;
+		letter-spacing: -0.04em;
+		line-height: 1;
+		margin-bottom: 8px;
+	}
+	.stat-label {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		line-height: 1.4;
+	}
+
+	.system-section {
+		background: var(--growpha-surface-1);
+		padding: 40px 0;
+	}
+	.system-header {
+		max-width: 640px;
+		margin-bottom: 40px;
+	}
+	.system-header .section-label {
+		margin-bottom: 16px;
+	}
+	.system-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 0 0 16px;
+		color: var(--growpha-text-primary);
+	}
+	.system-intro {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.7;
+		margin: 0 0 12px;
+	}
+	.system-steps {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.system-step {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		padding: 16px 20px;
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 10px;
+	}
+	.system-step-num {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 1.25rem;
+		color: var(--growpha-green-bright);
+		flex-shrink: 0;
+	}
+	.system-step-title {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.9375rem;
+		color: var(--growpha-text-primary);
+	}
+</style>

@@ -1,0 +1,140 @@
+---
+interface Tool {
+	title: string;
+	src?: string;
+	initials?: string;
+}
+interface Props {
+	label: string;
+	tools: Tool[];
+}
+const { label, tools } = Astro.props;
+const loop = [...tools, ...tools];
+---
+
+<div class="tm-strip">
+	<div class="tm-label">{label}</div>
+	<div class="tm-scroll-wrap">
+		<div class="tm-fade tm-fade-left"></div>
+		<div class="tm-fade tm-fade-right"></div>
+		<div class="tm-scroll-track">
+			{
+				loop.map((tool) => (
+					<div class="tm-item" title={tool.title}>
+						<div class="tm-icon">
+							{tool.src ? <img src={tool.src} alt={tool.title} /> : <span class="tm-initials">{tool.initials}</span>}
+						</div>
+						<span>{tool.title}</span>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</div>
+
+<style>
+	.tm-strip {
+		background: var(--growpha-surface-2);
+		border-top: 1px solid rgba(255, 255, 255, 0.07);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+		padding: 28px 0;
+		overflow: hidden;
+	}
+	.tm-label {
+		text-align: center;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-bottom: 14px;
+	}
+	.tm-scroll-wrap {
+		position: relative;
+		overflow: hidden;
+	}
+	.tm-fade {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 80px;
+		z-index: 2;
+		pointer-events: none;
+	}
+	.tm-fade-left {
+		left: 0;
+		background: linear-gradient(90deg, var(--growpha-surface-2) 0%, transparent 100%);
+	}
+	.tm-fade-right {
+		right: 0;
+		background: linear-gradient(270deg, var(--growpha-surface-2) 0%, transparent 100%);
+	}
+	.tm-scroll-track {
+		display: flex;
+		align-items: stretch;
+		width: max-content;
+		animation: tm-scroll 30s linear infinite;
+	}
+	.tm-scroll-track:hover {
+		animation-play-state: paused;
+	}
+	@keyframes tm-scroll {
+		from {
+			transform: translate(0);
+		}
+		to {
+			transform: translate(-50%);
+		}
+	}
+	.tm-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		padding: 0 36px;
+		border-right: 1px solid rgba(255, 255, 255, 0.05);
+		min-width: 100px;
+		opacity: 0.55;
+		transition: opacity 0.25s;
+	}
+	.tm-item:hover {
+		opacity: 1;
+	}
+	.tm-icon {
+		height: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.tm-icon img {
+		height: 26px;
+		width: auto;
+		max-width: 100px;
+		object-fit: contain;
+		display: block;
+	}
+	.tm-initials {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 26px;
+		height: 26px;
+		border-radius: 6px;
+		background: rgba(255, 255, 255, 0.08);
+		color: var(--growpha-text-secondary);
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+	}
+	.tm-item span:last-child {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.6875rem;
+		color: rgba(200, 217, 201, 0.7);
+		letter-spacing: 0.02em;
+		white-space: nowrap;
+		line-height: 1;
+	}
+</style>

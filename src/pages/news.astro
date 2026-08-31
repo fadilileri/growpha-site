@@ -1,0 +1,128 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const categories = ['All', 'Algorithm Update', 'AI Search', 'Technical SEO', 'Industry', 'Growpha'];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="News | Growpha"
+			description="Algorithm updates, AI search developments, technical SEO changes, and Growpha announcements — curated for practitioners."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="news-hero">
+				<div class="gp-container">
+					<div class="section-label"><span class="status-dot"></span>Live Updates</div>
+					<h1 class="news-h1">
+						Search industry news.<br /><span class="text-gradient-orange">No noise. No filler.</span>
+					</h1>
+					<p class="news-lead">
+						Algorithm updates, AI search developments, technical SEO changes, and Growpha announcements —
+						curated for practitioners.
+					</p>
+					<a href="/blog" class="ghero-btn-ghost">Read the Blog</a>
+				</div>
+			</section>
+
+			<section class="news-body">
+				<div class="gp-container">
+					<div class="news-filters">
+						{categories.map((c, i) => (
+							<button class:list={['news-filter', { active: i === 0 }]}>{c}</button>
+						))}
+					</div>
+					<div class="news-empty">
+						<p class="news-empty-title">No news published yet</p>
+						<p class="news-empty-desc">Check back soon — news articles will appear here once published via the CMS.</p>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.news-hero {
+		background: var(--growpha-surface-1);
+		padding: 40px 0 40px;
+	}
+	.news-hero .section-label {
+		margin-bottom: 20px;
+	}
+	.news-h1 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(2rem, 4vw, 3rem);
+		letter-spacing: -0.03em;
+		line-height: 1.15;
+		margin: 0 0 16px;
+		color: var(--growpha-text-primary);
+	}
+	.news-lead {
+		color: var(--growpha-text-secondary);
+		font-size: 1.0625rem;
+		line-height: 1.7;
+		max-width: 560px;
+		margin: 0 0 28px;
+	}
+
+	.news-body {
+		background: var(--growpha-black);
+		padding: 48px 0 80px;
+	}
+	.news-filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-bottom: 40px;
+	}
+	.news-filter {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.8125rem;
+		padding: 8px 16px;
+		border-radius: 999px;
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		color: var(--growpha-text-secondary);
+		cursor: pointer;
+	}
+	.news-filter.active {
+		background: rgba(34, 197, 94, 0.1);
+		border-color: rgba(34, 197, 94, 0.3);
+		color: var(--growpha-green-bright);
+	}
+	.news-empty {
+		text-align: center;
+		padding: 64px 24px;
+		border-radius: 16px;
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+	}
+	.news-empty-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.125rem;
+		color: var(--growpha-text-primary);
+		margin: 0 0 8px;
+	}
+	.news-empty-desc {
+		color: var(--growpha-text-muted);
+		font-size: 0.9375rem;
+		margin: 0;
+	}
+</style>

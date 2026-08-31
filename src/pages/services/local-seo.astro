@@ -1,0 +1,122 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import FeatureGrid from '../../components/service/FeatureGrid.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import Deliverables from '../../components/service/Deliverables.astro';
+import FaqAccordion from '../../components/service/FaqAccordion.astro';
+import AuditBanner from '../../components/service/AuditBanner.astro';
+import RelatedServices from '../../components/service/RelatedServices.astro';
+
+const tools = [
+	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
+	{ title: 'Ahrefs', initials: 'AH' },
+	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+	{ title: 'Analytics', src: 'https://cdn.simpleicons.org/googleanalytics/ffffff' },
+	{ title: 'Google Ads', src: 'https://cdn.simpleicons.org/googleads/ffffff' },
+	{ title: 'Moz', initials: 'MO' },
+];
+
+const features = [
+	{ title: 'GBP Optimisation', desc: 'Fully optimising your Google Business Profile — categories, attributes, photos, posts, and Q&A — to maximise local pack visibility.' },
+	{ title: 'Citation Building', desc: 'Building consistent NAP (Name, Address, Phone) citations across local directories and industry-specific platforms.' },
+	{ title: 'Local Content Strategy', desc: 'Creating location-specific content that targets local search intent and builds topical relevance for your service area.' },
+	{ title: 'Review Strategy', desc: 'Building a systematic approach to generating, responding to, and leveraging customer reviews for local ranking signals.' },
+	{ title: 'Local Link Building', desc: 'Acquiring links from local publications, business associations, and community organisations that reinforce local authority.' },
+	{ title: 'Multi-Location SEO', desc: 'Managing local SEO at scale for businesses with multiple locations — consistent signals, location-specific pages, and centralised reporting.' },
+];
+
+const processSteps = [
+	{ title: 'Local Audit', desc: 'Reviewing your GBP, citation consistency, local rankings, and competitor positioning.' },
+	{ title: 'GBP & Citation Cleanup', desc: 'Correcting inconsistencies, optimising your GBP, and building missing citations.' },
+	{ title: 'Content & Reviews', desc: 'Implementing a local content plan and review generation strategy.' },
+	{ title: 'Monitoring & Reporting', desc: 'Tracking local pack rankings, GBP performance, and citation health over time.' },
+];
+
+const deliverables = [
+	'Local SEO audit report',
+	'GBP optimisation',
+	'Citation audit and cleanup',
+	'Local content strategy',
+	'Review acquisition process',
+	'Local link building plan',
+	'Monthly local ranking report',
+	'Competitor local analysis',
+];
+
+const faqs = [
+	{
+		q: 'What is local SEO and who needs it?',
+		a: 'Local SEO is the process of optimising your online presence to attract customers from specific geographic areas. It is essential for any business that serves customers in a defined location — whether that is a single city, a region, or multiple locations. This includes restaurants, retail stores, professional services firms, healthcare providers, and any business where physical location or service area matters. Growpha builds local SEO strategies that drive both map pack visibility and organic local rankings.',
+	},
+	{
+		q: 'How do I get my business to appear in Google Maps?',
+		a: 'Appearing in Google Maps (the local pack) requires a verified and fully optimised Google Business Profile, consistent NAP (Name, Address, Phone) information across the web, genuine customer reviews, and local relevance signals from your website and citations. The local pack algorithm weighs three factors: relevance (how well your business matches the search), distance (proximity to the searcher), and prominence (how well-known and authoritative your business is). Growpha optimises all three factors as part of its local SEO service.',
+	},
+	{
+		q: 'How important are Google reviews for local SEO?',
+		a: "Google reviews are a significant local ranking signal — both the quantity and quality of reviews influence your position in the local pack. Beyond rankings, reviews directly affect click-through rates and conversion: most consumers read reviews before choosing a local business. A systematic review generation strategy — asking satisfied customers at the right moment, making it easy to leave a review, and responding professionally to all reviews — is one of the highest-ROI activities in local SEO. Growpha builds review strategies that are sustainable and compliant with Google's policies.",
+	},
+	{
+		q: 'What is a local citation and why does it matter?',
+		a: "A local citation is any online mention of your business's name, address, and phone number (NAP). Citations appear on business directories (Yelp, Yell, Thomson Local), industry-specific platforms, social media profiles, and local news sites. Consistent, accurate citations across the web reinforce your business's legitimacy and location to search engines. Inconsistent or incorrect citations — different phone numbers, old addresses, or name variations — can confuse Google and suppress local rankings. Growpha audits and corrects citation inconsistencies as part of every local SEO engagement.",
+	},
+	{
+		q: 'Can local SEO help a business with multiple locations?',
+		a: 'Yes — but multi-location SEO requires a more structured approach. Each location needs its own Google Business Profile, its own location page on your website, and its own citation profile. The challenge is maintaining consistency at scale while ensuring each location has genuinely unique, locally relevant content. Growpha manages multi-location SEO with a centralised strategy and location-specific execution — ensuring each branch has the signals it needs to rank in its own market without cannibalising the others.',
+	},
+];
+
+const related = [
+	{ label: 'Technical SEO', href: '/services/technical-seo' },
+	{ label: 'On-Page SEO', href: '/services/on-page-seo' },
+	{ label: 'Content Marketing', href: '/services/content-marketing' },
+	{ label: 'Web Development', href: '/services/web-development' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Local SEO | Growpha"
+			description="Local SEO builds a complete local search presence — from Google Business Profile to citation consistency, local content, and review strategy."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<ServiceHero
+				crumb="Local SEO"
+				label="Local SEO"
+				title="Local visibility that drives"
+				titleAccent="real-world footfall."
+				lead="Local SEO is not just about appearing in map packs. It is about building a complete local search presence — from Google Business Profile to citation consistency, local content, and review strategy."
+				primaryLabel="Get a Local SEO Audit"
+				primaryHref="/request-audit"
+				secondaryLabel="← Back to SEO"
+				secondaryHref="/services/seo"
+			/>
+			<ToolsMarquee label="Tools & Platforms Used" tools={tools} />
+			<FeatureGrid label="What This Covers" title="Built for measurable outcomes," titleAccent="not activity metrics." features={features} />
+			<ProcessSteps label="The Process" title="How we approach" titleAccent="local seo." intro="Every engagement follows a structured process — audit first, strategy second, execution third. No guesswork, no assumptions." steps={processSteps} />
+			<Deliverables label="Deliverables & Outcomes" title="What you get from working with Growpha." intro="Clear outputs, documented processes, and measurable results — not activity reports that obscure whether anything is actually working." items={deliverables} ctaLabel="Discuss Your Project" />
+			<FaqAccordion items={faqs} />
+			<AuditBanner />
+			<RelatedServices items={related} />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+</style>

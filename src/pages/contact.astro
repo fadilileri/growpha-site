@@ -1,0 +1,376 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const serviceOptions = [
+	'Audit Request',
+	'Technical SEO',
+	'On-Page SEO',
+	'Off-Page SEO',
+	'Local SEO',
+	'YouTube SEO',
+	'International SEO',
+	'AI / LLM SEO',
+	'Content Marketing',
+	'AI Automations',
+	'Wikipedia Creation',
+	'Shopify Development',
+	'WordPress Development',
+	'Not sure yet',
+];
+
+const expectRows = [
+	{ label: 'Response time', value: '1–2 business days' },
+	{ label: 'First response', value: 'Genuine assessment, not a sales call booking' },
+	{ label: 'Follow-up', value: 'A discovery call if there is a clear fit' },
+];
+
+const whyItems = [
+	{ title: 'Technical depth', desc: 'Every recommendation is grounded in data and technical analysis — not assumptions.' },
+	{ title: 'Direct engagement', desc: 'You work with the founder directly. No account management layer.' },
+	{ title: 'Honest assessment', desc: 'If your project is not a good fit, I will tell you — before taking any fee.' },
+];
+
+const goodFit = [
+	'Businesses serious about long-term search growth',
+	'Companies that value technical rigour over quick wins',
+	'Teams that want a direct relationship with the strategist',
+	'Brands ready to invest in sustainable growth systems',
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Contact | Growpha"
+			description="Tell me about your business, your current situation, and what you are trying to achieve. I will review your message and respond with an honest assessment — not a sales pitch."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="contact-hero">
+				<div class="gp-container">
+					<div class="svc-breadcrumb">
+						<a href="/">Home</a>
+						<span>›</span>
+						<span>Contact</span>
+					</div>
+					<div class="section-label"><span class="status-dot"></span>Get in Touch</div>
+					<h1 class="contact-h1">
+						Start with a<br /><span class="text-gradient-orange">real conversation.</span>
+					</h1>
+					<p class="contact-lead">
+						Tell me about your business, your current situation, and what you are trying to achieve. I will
+						review your message and respond with an honest assessment — not a sales pitch.
+					</p>
+				</div>
+			</section>
+
+			<section class="contact-body">
+				<div class="gp-container contact-grid">
+					<div class="contact-form-col">
+						<form
+							class="contact-form"
+							name="contact"
+							method="POST"
+							data-netlify="true"
+							data-netlify-honeypot="bot-field"
+							data-contact-form
+						>
+							<input type="hidden" name="form-name" value="contact" />
+							<p class="hp-field"><label>Don't fill this out: <input name="bot-field" /></label></p>
+							<div class="form-row">
+								<label>Your Name *<input type="text" name="name" required /></label>
+								<label>Email Address *<input type="email" name="email" required /></label>
+							</div>
+							<label>Company / Website<input type="text" name="company" /></label>
+							<label>
+								Service of Interest
+								<select name="service">
+									<option value="">Select a service</option>
+									{serviceOptions.map((s) => <option value={s}>{s}</option>)}
+								</select>
+							</label>
+							<label>Tell Me About Your Situation *<textarea name="message" rows="6" required></textarea></label>
+							<button type="submit" class="ghero-btn-primary" data-submit-btn>Send Message</button>
+							<p class="form-note" data-form-note>I review every message personally. You will receive a genuine response, not an automated reply.</p>
+						</form>
+					</div>
+
+					<div class="contact-side-col">
+						<div class="growpha-card contact-card">
+							<div class="contact-card-title">What to Expect</div>
+							{expectRows.map((r) => (
+								<div class="contact-card-row">
+									<span class="contact-card-label">{r.label}</span>
+									<span class="contact-card-value">{r.value}</span>
+								</div>
+							))}
+						</div>
+
+						<div class="growpha-card contact-card">
+							<div class="contact-card-title">Why Growpha</div>
+							{whyItems.map((item) => (
+								<div class="contact-why-item">
+									<div class="contact-why-title">{item.title}</div>
+									<p class="contact-why-desc">{item.desc}</p>
+								</div>
+							))}
+						</div>
+
+						<div class="growpha-card contact-card">
+							<div class="contact-card-title">Good fit for Growpha</div>
+							<ul class="contact-fit-list">
+								{goodFit.map((item) => <li>{item}</li>)}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<script>
+	const form = document.querySelector('[data-contact-form]') as HTMLFormElement | null;
+	const note = document.querySelector('[data-form-note]');
+	const submitBtn = document.querySelector('[data-submit-btn]') as HTMLButtonElement | null;
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		if (submitBtn) {
+			submitBtn.disabled = true;
+			submitBtn.textContent = 'Sending…';
+		}
+		const body = new URLSearchParams(new FormData(form) as any).toString();
+		fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
+			.then(() => {
+				form.reset();
+				form.querySelectorAll('input, select, textarea, button').forEach((el) => ((el as HTMLElement).style.display = 'none'));
+				if (note) {
+					note.textContent = "Thanks — your message has been sent. I'll get back to you within 1–2 business days.";
+					note.classList.add('form-note-success');
+				}
+			})
+			.catch(() => {
+				if (submitBtn) {
+					submitBtn.disabled = false;
+					submitBtn.textContent = 'Send Message';
+				}
+				if (note) note.textContent = 'Something went wrong sending your message — please try again or reach out via LinkedIn.';
+			});
+	});
+</script>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.contact-hero {
+		position: relative;
+		background: var(--growpha-surface-1);
+		padding: 40px 0 48px;
+	}
+	.svc-breadcrumb {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 24px;
+	}
+	.svc-breadcrumb a {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		text-decoration: none;
+	}
+	.svc-breadcrumb span {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+	}
+	.contact-hero .section-label {
+		margin-bottom: 20px;
+	}
+	.contact-h1 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+		margin: 0 0 16px;
+		color: var(--growpha-text-primary);
+	}
+	.contact-lead {
+		color: var(--growpha-text-secondary);
+		font-size: 1.0625rem;
+		line-height: 1.7;
+		max-width: 560px;
+		margin: 0;
+	}
+
+	.contact-body {
+		background: var(--growpha-black);
+		padding: 48px 0 64px;
+	}
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+	@media (min-width: 1024px) {
+		.contact-grid {
+			grid-template-columns: 7fr 5fr;
+			gap: 48px;
+		}
+	}
+
+	.contact-form {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+	@media (min-width: 640px) {
+		.form-row {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	.contact-form label {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		font-size: 0.8125rem;
+		font-weight: 600;
+		font-family: var(--font-heading);
+		color: var(--growpha-text-secondary);
+	}
+	.contact-form input,
+	.contact-form select,
+	.contact-form textarea {
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 10px;
+		padding: 12px 14px;
+		color: var(--growpha-text-primary);
+		font-family: var(--font-body);
+		font-size: 0.9375rem;
+		outline: none;
+		transition: border-color 0.2s;
+		resize: vertical;
+	}
+	.contact-form input:focus,
+	.contact-form select:focus,
+	.contact-form textarea:focus {
+		border-color: rgba(249, 115, 22, 0.5);
+	}
+	.contact-form button {
+		align-self: flex-start;
+		margin-top: 4px;
+	}
+	.form-note {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin: 0;
+	}
+	.form-note-success {
+		color: var(--growpha-green-bright);
+		font-weight: 600;
+		font-size: 0.9375rem;
+	}
+	.hp-field {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+
+	.contact-side-col {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	.contact-card {
+		padding: 22px;
+	}
+	.contact-card-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.8125rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--growpha-green-bright);
+		margin-bottom: 16px;
+	}
+	.contact-card-row {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		padding: 10px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.06);
+	}
+	.contact-card-row:first-of-type {
+		border-top: none;
+		padding-top: 0;
+	}
+	.contact-card-label {
+		font-size: 0.75rem;
+		color: var(--growpha-text-muted);
+	}
+	.contact-card-value {
+		font-size: 0.9rem;
+		color: var(--growpha-text-primary);
+		font-weight: 600;
+	}
+	.contact-why-item {
+		padding: 10px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.06);
+	}
+	.contact-why-item:first-of-type {
+		border-top: none;
+		padding-top: 0;
+	}
+	.contact-why-title {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.9rem;
+		color: var(--growpha-text-primary);
+		margin-bottom: 4px;
+	}
+	.contact-why-desc {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.6;
+		margin: 0;
+	}
+	.contact-fit-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.contact-fit-list li {
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		padding-left: 20px;
+		position: relative;
+	}
+	.contact-fit-list li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		color: var(--growpha-green-bright);
+		font-weight: 700;
+	}
+</style>

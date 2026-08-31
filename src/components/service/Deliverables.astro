@@ -1,0 +1,99 @@
+---
+interface Props {
+	label: string;
+	title: string;
+	intro: string;
+	items: string[];
+	ctaLabel: string;
+	ctaHref?: string;
+}
+const { label, title, intro, items, ctaLabel, ctaHref = '/contact' } = Astro.props;
+const check =
+	'<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>';
+---
+
+<section class="deliv-section">
+	<div class="gp-container">
+		<div class="deliv-grid">
+			<div>
+				<div class="section-label">{label}</div>
+				<h2 class="deliv-h2">{title}</h2>
+				<p class="deliv-intro">{intro}</p>
+				<a href={ctaHref} target={ctaHref.startsWith('http') ? '_blank' : undefined} class="ghero-btn-primary">{ctaLabel}</a>
+			</div>
+			<ul class="deliv-list">
+				{
+					items.map((item) => (
+						<li>
+							<span class="deliv-check" set:html={check} />
+							<span>{item}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</section>
+
+<style>
+	.deliv-section {
+		background: var(--growpha-surface-3);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.deliv-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+	@media (min-width: 1024px) {
+		.deliv-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	.deliv-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		margin: 16px 0 12px;
+		color: var(--growpha-text-primary);
+	}
+	.deliv-intro {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.7;
+		margin: 0 0 28px;
+	}
+	.deliv-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 14px;
+		align-content: start;
+	}
+	@media (min-width: 640px) {
+		.deliv-list {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.deliv-list li {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+	}
+	.deliv-check {
+		display: flex;
+		color: var(--growpha-green-bright);
+		flex-shrink: 0;
+		margin-top: 2px;
+	}
+	.deliv-list span:last-child {
+		font-size: 0.9375rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.5;
+	}
+</style>
