@@ -1,7 +1,8 @@
 {
-  "sheet_url": "https://docs.google.com/spreadsheets/d/1TjojJgGYaTgFtHJ-Mfvfa9nbIFO6OBOrTQpBkCCm95Y/edit",
-  "sheet_id": "1TjojJgGYaTgFtHJ-Mfvfa9nbIFO6OBOrTQpBkCCm95Y",
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1O5VH-yd6NVe1WBfuswwXg7EkH-ocdu2SG8kVniyZhso/edit",
+  "sheet_id": "1O5VH-yd6NVe1WBfuswwXg7EkH-ocdu2SG8kVniyZhso",
   "next_day": 1,
   "total_days": 30,
-  "notes": "next_day is the Day number (1-30) to pull from the sheet on the next automation run. The daily agent increments this by 1 after each successful publish and commits the change. After day 30, the agent should fall back to self-selecting topics from Growpha's service pillars, matching the same voice, until this file is refreshed with a new calendar."
+  "columns": ["Day", "Order", "Title", "Pillar", "Main Keyword", "Search Volume (US)", "Secondary Keyword 1", "Secondary Keyword 2", "Meta Title", "Meta Description", "URL Slug", "Content Brief"],
+  "notes": "next_day is the Day number (1-30) to pull from the sheet on the next automation run. Each row is fully pre-researched: a real Semrush-verified main keyword + volume, 2 secondary keywords, a ready meta title/description, the exact URL slug to use as the filename, and a 3-4 sentence content brief describing what the post must cover. The daily agent should use these fields directly rather than re-deriving them, then increment next_day by 1 after a successful publish and commit the change. After day 30, fall back to self-selecting topics from Growpha's service pillars, matching the same voice and doing the same keyword-research rigor, until this file is refreshed with a new calendar."
 }

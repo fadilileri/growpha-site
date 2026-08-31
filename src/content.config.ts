@@ -14,6 +14,8 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
+			// SEO: [main keyword, secondary keyword 1, secondary keyword 2, ...]
+			keywords: z.array(z.string()).optional(),
 		}),
 });
 
