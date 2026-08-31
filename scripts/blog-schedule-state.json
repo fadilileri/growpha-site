@@ -1,0 +1,7 @@
+{
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1TjojJgGYaTgFtHJ-Mfvfa9nbIFO6OBOrTQpBkCCm95Y/edit",
+  "sheet_id": "1TjojJgGYaTgFtHJ-Mfvfa9nbIFO6OBOrTQpBkCCm95Y",
+  "next_day": 1,
+  "total_days": 30,
+  "notes": "next_day is the Day number (1-30) to pull from the sheet on the next automation run. The daily agent increments this by 1 after each successful publish and commits the change. After day 30, the agent should fall back to self-selecting topics from Growpha's service pillars, matching the same voice, until this file is refreshed with a new calendar."
+}
