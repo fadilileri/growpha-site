@@ -3,6 +3,7 @@ title: 'The SEO Audit Checklist That Actually Finds Revenue-Blocking Issues'
 description: 'Most SEO audits produce a list of 200 issues and no prioritisation. This is the framework used to separate the issues that are costing you rankings from the ones that are just noise.'
 pubDate: 'Feb 18 2025'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+category: 'SEO'
 ---
 
 A 200-item audit spreadsheet is not a strategy — it is a way to make a client feel like they got their money's worth while giving their team no idea what to actually fix first. Most audit tools flag every deviation from best practice with equal weight. A missing alt tag on a footer icon and a robots.txt line blocking your entire product catalogue show up as the same severity of "issue." They are not the same problem.

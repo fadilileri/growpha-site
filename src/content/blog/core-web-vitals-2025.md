@@ -3,6 +3,7 @@ title: 'Why Your Core Web Vitals Score Is Lying to You (And What to Do About It)
 description: 'Most teams optimise for the lab score. The lab score is not what Google measures. Here is what the field data is actually telling you — and the specific fixes that move the needle in CrUX.'
 pubDate: 'Mar 12 2025'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+category: 'Technical SEO'
 ---
 
 Most teams chase a green Lighthouse score, run it in an incognito tab on a fibre connection in an empty office, and call it done. That number is a lab score. It is not what Google actually uses to rank you.

@@ -3,6 +3,7 @@ title: 'Shopify SEO in 2025: The Technical Foundations Most Stores Get Wrong'
 description: "Shopify's default architecture creates specific SEO problems that most store owners do not know exist. Here is a systematic breakdown of the issues and how to fix them without touching Liquid."
 pubDate: 'Jan 15 2025'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+category: 'Web Development'
 ---
 
 Shopify is a strong e-commerce platform, but its defaults were not built with technical SEO as the priority — and most store owners inherit problems they never chose. None of these require ripping apart your theme. They require knowing where Shopify's architecture works against you by default.

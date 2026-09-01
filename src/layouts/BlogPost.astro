@@ -1,120 +1,788 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import avatar from '../assets/brand/fadil-avatar.png';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import { computeMetrics } from '../utils/readingMetrics';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & { rawBody?: string };
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const {
+	title,
+	description,
+	category = 'SEO',
+	rawBody = '',
+	aiSummary,
+	definitions,
+	qualityAssessment,
+} = Astro.props;
+
+const metrics = computeMetrics(rawBody);
+
+const fleschColor = metrics.fleschScore >= 70 ? 'var(--growpha-green-bright)' : metrics.fleschScore >= 50 ? 'var(--growpha-orange)' : '#ef4444';
+
+function scoreColor(score: number) {
+	if (score >= 8) return 'var(--growpha-green-bright)';
+	if (score >= 6) return 'var(--growpha-orange)';
+	return '#ef4444';
+}
+
+const icons = {
+	clock:
+		'<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+	doc:
+		'<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path></svg>',
+	bolt:
+		'<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>',
+	book:
+		'<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>',
+	chart:
+		'<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>',
+	chevronRight:
+		'<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>',
+	arrowRight:
+		'<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>',
+};
+
+const tabs = [
+	{ key: 'article', label: 'Article', icon: icons.doc },
+	{ key: 'summary', label: 'AI Summary', icon: icons.bolt },
+	{ key: 'definitions', label: 'Definitions', icon: icons.book },
+	{ key: 'seo', label: 'AI + SEO Data', icon: icons.chart },
+];
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: var(--radius-card);
-				border: 1px solid var(--border);
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: var(--text-muted);
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.byline {
-				display: inline-flex;
-				align-items: center;
-				gap: 10px;
-				margin: 0 auto 0.5em;
-			}
-			.byline-avatar {
-				width: 40px;
-				height: 40px;
-				border-radius: 50%;
-				object-fit: cover;
-				display: block;
-			}
-			.byline-meta {
-				display: flex;
-				flex-direction: column;
-				align-items: flex-start;
-				text-align: left;
-			}
-			.byline-name {
-				font-weight: 600;
-				color: var(--text);
-				font-size: 0.9em;
-				line-height: 1.3;
-			}
-			.date {
-				color: var(--text-muted);
-				font-size: 0.85em;
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-			hr {
-				border-top: 1px solid var(--border);
-			}
-		</style>
 	</head>
-
 	<body>
 		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+		<main class="blog-detail">
+			<div class="gp-container detail-head">
+				<nav class="bd-breadcrumb">
+					<a href="/">Home</a>
+					<span set:html={icons.chevronRight} />
+					<a href="/blog">Blog</a>
+					<span set:html={icons.chevronRight} />
+					<span>Article</span>
+				</nav>
+
+				<div class="bd-category">{category}</div>
+				<h1 class="bd-title">{title}</h1>
+				<div class="bd-meta">
+					<span set:html={icons.clock} />
+					{metrics.readingTimeMinutes} min read
 				</div>
-				<div class="prose">
-					<div class="title">
-						<h1>{title}</h1>
-						<div class="byline">
-							<Image src={avatar} alt="Fadil İleri" width={40} height={40} class="byline-avatar" />
-							<div class="byline-meta">
-								<span class="byline-name">Fadil İleri</span>
-								<span class="date">
-									<FormattedDate date={pubDate} />
-									{
-										updatedDate && (
-											<span class="last-updated-on"> · Updated <FormattedDate date={updatedDate} /></span>
-										)
-									}
-								</span>
+
+				<div class="bd-tabs" role="tablist">
+					{tabs.map((t, i) => (
+						<button class:list={['bd-tab', { active: i === 0 }]} data-tab-btn={t.key} role="tab" aria-selected={i === 0}>
+							<span class="bd-tab-icon" set:html={t.icon} />
+							{t.label}
+							{i === 0 && <span class="bd-tab-dot" />}
+						</button>
+					))}
+				</div>
+			</div>
+
+			<div class="gp-container detail-grid">
+				<div class="detail-main">
+					<div class="bd-panel" data-panel="article">
+						<div class="prose">
+							<slot />
+						</div>
+					</div>
+
+					<div class="bd-panel" data-panel="summary" hidden>
+						{aiSummary ? (
+							<>
+								<div class="tldr-box">
+									<div class="tldr-label"><span set:html={icons.bolt} /> TL;DR</div>
+									<p>{aiSummary.tldr}</p>
+								</div>
+								<div class="takeaways-label">Key Takeaways</div>
+								<div class="takeaways-list">
+									{aiSummary.keyTakeaways.map((t, i) => (
+										<div class="takeaway-item">
+											<span class="num-badge">{i + 1}</span>
+											<span>{t}</span>
+										</div>
+									))}
+								</div>
+								<div class="summary-stats">
+									<div class="stat-tile">
+										<div class="stat-value">{metrics.readingTimeMinutes} min</div>
+										<div class="stat-label">Reading Time</div>
+									</div>
+									<div class="stat-tile">
+										<div class="stat-value">{aiSummary.readingLevel || metrics.fleschLabel}</div>
+										<div class="stat-label">Reading Level</div>
+									</div>
+								</div>
+							</>
+						) : (
+							<div class="bd-empty">AI summary has not been generated for this article yet.</div>
+						)}
+					</div>
+
+					<div class="bd-panel" data-panel="definitions" hidden>
+						{definitions && definitions.length > 0 ? (
+							<>
+								<p class="definitions-intro">Key terms used in this article, extracted and defined by AI.</p>
+								<div class="definitions-grid">
+									{definitions.map((d, i) => (
+										<div class="growpha-card definition-card">
+											<div class="def-badge">{i + 1}</div>
+											<div class="def-term">{d.term}</div>
+											<p class="def-text">{d.definition}</p>
+										</div>
+									))}
+								</div>
+							</>
+						) : (
+							<div class="bd-empty">No key terms have been extracted for this article yet.</div>
+						)}
+					</div>
+
+					<div class="bd-panel" data-panel="seo" hidden>
+						<div class="section-label">Content Metrics</div>
+						<div class="metrics-grid">
+							<div class="metric-tile">
+								<div class="metric-value">{metrics.wordCount.toLocaleString()}</div>
+								<div class="metric-label">Word Count</div>
+							</div>
+							<div class="metric-tile">
+								<div class="metric-value">{metrics.readingTimeMinutes} min</div>
+								<div class="metric-label">Reading Time</div>
+							</div>
+							<div class="metric-tile">
+								<div class="metric-value">{metrics.headings}</div>
+								<div class="metric-label">Headings</div>
+							</div>
+							<div class="metric-tile">
+								<div class="metric-value">{metrics.paragraphs}</div>
+								<div class="metric-label">Paragraphs</div>
+							</div>
+							<div class="metric-tile">
+								<div class="metric-value">{metrics.links}</div>
+								<div class="metric-label">Links</div>
+							</div>
+							<div class="metric-tile">
+								<div class="metric-value">{metrics.images}</div>
+								<div class="metric-label">Images</div>
+							</div>
+							<div class="metric-tile">
+								<div class="metric-value">{metrics.sentences}</div>
+								<div class="metric-label">Sentences</div>
+							</div>
+							<div class="metric-tile">
+								<div class="metric-value">{metrics.fleschLabel}</div>
+								<div class="metric-label">Readability</div>
 							</div>
 						</div>
-						<hr />
+
+						<div class="flesch-section">
+							<div class="flesch-header">
+								<span>Flesch Readability Score</span>
+								<span>{metrics.fleschScore} / 100 — {metrics.fleschLabel}</span>
+							</div>
+							<div class="flesch-bar">
+								<div class="flesch-fill" style={`width:${metrics.fleschScore}%; background:${fleschColor}`} />
+							</div>
+						</div>
+
+						{qualityAssessment && qualityAssessment.length > 0 ? (
+							<>
+								<div class="section-label quality-label-spacing">AI Content Quality Assessment</div>
+								<div class="quality-list">
+									{qualityAssessment.map((q) => (
+										<div class="quality-card">
+											<span class="quality-badge" style={`background:${scoreColor(q.score)}1a; color:${scoreColor(q.score)}; border-color:${scoreColor(q.score)}40`}>{q.score}</span>
+											<div>
+												<div class="quality-title">{q.label}</div>
+												<p class="quality-desc">{q.description}</p>
+											</div>
+										</div>
+									))}
+								</div>
+							</>
+						) : (
+							<div class="bd-empty">AI content quality assessment has not been generated for this article yet.</div>
+						)}
 					</div>
-					<slot />
 				</div>
-			</article>
+
+				<aside class="detail-sidebar">
+					<div class="growpha-card sidebar-card">
+						<div class="sidebar-card-title">Article Details</div>
+						<div class="sidebar-row">
+							<span class="sidebar-row-label">Category</span>
+							<span class="service-tag">{category}</span>
+						</div>
+						<div class="sidebar-row">
+							<span class="sidebar-row-label">Read time</span>
+							<span class="sidebar-row-value">{metrics.readingTimeMinutes} min read</span>
+						</div>
+					</div>
+
+					<div class="growpha-card sidebar-card">
+						<div class="sidebar-card-title">Reading Modes</div>
+						<div class="reading-modes">
+							{tabs.map((t, i) => (
+								<button class:list={['reading-mode-btn', { active: i === 0 }]} data-tab-link={t.key}>
+									<span class="bd-tab-icon" set:html={t.icon} />
+									{t.label}
+								</button>
+							))}
+						</div>
+					</div>
+
+					<div class="growpha-card sidebar-card work-with-card">
+						<div class="sidebar-card-title">Work with Growpha</div>
+						<p class="work-with-desc">SEO infrastructure, AI automations, and content systems built for measurable growth.</p>
+						<a href="/contact" class="ghero-btn-primary work-with-btn">
+							Get in Touch <span set:html={icons.arrowRight} />
+						</a>
+					</div>
+				</aside>
+			</div>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<script>
+	const tabButtons = document.querySelectorAll('[data-tab-btn]');
+	const tabLinks = document.querySelectorAll('[data-tab-link]');
+	const panels = document.querySelectorAll('[data-panel]');
+
+	function activate(key: string) {
+		panels.forEach((p) => {
+			(p as HTMLElement).hidden = p.getAttribute('data-panel') !== key;
+		});
+		tabButtons.forEach((b) => {
+			const isActive = b.getAttribute('data-tab-btn') === key;
+			b.classList.toggle('active', isActive);
+			b.setAttribute('aria-selected', String(isActive));
+			const dot = b.querySelector('.bd-tab-dot');
+			if (dot) dot.remove();
+			if (isActive) b.insertAdjacentHTML('beforeend', '<span class="bd-tab-dot"></span>');
+		});
+		tabLinks.forEach((l) => {
+			l.classList.toggle('active', l.getAttribute('data-tab-link') === key);
+		});
+	}
+
+	tabButtons.forEach((b) => b.addEventListener('click', () => activate(b.getAttribute('data-tab-btn')!)));
+	tabLinks.forEach((l) => l.addEventListener('click', () => activate(l.getAttribute('data-tab-link')!)));
+</script>
+
+<style>
+	.blog-detail {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+		background: var(--growpha-black);
+	}
+	.detail-head {
+		padding: 32px 0 0;
+	}
+	.bd-breadcrumb {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 20px;
+	}
+	.bd-breadcrumb a {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		text-decoration: none;
+	}
+	.bd-breadcrumb a:hover {
+		color: var(--growpha-text-secondary);
+	}
+	.bd-breadcrumb span:not(:has(svg)) {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+	}
+	.bd-breadcrumb :global(svg) {
+		color: var(--growpha-text-muted);
+		flex-shrink: 0;
+	}
+
+	.bd-category {
+		display: inline-flex;
+		align-items: center;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--growpha-orange);
+		background: rgba(249, 115, 22, 0.1);
+		border: 1px solid rgba(249, 115, 22, 0.25);
+		border-radius: 999px;
+		padding: 4px 12px;
+		margin-bottom: 16px;
+	}
+	.bd-title {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+		letter-spacing: -0.025em;
+		line-height: 1.15;
+		color: var(--growpha-text-primary);
+		margin: 0 0 20px;
+		max-width: 900px;
+	}
+	.bd-meta {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin-bottom: 28px;
+	}
+	.bd-meta :global(svg) {
+		flex-shrink: 0;
+	}
+
+	.bd-tabs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	}
+	.bd-tab {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		background: transparent;
+		border: 0;
+		border-bottom: 2px solid transparent;
+		padding: 10px 14px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.875rem;
+		color: var(--growpha-text-muted);
+		cursor: pointer;
+		transition: color 0.15s;
+	}
+	.bd-tab:hover {
+		color: var(--growpha-text-secondary);
+	}
+	.bd-tab.active {
+		color: var(--growpha-text-primary);
+		border-bottom-color: var(--growpha-green-bright);
+	}
+	.bd-tab-icon {
+		display: inline-flex;
+		color: var(--growpha-orange);
+	}
+	.bd-tab-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--growpha-green-bright);
+		margin-left: 2px;
+	}
+
+	.detail-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 32px;
+		padding: 32px 0 64px;
+		align-items: start;
+	}
+	@media (min-width: 1024px) {
+		.detail-grid {
+			grid-template-columns: minmax(0, 1fr) 320px;
+			gap: 48px;
+		}
+	}
+
+	.detail-main {
+		min-width: 0;
+	}
+	.prose {
+		color: var(--growpha-text-secondary);
+		font-size: 1.0625rem;
+		line-height: 1.8;
+	}
+	.prose :global(h2) {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.5rem;
+		color: var(--growpha-text-primary);
+		letter-spacing: -0.01em;
+		margin: 2em 0 0.6em;
+	}
+	.prose :global(h3) {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.1875rem;
+		color: var(--growpha-text-primary);
+		margin: 1.75em 0 0.5em;
+	}
+	.prose :global(p) {
+		margin: 0 0 1.25em;
+	}
+	.prose :global(ul),
+	.prose :global(ol) {
+		margin: 0 0 1.25em;
+		padding-left: 1.25em;
+	}
+	.prose :global(li) {
+		margin-bottom: 0.5em;
+	}
+	.prose :global(strong) {
+		color: var(--growpha-text-primary);
+		font-weight: 700;
+	}
+	.prose :global(code) {
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 4px;
+		padding: 2px 6px;
+		font-size: 0.9em;
+	}
+	.prose :global(a) {
+		color: var(--growpha-orange);
+	}
+
+	.bd-empty {
+		background: var(--growpha-surface-2);
+		border: 1px dashed rgba(255, 255, 255, 0.12);
+		border-radius: 12px;
+		padding: 32px 24px;
+		text-align: center;
+		color: var(--growpha-text-muted);
+		font-size: 0.9375rem;
+	}
+
+	/* AI Summary tab */
+	.tldr-box {
+		background: rgba(34, 197, 94, 0.06);
+		border: 1px solid rgba(34, 197, 94, 0.2);
+		border-left: 3px solid var(--growpha-green-bright);
+		border-radius: 10px;
+		padding: 18px 20px;
+		margin-bottom: 28px;
+	}
+	.tldr-label {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--growpha-green-bright);
+		margin-bottom: 10px;
+	}
+	.tldr-box p {
+		margin: 0;
+		color: var(--growpha-text-secondary);
+		font-size: 0.9375rem;
+		line-height: 1.7;
+	}
+	.takeaways-label {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.9375rem;
+		color: var(--growpha-text-primary);
+		margin-bottom: 14px;
+	}
+	.takeaways-list {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		margin-bottom: 28px;
+	}
+	.takeaway-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 10px;
+		padding: 12px 14px;
+		font-size: 0.9375rem;
+		color: var(--growpha-text-secondary);
+	}
+	.num-badge {
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		border-radius: 6px;
+		background: rgba(249, 115, 22, 0.12);
+		color: var(--growpha-orange);
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+	}
+	.summary-stats {
+		display: flex;
+		gap: 12px;
+	}
+	.stat-tile {
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 10px;
+		padding: 14px 18px;
+	}
+	.stat-value {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 1.25rem;
+		color: var(--growpha-text-primary);
+	}
+	.stat-label {
+		font-size: 0.6875rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-top: 2px;
+	}
+
+	/* Definitions tab */
+	.definitions-intro {
+		color: var(--growpha-text-muted);
+		font-size: 0.875rem;
+		margin: 0 0 20px;
+	}
+	.definitions-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+	@media (min-width: 640px) {
+		.definitions-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.definition-card {
+		position: relative;
+		padding: 18px;
+	}
+	.def-badge {
+		position: absolute;
+		top: 14px;
+		right: 14px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		border-radius: 5px;
+		background: rgba(249, 115, 22, 0.12);
+		color: var(--growpha-orange);
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.6875rem;
+	}
+	.def-term {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.8125rem;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		color: var(--growpha-text-primary);
+		margin-bottom: 8px;
+		padding-right: 28px;
+	}
+	.def-text {
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	/* AI + SEO Data tab */
+	.quality-label-spacing {
+		margin-top: 32px;
+	}
+	.metrics-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 12px;
+		margin-bottom: 24px;
+	}
+	@media (min-width: 640px) {
+		.metrics-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	.metric-tile {
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 10px;
+		padding: 16px;
+	}
+	.metric-value {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 1.375rem;
+		color: var(--growpha-text-primary);
+	}
+	.metric-label {
+		font-size: 0.6875rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-top: 4px;
+	}
+	.flesch-section {
+		margin-bottom: 28px;
+	}
+	.flesch-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin-bottom: 8px;
+	}
+	.flesch-bar {
+		height: 8px;
+		border-radius: 999px;
+		background: var(--growpha-surface-2);
+		overflow: hidden;
+	}
+	.flesch-fill {
+		height: 100%;
+		border-radius: 999px;
+	}
+	.quality-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.quality-card {
+		display: flex;
+		align-items: flex-start;
+		gap: 14px;
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 10px;
+		padding: 14px 16px;
+	}
+	.quality-badge {
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 8px;
+		border: 1px solid;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.875rem;
+	}
+	.quality-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.9375rem;
+		color: var(--growpha-text-primary);
+		margin-bottom: 4px;
+	}
+	.quality-desc {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	/* Sidebar */
+	.detail-sidebar {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.sidebar-card {
+		padding: 18px;
+	}
+	.sidebar-card-title {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--growpha-text-muted);
+		margin-bottom: 14px;
+	}
+	.sidebar-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 8px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.06);
+	}
+	.sidebar-row:first-of-type {
+		border-top: none;
+		padding-top: 0;
+	}
+	.sidebar-row-label {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.sidebar-row-value {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+		font-weight: 600;
+	}
+	.reading-modes {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+	.reading-mode-btn {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		width: 100%;
+		background: transparent;
+		border: 0;
+		border-radius: 8px;
+		padding: 9px 10px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		text-align: left;
+		cursor: pointer;
+		transition: background 0.15s, color 0.15s;
+	}
+	.reading-mode-btn:hover {
+		background: rgba(255, 255, 255, 0.04);
+	}
+	.reading-mode-btn.active {
+		background: rgba(249, 115, 22, 0.1);
+		color: var(--growpha-orange);
+	}
+	.reading-mode-btn .bd-tab-icon {
+		color: currentColor;
+		opacity: 0.8;
+	}
+
+	.work-with-card {
+		background: linear-gradient(135deg, rgba(249, 115, 22, 0.08) 0%, var(--growpha-surface-3) 60%);
+	}
+	.work-with-desc {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-secondary);
+		line-height: 1.6;
+		margin: 0 0 16px;
+	}
+	.work-with-btn {
+		width: 100%;
+		justify-content: center;
+	}
+</style>
