@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://growpha.com/sitemap-index.xml
+Sitemap: https://growpha.com/sitemap-pages.xml
+Sitemap: https://growpha.com/sitemap-services.xml
+Sitemap: https://growpha.com/sitemap-blog.xml
