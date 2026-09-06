@@ -1,5 +1,5 @@
 ---
-title: "Content Gap Analysis: Finding What Competitors Haven't Written | Growpha"
+title: "Content Gap Analysis for SEO | Growpha"
 description: "Competing head-on for the same keywords as established competitors is slow. Here's how to find genuine content gaps they've missed instead."
 pubDate: 'Sep 6 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'

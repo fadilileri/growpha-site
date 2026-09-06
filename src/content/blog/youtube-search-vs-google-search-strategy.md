@@ -1,5 +1,5 @@
 ---
-title: 'YouTube Search vs Google Search: Different Strategies Needed | Growpha'
+title: 'YouTube Search vs Google Search Strategy | Growpha'
 description: "YouTube's algorithm weighs watch time and session behaviour very differently from Google's web ranking factors. Here's how to optimise for each properly."
 pubDate: 'Sep 6 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'

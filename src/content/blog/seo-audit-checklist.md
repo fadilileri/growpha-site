@@ -1,6 +1,6 @@
 ---
-title: 'The SEO Audit Checklist That Actually Finds Revenue-Blocking Issues'
-description: 'Most SEO audits produce a list of 200 issues and no prioritisation. This is the framework used to separate the issues that are costing you rankings from the ones that are just noise.'
+title: 'The SEO Audit Checklist for Revenue Issues | Growpha'
+description: 'Most SEO audits produce 200 issues with no prioritisation. This framework separates what is costing you rankings from what is just noise.'
 pubDate: 'Feb 18 2025'
 heroImage: '../../assets/blog-placeholder-2.jpg'
 category: 'SEO'

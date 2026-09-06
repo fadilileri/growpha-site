@@ -1,6 +1,6 @@
 ---
-title: 'Shopify SEO in 2025: The Technical Foundations Most Stores Get Wrong'
-description: "Shopify's default architecture creates specific SEO problems that most store owners do not know exist. Here is a systematic breakdown of the issues and how to fix them without touching Liquid."
+title: 'Shopify SEO in 2025: Technical Foundations | Growpha'
+description: "Shopify's default setup creates SEO problems most store owners do not know exist. Here is a breakdown of the issues and how to fix them without touching Liquid."
 pubDate: 'Jan 15 2025'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 category: 'Web Development'

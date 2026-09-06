@@ -1,6 +1,6 @@
 ---
-title: 'Wikipedia Notability Guidelines: What Actually Qualifies | Growpha'
-description: "Most businesses that want a Wikipedia page don't yet meet notability guidelines. Here's what actually qualifies, in plain terms."
+title: 'Wikipedia Notability Guidelines Explained | Growpha'
+description: "Most businesses that want a Wikipedia page do not yet meet notability guidelines. Here's what qualifies, in plain terms."
 pubDate: 'Sep 6 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'
 category: 'Wikipedia Creation'

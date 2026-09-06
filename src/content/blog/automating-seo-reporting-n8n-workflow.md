@@ -1,5 +1,5 @@
 ---
-title: 'Automating SEO Reporting With n8n: A Practical Workflow | Growpha'
+title: 'Automating SEO Reporting With n8n | Growpha'
 description: "Manually pulling SEO reports from multiple tools each week wastes hours. Here's a practical n8n workflow that automates it end to end."
 pubDate: 'Sep 6 2026'
 heroImage: '../../assets/blog-placeholder-5.jpg'

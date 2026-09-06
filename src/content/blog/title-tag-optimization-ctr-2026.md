@@ -1,5 +1,5 @@
 ---
-title: 'Title Tag Optimisation: What Actually Moves CTR in 2026 | Growpha'
+title: 'Title Tag Optimisation for CTR in 2026 | Growpha'
 description: "Keyword-stuffed title tags don't win clicks anymore. Here's what moves click-through rate in the SERP today."
 pubDate: 'Sep 1 2026'
 heroImage: '../../assets/blog-placeholder-4.jpg'

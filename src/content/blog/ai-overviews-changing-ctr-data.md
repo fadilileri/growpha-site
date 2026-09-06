@@ -1,6 +1,6 @@
 ---
-title: "AI Overviews Are Changing CTR — Here's the Actual Data | Growpha"
-description: "AI Overviews are measurably reducing organic click-through rates for many query types. Here's what the current data actually shows."
+title: "AI Overviews and the Real CTR Data | Growpha"
+description: "AI Overviews are measurably reducing organic click-through rates for many query types. Here's what the current data shows."
 pubDate: 'Sep 6 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 category: 'AI/LLM SEO'

@@ -7,7 +7,6 @@ import AhrefsLogo from '../assets/brand/tools/ahrefs.png';
 import OpenAiLogo from '../assets/brand/tools/openai.webp';
 import ScreamingFrogLogo from '../assets/brand/tools/screamingfrog.webp';
 import { Image } from 'astro:assets';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const trustItems = ['Based in Dubai, UAE', 'AI-native workflows', 'Technical-first approach'];
 
@@ -217,7 +216,10 @@ const toolsLoop = [...tools, ...tools];
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead
+			title="SEO Agency in Dubai | Technical SEO & Growth | Growpha"
+			description="Growpha is a Dubai-based SEO agency helping UAE businesses grow organic traffic through technical audits, content systems, and AI search visibility."
+		/>
 	</head>
 	<body>
 		<Header />

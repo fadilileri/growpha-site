@@ -1,5 +1,5 @@
 ---
-title: 'Hreflang Mistakes Splitting Your International Rankings | Growpha'
+title: 'Hreflang Mistakes and International Rankings | Growpha'
 description: 'Hreflang is one of the most misimplemented tags in SEO. Here are the specific mistakes fragmenting your international search visibility.'
 pubDate: 'Sep 1 2026'
 heroImage: '../../assets/blog-placeholder-2.jpg'

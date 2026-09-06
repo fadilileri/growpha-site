@@ -1,6 +1,6 @@
 ---
-title: 'How a Crawl Budget Audit Finds Crawl Budget Waste'
-description: 'Crawl budget problems rarely announce themselves. They show up as slow indexation, stale content, and pages that never seem to get recrawled — until you go looking for where the budget is actually being spent.'
+title: 'How a Crawl Budget Audit Finds Crawl Budget Waste | Growpha'
+description: 'Crawl budget problems rarely announce themselves. They show up as slow indexation and stale content until you find where the budget is being spent.'
 pubDate: 'Apr 3 2025'
 heroImage: '../../assets/blog-placeholder-4.jpg'
 category: 'SEO'

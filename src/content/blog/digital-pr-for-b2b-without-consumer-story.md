@@ -1,5 +1,5 @@
 ---
-title: 'Digital PR for B2B: Earning Links Without a Consumer Story | Growpha'
+title: 'Digital PR for B2B Without a Consumer Story | Growpha'
 description: "B2B brands can't rely on consumer-friendly viral hooks. Here's how digital PR works for B2B companies without a mass-market story."
 pubDate: 'Sep 1 2026'
 category: 'Off-Page SEO'

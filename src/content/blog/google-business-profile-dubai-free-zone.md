@@ -1,5 +1,5 @@
 ---
-title: 'Google Business Profile Optimisation for Dubai Free Zones | Growpha'
+title: 'GBP Optimisation for Dubai Free Zones | Growpha'
 description: "Free zone businesses face specific GBP verification and category challenges. Here's how to optimise a Google Business Profile properly in Dubai."
 pubDate: 'Sep 1 2026'
 heroImage: '../../assets/blog-placeholder-3.jpg'

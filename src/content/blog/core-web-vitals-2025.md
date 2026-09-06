@@ -1,6 +1,6 @@
 ---
-title: 'Why Your Core Web Vitals Score Is Lying to You (And What to Do About It)'
-description: 'Most teams optimise for the lab score. The lab score is not what Google measures. Here is what the field data is actually telling you — and the specific fixes that move the needle in CrUX.'
+title: 'Core Web Vitals: Why Your Score Is Misleading | Growpha'
+description: 'Most teams optimise for the lab score, but that is not what Google measures. Here is what the field data shows, and the fixes that move CrUX.'
 pubDate: 'Mar 12 2025'
 heroImage: '../../assets/blog-placeholder-5.jpg'
 category: 'Technical SEO'
