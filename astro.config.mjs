@@ -1,15 +1,17 @@
 // @ts-check
 
 import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
+// Sitemaps are hand-rolled as endpoints (src/pages/sitemap-*.xml.js), split by
+// section (pages/services/blog) with a sitemap-index.xml pointing at all three,
+// so @astrojs/sitemap's single auto-generated file isn't used.
 export default defineConfig({
   site: 'https://growpha.com',
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx()],
 
   redirects: {
     '/about': '/who-am-i',
