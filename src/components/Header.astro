@@ -30,30 +30,30 @@ const icons = {
 };
 
 const seoItems = [
-	{ href: '/services/seo', icon: icons.search, title: 'SEO', desc: 'Technical foundations & authority building' },
-	{ href: '/services/ai-llm-seo', icon: icons.bot, title: 'AI / LLM SEO', desc: 'Visibility in AI-driven search systems' },
+	{ href: '/services/seo/', icon: icons.search, title: 'SEO', desc: 'Technical foundations & authority building' },
+	{ href: '/services/ai-llm-seo/', icon: icons.bot, title: 'AI / LLM SEO', desc: 'Visibility in AI-driven search systems' },
 ];
 const seoSubItems = [
-	{ href: '/services/technical-seo', icon: icons.shieldCheck, title: 'Technical SEO' },
-	{ href: '/services/on-page-seo', icon: icons.layoutTemplate, title: 'On-Page SEO' },
-	{ href: '/services/off-page-seo', icon: icons.globe, title: 'Off-Page SEO' },
-	{ href: '/services/local-seo', icon: icons.mapPin, title: 'Local SEO' },
-	{ href: '/services/youtube-seo', icon: icons.youtube, title: 'YouTube SEO' },
-	{ href: '/services/international-seo', icon: icons.earth, title: 'International SEO' },
+	{ href: '/services/technical-seo/', icon: icons.shieldCheck, title: 'Technical SEO' },
+	{ href: '/services/on-page-seo/', icon: icons.layoutTemplate, title: 'On-Page SEO' },
+	{ href: '/services/off-page-seo/', icon: icons.globe, title: 'Off-Page SEO' },
+	{ href: '/services/local-seo/', icon: icons.mapPin, title: 'Local SEO' },
+	{ href: '/services/youtube-seo/', icon: icons.youtube, title: 'YouTube SEO' },
+	{ href: '/services/international-seo/', icon: icons.earth, title: 'International SEO' },
 ];
 const growthItems = [
-	{ href: '/services/content-marketing', icon: icons.fileText, title: 'Content Marketing', desc: 'Topical authority & content systems' },
-	{ href: '/services/ai-automations', icon: icons.zap, title: 'AI Automations', desc: 'Workflows that remove manual bottlenecks' },
-	{ href: '/services/wikipedia-creation', icon: icons.bookOpen, title: 'Wikipedia Creation', desc: 'Notability research & editorial compliance' },
+	{ href: '/services/content-marketing/', icon: icons.fileText, title: 'Content Marketing', desc: 'Topical authority & content systems' },
+	{ href: '/services/ai-automations/', icon: icons.zap, title: 'AI Automations', desc: 'Workflows that remove manual bottlenecks' },
+	{ href: '/services/wikipedia-creation/', icon: icons.bookOpen, title: 'Wikipedia Creation', desc: 'Notability research & editorial compliance' },
 ];
 const devItems = [
-	{ href: '/services/web-development', icon: icons.codeXml, title: 'Web Development', desc: 'Performance-first, SEO-ready builds' },
-	{ href: '/services/shopify-development', icon: icons.shoppingBag, title: 'Shopify Development', desc: 'E-commerce performance & conversion' },
-	{ href: '/services/wordpress-development', icon: icons.layoutTemplate, title: 'WordPress Development', desc: 'Scalable, editorial-ready builds' },
+	{ href: '/services/web-development/', icon: icons.codeXml, title: 'Web Development', desc: 'Performance-first, SEO-ready builds' },
+	{ href: '/services/shopify-development/', icon: icons.shoppingBag, title: 'Shopify Development', desc: 'E-commerce performance & conversion' },
+	{ href: '/services/wordpress-development/', icon: icons.layoutTemplate, title: 'WordPress Development', desc: 'Scalable, editorial-ready builds' },
 ];
 const newsItems = [
-	{ href: '/blog', icon: icons.fileText, title: 'Blog', desc: 'Strategic insights & guides' },
-	{ href: '/news', icon: icons.zap, title: 'News', desc: 'Industry updates & commentary' },
+	{ href: '/blog/', icon: icons.fileText, title: 'Blog', desc: 'Strategic insights & guides' },
+	{ href: '/news/', icon: icons.zap, title: 'News', desc: 'Industry updates & commentary' },
 ];
 ---
 
@@ -132,13 +132,13 @@ const newsItems = [
 									<span class="mega-footer-title">Not sure where to start?</span>
 									<span class="mega-footer-sub">An audit will tell you exactly what to fix.</span>
 								</div>
-								<a href="/request-audit" class="mega-footer-btn">
+								<a href="/request-audit/" class="mega-footer-btn">
 									Start with an audit <span set:html={icons.arrowRight} />
 								</a>
 							</div>
 							<div class="mega-footer-row">
 								<span class="mega-footer-sub">Ready to start a full engagement?</span>
-								<a href="/contact" class="mega-footer-link">
+								<a href="/contact/" class="mega-footer-link">
 									Let's talk <span set:html={icons.arrowRight} />
 								</a>
 							</div>
@@ -146,9 +146,9 @@ const newsItems = [
 					</div>
 				</div>
 
-				<a href="/services/ai-llm-seo" class="nav-link">AI / LLM SEO</a>
-				<a href="/services/content-marketing" class="nav-link">Content</a>
-				<a href="/services/ai-automations" class="nav-link">AI Automations</a>
+				<a href="/services/ai-llm-seo/" class="nav-link">AI / LLM SEO</a>
+				<a href="/services/content-marketing/" class="nav-link">Content</a>
+				<a href="/services/ai-automations/" class="nav-link">AI Automations</a>
 
 				<div class="nav-item">
 					<button class:list={['nav-link', 'nav-btn', { active: isActive('/blog') || isActive('/news') }]} data-menu-trigger="news">
@@ -168,12 +168,12 @@ const newsItems = [
 					</div>
 				</div>
 
-				<a href="/who-am-i" class:list={['nav-link', { active: isActive('/who-am-i') }]}>Who am I</a>
+				<a href="/who-am-i/" class:list={['nav-link', { active: isActive('/who-am-i') }]}>Who am I</a>
 			</nav>
 
 			<div class="actions">
-				<a href="/request-audit" class="btn-audit">Request Audit</a>
-				<a href="/contact" class="btn-primary-header">
+				<a href="/request-audit/" class="btn-audit">Request Audit</a>
+				<a href="/contact/" class="btn-primary-header">
 					Let's Talk <span set:html={icons.arrowRight} />
 				</a>
 				<button class="mobile-toggle" aria-label="Toggle menu" data-mobile-toggle>
@@ -216,17 +216,17 @@ const newsItems = [
 				</div>
 				<div class="mobile-audit-banner">
 					<span>Not sure where to start?</span>
-					<a href="/request-audit">
+					<a href="/request-audit/">
 						Start with an audit <span set:html={icons.arrowRight} />
 					</a>
 				</div>
 			</div>
 		</div>
 
-		<a href="/services/ai-llm-seo" class="mobile-link">AI / LLM SEO</a>
-		<a href="/services/content-marketing" class="mobile-link">Content Marketing</a>
-		<a href="/services/ai-automations" class="mobile-link">AI Automations</a>
-		<a href="/services/wikipedia-creation" class="mobile-link">Wikipedia Creation</a>
+		<a href="/services/ai-llm-seo/" class="mobile-link">AI / LLM SEO</a>
+		<a href="/services/content-marketing/" class="mobile-link">Content Marketing</a>
+		<a href="/services/ai-automations/" class="mobile-link">AI Automations</a>
+		<a href="/services/wikipedia-creation/" class="mobile-link">Wikipedia Creation</a>
 
 		<div class="mobile-accordion">
 			<button class="mobile-accordion-btn" data-accordion-trigger="m-news">
@@ -240,10 +240,10 @@ const newsItems = [
 			</div>
 		</div>
 
-		<a href="/who-am-i" class="mobile-link">Who am I</a>
-		<a href="/request-audit" class="mobile-link-audit">Request Audit</a>
+		<a href="/who-am-i/" class="mobile-link">Who am I</a>
+		<a href="/request-audit/" class="mobile-link-audit">Request Audit</a>
 		<div class="mobile-cta-wrap">
-			<a href="/contact" class="btn-primary-header mobile-cta-btn">
+			<a href="/contact/" class="btn-primary-header mobile-cta-btn">
 				Let's Talk <span set:html={icons.arrowRight} />
 			</a>
 		</div>
