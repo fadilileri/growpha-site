@@ -1,0 +1,87 @@
+---
+// Anonymised client result. Keep the numbers identical wherever this block is used.
+interface Props {
+	label?: string;
+	title?: string;
+	titleAccent?: string;
+}
+const { label = 'Case Study', title = 'A JavaScript-heavy site', titleAccent = 'made indexable.' } = Astro.props;
+---
+
+<section class="cs-section">
+	<div class="gp-container cs-grid">
+		<div>
+			<div class="section-label">{label}</div>
+			<h2 class="cs-h2">{title}<br /><span class="text-gradient-orange">{titleAccent}</span></h2>
+			<p class="cs-p">
+				The client's website was built with AI tools and relied heavily on JavaScript, so Google could index only 15 of its
+				pages. I rebuilt it into a structure search engines can crawl and render, then ran on-page and content SEO on top.
+			</p>
+			<p class="cs-p">
+				Indexed pages grew from 15 to 155 within 15 days of the change. Organic traffic grew 300% over the following two
+				months. Client name withheld.
+			</p>
+		</div>
+		<div class="cs-stats">
+			<div><span>15 → 155</span>Indexed pages in 15 days</div>
+			<div><span>+300%</span>Organic traffic in 2 months</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cs-section {
+		background: var(--growpha-surface-1);
+		padding: 48px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.cs-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 32px;
+		align-items: center;
+	}
+	@media (min-width: 900px) {
+		.cs-grid {
+			grid-template-columns: 1.4fr 1fr;
+			gap: 56px;
+		}
+	}
+	.cs-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.15;
+		margin: 16px 0 20px;
+		color: var(--growpha-text-primary);
+	}
+	.cs-p {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.75;
+		margin: 0 0 16px;
+		max-width: 620px;
+	}
+	.cs-stats {
+		display: grid;
+		gap: 16px;
+	}
+	.cs-stats div {
+		background: var(--growpha-surface-2);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 12px;
+		padding: 24px;
+		font-size: 0.875rem;
+		color: var(--growpha-text-muted);
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+	.cs-stats span {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 2.25rem;
+		color: var(--growpha-orange);
+	}
+</style>

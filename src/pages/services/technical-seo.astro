@@ -10,6 +10,7 @@ import Deliverables from '../../components/service/Deliverables.astro';
 import FaqAccordion from '../../components/service/FaqAccordion.astro';
 import AuditBanner from '../../components/service/AuditBanner.astro';
 import RelatedServices from '../../components/service/RelatedServices.astro';
+import CaseStudy from '../../components/service/CaseStudy.astro';
 
 const tools = [
 	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
@@ -104,6 +105,7 @@ const related = [
 			<FeatureGrid label="What This Covers" title="Built for measurable outcomes," titleAccent="not activity metrics." features={features} />
 			<ProcessSteps label="The Process" title="How we approach" titleAccent="technical seo." intro="Every engagement follows a structured process — audit first, strategy second, execution third. No guesswork, no assumptions." steps={processSteps} />
 			<Deliverables label="Deliverables & Outcomes" title="What you get from working with Growpha." intro="Clear outputs, documented processes, and measurable results — not activity reports that obscure whether anything is actually working." items={deliverables} ctaLabel="Discuss Your Project" />
+			<CaseStudy />
 			<FaqAccordion items={faqs} />
 			<AuditBanner />
 			<RelatedServices items={related} />
