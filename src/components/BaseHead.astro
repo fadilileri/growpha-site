@@ -14,6 +14,7 @@ interface Props {
 	image?: ImageMetadata;
 	/** Path or URL of a 1200x630 social image. Overrides `image`. */
 	ogImage?: string;
+	ogImageAlt?: string;
 	ogTitle?: string;
 	ogDescription?: string;
 	/** og:locale, e.g. 'en_AE'. */
@@ -29,6 +30,7 @@ const {
 	description,
 	image = FallbackImage,
 	ogImage,
+	ogImageAlt,
 	ogTitle = title,
 	ogDescription = description,
 	locale = 'en_AE',
@@ -72,6 +74,9 @@ const jsonLd = schema ?? sitewideSchema;
 <meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={ogDescription} />
 <meta property="og:image" content={socialImage} />
+{ogImage && <meta property="og:image:width" content="1200" />}
+{ogImage && <meta property="og:image:height" content="630" />}
+{ogImage && ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
 <meta property="og:locale" content={locale} />
 <meta property="og:site_name" content="Growpha" />
 
@@ -80,6 +85,7 @@ const jsonLd = schema ?? sitewideSchema;
 <meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={ogDescription} />
 <meta name="twitter:image" content={socialImage} />
+{ogImage && ogImageAlt && <meta name="twitter:image:alt" content={ogImageAlt} />}
 
 <!-- Structured data -->
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

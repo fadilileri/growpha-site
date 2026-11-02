@@ -29,9 +29,10 @@ export const person = {
 	'@type': 'Person',
 	'@id': PERSON_ID,
 	name: 'Fadil İleri',
+	alternateName: 'Fadil Ileri',
 	jobTitle: 'Founder, Technical SEO & Digital Growth Strategist',
 	url: `${SITE_URL}/who-am-i/`,
-	sameAs: ['https://www.linkedin.com/in/fadilileri34/'],
+	sameAs: ['https://www.linkedin.com/in/fadilileri34/', 'https://fadilileri.com/'],
 	knowsAbout: [
 		'Generative engine optimisation',
 		'AI search visibility',

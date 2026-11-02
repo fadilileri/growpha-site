@@ -1,4 +1,12 @@
 ---
+interface HeroImage {
+	src: string;
+	srcset?: string;
+	sizes?: string;
+	width: number;
+	height: number;
+	alt: string;
+}
 interface Props {
 	crumb: string;
 	crumbParent?: { label: string; href: string };
@@ -11,6 +19,8 @@ interface Props {
 	primaryHref?: string;
 	secondaryLabel?: string;
 	secondaryHref?: string;
+	/** Optional illustration: right column on desktop, below the buttons on mobile. */
+	image?: HeroImage;
 }
 
 const {
@@ -25,6 +35,7 @@ const {
 	primaryHref = '/contact/',
 	secondaryLabel,
 	secondaryHref,
+	image,
 } = Astro.props;
 
 const arrowRight =
@@ -36,6 +47,7 @@ const chevronRight =
 <section class="svc-hero">
 	<div class="svc-hero-dots" aria-hidden="true"></div>
 	<div class="gp-container">
+		<div class:list={['svc-hero-wrap', { 'has-image': Boolean(image) }]}>
 		<div class="svc-hero-inner">
 			<div class="svc-breadcrumb">
 				<a href="/">Home</a>
@@ -64,6 +76,22 @@ const chevronRight =
 				)}
 			</div>
 		</div>
+		{image && (
+			<div class="svc-hero-media">
+				<img
+					src={image.src}
+					srcset={image.srcset}
+					sizes={image.sizes}
+					width={image.width}
+					height={image.height}
+					alt={image.alt}
+					fetchpriority="high"
+					loading="eager"
+					decoding="async"
+				/>
+			</div>
+		)}
+		</div>
 	</div>
 </section>
 
@@ -81,6 +109,36 @@ const chevronRight =
 		opacity: 0.35;
 		background-image: radial-gradient(circle, rgba(34, 197, 94, 0.08) 1px, transparent 1px);
 		background-size: 28px 28px;
+	}
+	.svc-hero-wrap.has-image {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 32px;
+		align-items: center;
+	}
+	@media (min-width: 1024px) {
+		.svc-hero-wrap.has-image {
+			grid-template-columns: minmax(0, 1fr) 440px;
+			gap: 48px;
+		}
+	}
+	.svc-hero-media {
+		position: relative;
+		z-index: 10;
+		width: 100%;
+		max-width: 280px;
+	}
+	@media (min-width: 1024px) {
+		.svc-hero-media {
+			max-width: 440px;
+		}
+	}
+	.svc-hero-media img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 16px;
+		border: 1px solid rgba(255, 255, 255, 0.06);
 	}
 	.svc-hero-inner {
 		position: relative;

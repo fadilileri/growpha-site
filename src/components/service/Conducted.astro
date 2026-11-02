@@ -11,6 +11,14 @@ interface PersonLink {
 	href: string;
 	external?: boolean;
 }
+interface Portrait {
+	src: string;
+	srcset?: string;
+	sizes?: string;
+	width: number;
+	height: number;
+	alt: string;
+}
 interface Props {
 	label: string;
 	title: string;
@@ -23,12 +31,16 @@ interface Props {
 	personName?: string;
 	personRole?: string;
 	personLinks?: PersonLink[];
+	/** Optional large round portrait shown beside the text on desktop. */
+	portrait?: Portrait;
 }
-const { label, title, titleAccent, text, stats, note, photo, personName, personRole, personLinks = [] } = Astro.props;
+const { label, title, titleAccent, text, stats, note, photo, personName, personRole, personLinks = [], portrait } = Astro.props;
 ---
 
 <section class="ra-conducted">
 	<div class="gp-container">
+		<div class:list={['ra-cond-layout', { 'has-portrait': Boolean(portrait) }]}>
+		<div class="ra-cond-main">
 		<div class="section-label">{label}</div>
 		<h2 class="ra-conducted-h2">{title}<br /><span class="text-gradient-orange">{titleAccent}</span></h2>
 		<p class="ra-conducted-p">{text}</p>
@@ -49,6 +61,21 @@ const { label, title, titleAccent, text, stats, note, photo, personName, personR
 				</div>
 			)
 		}
+		</div>
+		{portrait && (
+			<img
+				class="ra-portrait"
+				src={portrait.src}
+				srcset={portrait.srcset}
+				sizes={portrait.sizes}
+				width={portrait.width}
+				height={portrait.height}
+				alt={portrait.alt}
+				loading="lazy"
+				decoding="async"
+			/>
+		)}
+		</div>
 		<div class="ra-conducted-stats">
 			{stats.map((s) => <div><span>{s.value}</span>{s.label}</div>)}
 		</div>
@@ -57,6 +84,34 @@ const { label, title, titleAccent, text, stats, note, photo, personName, personR
 </section>
 
 <style>
+	.ra-cond-layout.has-portrait {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 28px;
+		align-items: center;
+		margin-bottom: 28px;
+	}
+	@media (min-width: 900px) {
+		.ra-cond-layout.has-portrait {
+			grid-template-columns: minmax(0, 1fr) 200px;
+			gap: 56px;
+		}
+	}
+	.ra-portrait {
+		width: 160px;
+		height: 160px;
+		border-radius: 50%;
+		object-fit: cover;
+		justify-self: start;
+		border: 2px solid rgba(249, 115, 22, 0.45);
+	}
+	@media (min-width: 900px) {
+		.ra-portrait {
+			width: 200px;
+			height: 200px;
+			justify-self: center;
+		}
+	}
 	.ra-conducted {
 		background: var(--growpha-surface-1);
 		padding: 40px 0;
