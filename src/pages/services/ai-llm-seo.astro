@@ -8,6 +8,9 @@ import FeatureGrid from '../../components/service/FeatureGrid.astro';
 import FaqAccordion from '../../components/service/FaqAccordion.astro';
 import ClosingCta from '../../components/service/ClosingCta.astro';
 import AuditBanner from '../../components/service/AuditBanner.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import Conducted from '../../components/service/Conducted.astro';
+import RelatedServices from '../../components/service/RelatedServices.astro';
 
 const tools = [
 	{ title: 'OpenAI', initials: 'AI' },
@@ -33,76 +36,215 @@ const disciplines = [
 	{
 		icon: icon('<path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path>'),
 		title: 'AI Search Visibility',
-		desc: 'Optimising for how AI-powered search surfaces, cites, and recommends your brand — including ChatGPT, Perplexity, and Google AI Overviews.',
+		desc: "How ChatGPT, Perplexity, Gemini and Google AI Overviews describe and cite your brand for the UAE queries your buyers ask.",
 	},
 	{
 		icon: icon('<circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle>'),
 		title: 'Entity-Based Optimisation',
-		desc: 'Building structured entity relationships that help AI systems understand who you are, what you do, and why you are authoritative.',
+		desc: "One consistent profile of who you are, what you do and where you're licensed, across your site, schema, Google Business Profile and directories.",
 	},
 	{
 		icon: icon('<path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>'),
 		title: 'Citation & Mention Strategy',
-		desc: 'Positioning your brand to be cited by AI systems through strategic content placement, Wikipedia presence, and authoritative source building.',
+		desc: "Finding the UAE and industry sources AI tools cite in your category, from regional media to directories and Wikipedia, and earning a place on them.",
 	},
 	{
 		icon: icon('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path>'),
 		title: 'LLM Content Structuring',
-		desc: 'Formatting and structuring content so that large language models can accurately retrieve, summarise, and attribute your expertise.',
+		desc: "Priority pages rewritten with direct answers, clear headings and checkable facts that language models can retrieve, summarise and attribute.",
 	},
 	{
 		icon: icon('<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>'),
 		title: 'Search Experience Shifts',
-		desc: 'Understanding how zero-click, AI-generated answers, and conversational search are changing the traffic landscape — and adapting accordingly.',
+		desc: "Which of your queries now show AI answers or zero-click results, what that does to your traffic, and where to adapt first.",
 	},
 	{
 		icon: icon('<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path>'),
 		title: 'Technical Content Foundations',
-		desc: 'Schema, structured data, and technical signals that help AI systems parse and trust your content at a machine level.',
+		desc: "Schema, crawl access for AI bots and machine-readable site signals that help AI systems parse and trust your content.",
 	},
 ];
 
 const realityPoints = [
-	'Optimisation for ChatGPT, Perplexity, and Google AI Overviews',
+	'Optimisation for ChatGPT, Perplexity and AI Overviews',
+	'A baseline of how AI describes your brand today',
 	'Entity and knowledge graph development',
+	'Consistent details across UAE directories and GBP',
+	'UAE and industry citation strategy',
 	'Structured content for LLM retrieval',
-	'Wikipedia and authoritative citation strategy',
-	'Brand mention and co-citation monitoring',
-	'AI-era content architecture',
-	'Technical schema for machine readability',
-	'Ongoing AI search landscape monitoring',
+	'Schema markup for machine readability',
+	'Monthly AI visibility and share-of-voice tracking',
 ];
 
+const processSteps = [
+	{ title: 'AI Visibility Audit', desc: 'Your priority queries tested across AI platforms and Google. Fixed price, 999 AED, 10 business days.' },
+	{ title: 'Entity & Citation Map', desc: "The sources AI tools trust in your UAE category, and where you're missing or inconsistent." },
+	{ title: 'Foundations & Content', desc: 'Schema, entity fixes and priority pages restructured so AI systems can quote you accurately.' },
+	{ title: 'Monitoring', desc: 'Mentions, share of voice and AI referral traffic, reported monthly with what to do next.' },
+];
+
+const conductedStats = [
+	{ value: '10+', label: 'Years in technical SEO' },
+	{ value: '6', label: 'Audit areas covered' },
+	{ value: '10', label: 'Business days to delivery' },
+];
+
+const related = [
+	{ label: 'SEO', href: '/services/seo/' },
+	{ label: 'Technical SEO', href: '/services/technical-seo/' },
+	{ label: 'Local SEO', href: '/services/local-seo/' },
+	{ label: 'Wikipedia Creation', href: '/services/wikipedia-creation/' },
+];
+
+// The FAQ below is the single source for both the visible accordion and the FAQPage JSON-LD,
+// so the markup always matches the on-page text word for word.
 const faqs = [
 	{
-		q: 'What is AI and LLM SEO?',
-		a: 'AI and LLM SEO is the practice of optimising your brand, content, and digital presence to be accurately represented, cited, and recommended by AI-powered search systems such as Google AI Overviews, ChatGPT, Perplexity, and Bing Copilot. These systems retrieve information differently from traditional search engines — they synthesise answers from trusted sources rather than simply ranking pages. Growpha builds the content architecture, entity signals, and authority foundations that make your brand a reliable source for AI systems to reference.',
-	},
-	{
-		q: 'How do I get my brand mentioned by ChatGPT or Perplexity?',
-		a: 'AI language models and retrieval-augmented generation systems draw from a combination of training data, indexed web content, and trusted reference sources. To increase the likelihood of being cited, your brand needs strong entity presence across authoritative sources — including Wikipedia, industry publications, structured data markup, and high-quality content that directly answers the questions your audience asks. Growpha maps the specific sources and signals that influence AI retrieval in your category and builds a strategy to establish your brand as a credible reference.',
+		q: 'What is AI SEO?',
+		a: 'AI SEO, sometimes called generative engine optimisation (GEO) or LLM SEO, is the work of making sure AI search tools such as ChatGPT, Perplexity, Gemini and Google AI Overviews understand your business correctly and cite or recommend it. It combines technical SEO, structured data, entity building and citation strategy.',
 	},
 	{
 		q: 'Is AI SEO different from traditional SEO?',
-		a: 'AI SEO shares many foundations with traditional SEO — content quality, authority, and technical accessibility all matter — but the optimisation targets differ. Traditional SEO focuses on ranking web pages for specific keyword queries. AI SEO focuses on ensuring your brand and expertise are accurately represented in AI-generated answers, which may not link to your site at all. This requires a different content strategy, entity optimisation approach, and authority-building framework. Growpha integrates both disciplines so your visibility is protected across both traditional and AI-powered search.',
+		a: 'It builds on it. Traditional SEO ranks pages for keywords. AI SEO makes sure your brand is represented accurately in AI-generated answers, which may not link to your site. Strong rankings, clean technical foundations and authority still feed AI visibility, so we run both together.',
+		link: { text: 'Traditional SEO', href: '/services/seo/' },
+	},
+	{
+		q: 'How much does AI SEO cost in Dubai?',
+		a: 'Growpha starts with a fixed-price AI visibility and SEO audit at 999 AED, delivered in 10 days. Ongoing work is priced after the audit, based on scope and competition.',
+	},
+	{
+		q: 'How do I get my business mentioned by ChatGPT or Perplexity?',
+		a: "Be consistently described on the sources these tools trust: your own well-structured website, Google Business Profile, UAE business directories, regional and industry media, and reference sites. Then make sure your pages answer your buyers' questions directly. We map which sources matter in your category and close the gaps.",
 	},
 	{
 		q: 'How do I optimise for Google AI Overviews?',
-		a: 'Google AI Overviews (formerly Search Generative Experience) draws from pages that already rank well organically, prioritising content that is authoritative, well-structured, and directly answers the query. Optimising for AI Overviews involves strong on-page structure with clear headings and concise answers, schema markup, E-E-A-T signals (experience, expertise, authoritativeness, trustworthiness), and a track record of ranking in the top positions for relevant queries. Growpha treats AI Overview visibility as an extension of its core SEO strategy, not a separate discipline.',
+		a: 'AI Overviews mostly draw on pages that already rank well. Focus on strong organic rankings, clear headings with direct answers, accurate schema markup, and visible expertise: real authors, evidence and up-to-date facts.',
+	},
+	{
+		q: 'Do you optimise for Arabic AI search?',
+		a: 'Growpha works in English. We optimise your English content and entity data for AI answers in the UAE. If you publish in Arabic too, we make sure your business name, services and location are consistent across both languages, so AI tools recognise them as the same business.',
+	},
+	{
+		q: 'What is answer engine optimisation?',
+		a: 'Answer engine optimisation is structuring content so search and AI tools can pull it as a direct answer. In the UAE, "AEO" usually refers to the customs Authorised Economic Operator programme, so we call this answer engine optimisation or GEO to avoid confusion.',
 	},
 	{
 		q: 'Can AI SEO be measured?',
-		a: 'AI search visibility is harder to measure than traditional organic rankings because AI systems do not always link to sources and there is no equivalent of Google Search Console for AI retrieval. However, proxy metrics include brand mention tracking across AI platforms, share of voice in AI-generated answers for target queries, referral traffic from AI search tools, and entity presence across authoritative reference sources. Growpha builds a measurement framework for each client that tracks the signals most likely to correlate with AI visibility in their specific market.',
+		a: 'Yes, through proxy metrics: mentions and citations in AI answers for a fixed query set, share of voice against competitors, referral traffic from AI tools in GA4, and entity consistency. We set these up in the audit and report on them monthly.',
 	},
 ];
+
+const pageUrl = 'https://growpha.com/services/ai-llm-seo/';
+const pageTitle = 'AI SEO Services in Dubai | GEO & LLM Optimisation | Growpha';
+const pageDescription =
+	"AI SEO in Dubai from a technical SEO consultant with 10+ years' experience. Get your brand cited by ChatGPT, Perplexity and Google AI Overviews.";
+const areaServed = [
+	{ '@type': 'City', name: 'Dubai' },
+	{ '@type': 'Country', name: 'United Arab Emirates' },
+];
+
+// Facts included here are only those visible on the site. Add address/telephone and the
+// Google Business Profile URL (sameAs) once the licensed business details are confirmed.
+const schema = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'ProfessionalService',
+			'@id': 'https://growpha.com/#organization',
+			name: 'Growpha',
+			url: 'https://growpha.com/',
+			logo: { '@type': 'ImageObject', url: 'https://growpha.com/logo.png' },
+			description: 'Technical SEO, AI search optimisation and digital growth consultancy based in Dubai.',
+			founder: { '@id': 'https://growpha.com/who-am-i/#person' },
+			areaServed,
+		},
+		{
+			'@type': 'Person',
+			'@id': 'https://growpha.com/who-am-i/#person',
+			name: 'Fadil İleri',
+			jobTitle: 'Founder, Technical SEO & Digital Growth Strategist',
+			url: 'https://growpha.com/who-am-i/',
+			worksFor: { '@id': 'https://growpha.com/#organization' },
+			sameAs: ['https://www.linkedin.com/in/fadilileri34/'],
+			knowsAbout: [
+				'Technical SEO',
+				'Generative engine optimisation',
+				'AI search visibility',
+				'Structured data',
+				'International SEO',
+			],
+		},
+		{
+			'@type': 'WebPage',
+			'@id': `${pageUrl}#webpage`,
+			url: pageUrl,
+			name: pageTitle,
+			inLanguage: 'en-AE',
+			isPartOf: { '@id': 'https://growpha.com/#website' },
+			about: { '@id': `${pageUrl}#service` },
+			author: { '@id': 'https://growpha.com/who-am-i/#person' },
+			breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+		},
+		{
+			'@type': 'WebSite',
+			'@id': 'https://growpha.com/#website',
+			url: 'https://growpha.com/',
+			name: 'Growpha',
+			publisher: { '@id': 'https://growpha.com/#organization' },
+		},
+		{
+			'@type': 'Service',
+			'@id': `${pageUrl}#service`,
+			name: 'AI SEO Services in Dubai',
+			alternateName: ['Generative engine optimisation', 'LLM SEO', 'AI search optimisation'],
+			serviceType: 'AI search optimisation',
+			description:
+				'Optimisation for AI search platforms including ChatGPT, Perplexity and Google AI Overviews: entity building, citation strategy, LLM content structuring and technical foundations.',
+			provider: { '@id': 'https://growpha.com/#organization' },
+			areaServed,
+			url: pageUrl,
+			offers: {
+				'@type': 'Offer',
+				name: 'SEO and AI search visibility audit',
+				price: '999',
+				priceCurrency: 'AED',
+				url: 'https://growpha.com/request-audit/',
+				availability: 'https://schema.org/InStock',
+			},
+		},
+		{
+			'@type': 'BreadcrumbList',
+			'@id': `${pageUrl}#breadcrumb`,
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://growpha.com/' },
+				{ '@type': 'ListItem', position: 2, name: 'Services', item: 'https://growpha.com/services/' },
+				{ '@type': 'ListItem', position: 3, name: 'AI / LLM SEO', item: pageUrl },
+			],
+		},
+		{
+			'@type': 'FAQPage',
+			'@id': `${pageUrl}#faq`,
+			mainEntity: faqs.map((f) => ({
+				'@type': 'Question',
+				name: f.q,
+				acceptedAnswer: { '@type': 'Answer', text: f.a },
+			})),
+		},
+	],
+};
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead
-			title="AI SEO Services in Dubai | Growpha"
-			description="AI SEO built for how people search now: ChatGPT, Perplexity, and Google AI Overviews, backed by the technical and content foundations that earn citations."
+			title={pageTitle}
+			description={pageDescription}
+			ogTitle="AI SEO Services in Dubai: Get Cited by ChatGPT, Perplexity & AI Overviews"
+			ogDescription="Generative engine optimisation for UAE businesses. Fixed-price audit from 999 AED, delivered in 10 days."
+			ogImage="/og/ai-llm-seo-dubai.jpg"
+			locale="en_AE"
+			schema={schema}
 		/>
 	</head>
 	<body>
@@ -110,15 +252,17 @@ const faqs = [
 		<main>
 			<ServiceHero
 				crumb="AI / LLM SEO"
-				label="Emerging Discipline"
-				title="Search is changing."
-				titleAccent="Your visibility strategy needs to change with it."
-				lead="AI-powered search is not a future concern — it is reshaping how brands are discovered, cited, and recommended right now. Growpha builds the technical and content foundations that make you visible in the AI search era."
-				primaryLabel="Discuss AI Search Strategy"
-				secondaryLabel="Traditional SEO"
-				secondaryHref="/services/seo"
+				crumbParent={{ label: 'Services', href: '/services/' }}
+				label="AI Search Optimisation · Dubai"
+				title="AI SEO services in Dubai."
+				titleAccent="Get cited by ChatGPT, Perplexity and AI Overviews."
+				lead="UAE buyers now ask AI assistants which supplier to shortlist. Growpha makes sure your business is one of the names ChatGPT, Perplexity and Google AI Overviews trust, cite and recommend."
+				primaryLabel="Request Your Audit — 999 AED"
+				primaryHref="/request-audit/"
+				secondaryLabel="Discuss AI Search Strategy"
+				secondaryHref="/contact/"
 			/>
-			<ToolsMarquee label="AI & LLM Platforms We Work With" tools={tools} />
+			<ToolsMarquee label="AI search platforms we optimise for" tools={tools} />
 
 			<section class="shift-section">
 				<div class="gp-container">
@@ -145,27 +289,24 @@ const faqs = [
 				</div>
 			</section>
 
-			<FeatureGrid label="What We Do" title="Six disciplines for" titleAccent="the AI search era." features={disciplines} />
+			<FeatureGrid label="What We Do" title="What our AI SEO" titleAccent="service covers." features={disciplines} />
 
 			<section class="reality-section">
 				<div class="gp-container">
 					<div class="reality-grid">
 						<div>
 							<div class="section-label">The Reality</div>
-							<h2 class="reality-h2">
-								AI systems are already making recommendations about your category.
-							</h2>
+							<h2 class="reality-h2">AI is already recommending businesses in Dubai. Is yours one of them?</h2>
 							<p class="reality-p">
-								Whether your brand appears in those recommendations — or your competitor's does — depends
-								on the signals you have built. Entity authority, citation presence, structured content,
-								and knowledge graph data all influence AI retrieval.
+								When a buyer in DIFC or a founder in a free zone asks an AI assistant for the best provider in
+								Dubai, they get a handful of names, not ten blue links. If you're not one of them, you're not
+								on the shortlist.
 							</p>
 							<p class="reality-p">
-								Growpha builds the technical and content foundations that position you to be cited,
-								recommended, and trusted by AI search systems — not just ranked by traditional
-								algorithms.
+								Those names come from sources AI trusts: regional media, UAE directories, free-zone registers,
+								reviews and well-built websites. Growpha builds your presence across all of them.
 							</p>
-							<a href="/services/ai-llm-seo/" class="ghero-btn-ghost">Explore AI SEO Strategy</a>
+							<a href="/request-audit/" class="ghero-btn-ghost">Explore AI SEO Strategy</a>
 						</div>
 						<ul class="reality-list">
 							{realityPoints.map((p) => <li>{p}</li>)}
@@ -174,16 +315,35 @@ const faqs = [
 				</div>
 			</section>
 
-			<FaqAccordion items={faqs} />
+			<ProcessSteps
+				label="The Process"
+				title="How AI SEO works"
+				titleAccent="with Growpha."
+				intro="Audit first, strategy second, execution third. Every step is measured against a baseline, so you can see what changed."
+				steps={processSteps}
+			/>
+
+			<Conducted
+				label="Who Does the Work"
+				title="Led by the founder."
+				titleAccent="Not outsourced."
+				text="Every AI SEO engagement is run by Fadil İleri, Growpha's founder: a Dubai-based technical SEO consultant with over ten years' experience across e-commerce, finance, SaaS, real estate and enterprise sites. There's no account-manager layer between you and the person doing the work."
+				stats={conductedStats}
+				note="Available to meet in person for businesses in DIFC, Business Bay, and JLT."
+			/>
+
+			<FaqAccordion title="AI SEO in Dubai: frequently asked questions" items={faqs} schema={false} />
 
 			<ClosingCta
 				label="Get Ahead of the Shift"
-				title="The brands building AI visibility"
-				titleAccent="today will own tomorrow's search."
-				intro="Most businesses are still optimising for 2020 search. The window to build a meaningful AI search advantage is now — before your competitors do."
+				title="Become the answer AI gives"
+				titleAccent="in your category."
+				intro="Most UAE businesses still optimise only for 2020-style search. See how AI tools describe you today, and get there before your competitors."
 				ctaLabel="Start the Conversation"
+				ctaHref="/contact/"
 			/>
 			<AuditBanner />
+			<RelatedServices items={related} />
 		</main>
 		<Footer />
 	</body>

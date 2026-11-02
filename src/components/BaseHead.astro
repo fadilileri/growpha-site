@@ -11,11 +11,57 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	/** Path or URL of a 1200x630 social image. Overrides `image`. */
+	ogImage?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	/** og:locale, e.g. 'en_AE'. */
+	locale?: string;
+	/** Full JSON-LD document for the page. Defaults to the sitewide Organization + WebSite graph. */
+	schema?: Record<string, unknown>;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const {
+	title,
+	description,
+	image = FallbackImage,
+	ogImage,
+	ogTitle = title,
+	ogDescription = description,
+	locale = 'en_AE',
+	schema,
+} = Astro.props;
+
+const socialImage = ogImage ? new URL(ogImage, Astro.site) : new URL(image.src, Astro.url);
+
+const sitewideSchema = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'ProfessionalService',
+			'@id': 'https://growpha.com/#organization',
+			name: 'Growpha',
+			url: 'https://growpha.com/',
+			logo: { '@type': 'ImageObject', url: 'https://growpha.com/logo.png' },
+			description: 'Technical SEO, AI search optimisation and digital growth consultancy based in Dubai.',
+			founder: { '@id': 'https://growpha.com/who-am-i/#person' },
+			areaServed: [
+				{ '@type': 'City', name: 'Dubai' },
+				{ '@type': 'Country', name: 'United Arab Emirates' },
+			],
+		},
+		{
+			'@type': 'WebSite',
+			'@id': 'https://growpha.com/#website',
+			url: 'https://growpha.com/',
+			name: 'Growpha',
+			publisher: { '@id': 'https://growpha.com/#organization' },
+		},
+	],
+};
+const jsonLd = schema ?? sitewideSchema;
 ---
 
 <!-- Global Metadata -->
@@ -46,9 +92,17 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:image" content={socialImage} />
+<meta property="og:locale" content={locale} />
+<meta property="og:site_name" content="Growpha" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDescription} />
+<meta name="twitter:image" content={socialImage} />
+
+<!-- Structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

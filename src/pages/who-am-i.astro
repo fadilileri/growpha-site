@@ -13,6 +13,48 @@ const stats = [
 	{ value: '#1', label: 'Rankings achieved in highly competitive categories' },
 ];
 
+const schema = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'ProfessionalService',
+			'@id': 'https://growpha.com/#organization',
+			name: 'Growpha',
+			url: 'https://growpha.com/',
+			logo: { '@type': 'ImageObject', url: 'https://growpha.com/logo.png' },
+			description: 'Technical SEO, AI search optimisation and digital growth consultancy based in Dubai.',
+			founder: { '@id': 'https://growpha.com/who-am-i/#person' },
+			areaServed: [
+				{ '@type': 'City', name: 'Dubai' },
+				{ '@type': 'Country', name: 'United Arab Emirates' },
+			],
+		},
+		{
+			'@type': 'Person',
+			'@id': 'https://growpha.com/who-am-i/#person',
+			name: 'Fadil İleri',
+			jobTitle: 'Founder, Technical SEO & Digital Growth Strategist',
+			url: 'https://growpha.com/who-am-i/',
+			worksFor: { '@id': 'https://growpha.com/#organization' },
+			sameAs: ['https://www.linkedin.com/in/fadilileri34/'],
+			knowsAbout: [
+				'Technical SEO',
+				'Generative engine optimisation',
+				'AI search visibility',
+				'Structured data',
+				'International SEO',
+			],
+		},
+		{
+			'@type': 'WebSite',
+			'@id': 'https://growpha.com/#website',
+			url: 'https://growpha.com/',
+			name: 'Growpha',
+			publisher: { '@id': 'https://growpha.com/#organization' },
+		},
+	],
+};
+
 const howFadilWorks = [
 	'Technical audit before any strategy recommendation',
 	'Evidence-led decisions grounded in real data',
@@ -84,6 +126,7 @@ const whyWork = [
 		<BaseHead
 			title="SEO Consultant in Dubai | Fadil İleri, Founder of Growpha"
 			description="Fadil İleri is a Dubai-based SEO consultant and the founder of Growpha, working directly with UAE businesses on technical SEO and organic growth."
+			schema={schema}
 		/>
 	</head>
 	<body>
@@ -102,8 +145,8 @@ const whyWork = [
 							<h1 class="wai-h1">Fadil İleri</h1>
 							<p class="wai-role">Technical SEO &amp; <span class="text-gradient-orange">Digital Growth Strategist.</span></p>
 							<p class="wai-lead">
-								I am Fadil İleri — the founder of Growpha. I am a Dubai-based technical SEO and digital growth
-								strategist with over 10 years of experience working with e-commerce brands, enterprise websites,
+								I am Fadil İleri, an SEO expert in Dubai and the founder of Growpha. I am a technical SEO and
+								digital growth strategist with over 10 years of experience working with e-commerce brands, enterprise websites,
 								SaaS companies, and UAE businesses. I combine deep technical SEO expertise with AI tools, Python
 								automation, and data-driven analysis to build growth systems that are measurable, scalable, and
 								built to last.
@@ -194,7 +237,11 @@ const whyWork = [
 							{coreExpertise.map((item) => (
 								<div class="check-row">
 									<span class="check-icon">✓</span>
-									<span>{item}</span>
+									{item === 'AI / LLM search visibility' ? (
+										<a href="/services/ai-llm-seo/">{item}</a>
+									) : (
+										<span>{item}</span>
+									)}
 								</div>
 							))}
 						</div>
@@ -519,6 +566,16 @@ const whyWork = [
 	}
 	.check-row:hover {
 		background: rgba(34, 197, 94, 0.06);
+	}
+	.check-row a {
+		font-size: 0.9375rem;
+		line-height: 1.5;
+		color: var(--growpha-green-bright);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.check-row a:hover {
+		color: var(--growpha-orange);
 	}
 	.check-row-bordered {
 		padding: 8px 0;

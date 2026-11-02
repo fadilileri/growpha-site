@@ -1,0 +1,84 @@
+---
+interface Stat {
+	value: string;
+	label: string;
+}
+interface Props {
+	label: string;
+	title: string;
+	titleAccent: string;
+	text: string;
+	stats: Stat[];
+	note?: string;
+}
+const { label, title, titleAccent, text, stats, note } = Astro.props;
+---
+
+<section class="ra-conducted">
+	<div class="gp-container">
+		<div class="section-label">{label}</div>
+		<h2 class="ra-conducted-h2">{title}<br /><span class="text-gradient-orange">{titleAccent}</span></h2>
+		<p class="ra-conducted-p">{text}</p>
+		<div class="ra-conducted-stats">
+			{stats.map((s) => <div><span>{s.value}</span>{s.label}</div>)}
+		</div>
+		{note && <p class="ra-conducted-meet">{note}</p>}
+	</div>
+</section>
+
+<style>
+	.ra-conducted {
+		background: var(--growpha-surface-1);
+		padding: 40px 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	.ra-conducted .section-label {
+		margin-bottom: 16px;
+	}
+	.ra-conducted-h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		letter-spacing: -0.025em;
+		line-height: 1.15;
+		margin: 0 0 20px;
+		color: var(--growpha-text-primary);
+		max-width: 680px;
+	}
+	.ra-conducted-p {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.75;
+		max-width: 680px;
+		margin: 0 0 32px;
+	}
+	.ra-conducted-stats {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+		margin-bottom: 20px;
+	}
+	@media (min-width: 640px) {
+		.ra-conducted-stats {
+			grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		}
+	}
+	.ra-conducted-stats div {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.ra-conducted-stats span {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 1.75rem;
+		color: var(--growpha-orange);
+	}
+	.ra-conducted-meet {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin: 0;
+	}
+</style>

@@ -44,7 +44,7 @@ const disciplines = [
 		title: 'Technical SEO',
 		desc: 'Site architecture, crawl efficiency, Core Web Vitals, structured data, indexing control, and canonical logic.',
 		bullets: ['Crawl budget optimisation', 'Schema markup', 'Page speed & CWV', 'Log file analysis'],
-		href: '/services/technical-seo',
+		href: '/services/technical-seo/',
 		linkLabel: 'Explore Technical SEO',
 	},
 	{
@@ -52,7 +52,7 @@ const disciplines = [
 		title: 'On-Page SEO',
 		desc: 'Content structure, semantic relevance, internal linking architecture, and on-page signal alignment.',
 		bullets: ['Keyword mapping', 'Content optimisation', 'Internal link strategy', 'Meta & heading structure'],
-		href: '/services/on-page-seo',
+		href: '/services/on-page-seo/',
 		linkLabel: 'Explore On-Page SEO',
 	},
 	{
@@ -60,7 +60,7 @@ const disciplines = [
 		title: 'Off-Page SEO',
 		desc: 'Authority acquisition, digital PR, link profile management, and brand signal development.',
 		bullets: ['Link acquisition', 'Digital PR', 'Brand mentions', 'Competitor gap analysis'],
-		href: '/services/off-page-seo',
+		href: '/services/off-page-seo/',
 		linkLabel: 'Explore Off-Page SEO',
 	},
 	{
@@ -68,7 +68,7 @@ const disciplines = [
 		title: 'Local SEO',
 		desc: 'Local pack visibility, Google Business Profile optimisation, citation consistency, and local content strategy.',
 		bullets: ['GBP optimisation', 'Citation building', 'Local content', 'Review strategy'],
-		href: '/services/local-seo',
+		href: '/services/local-seo/',
 		linkLabel: 'Explore Local SEO',
 	},
 	{
@@ -76,7 +76,7 @@ const disciplines = [
 		title: 'YouTube SEO',
 		desc: 'Video search visibility, channel architecture, metadata optimisation, and cross-platform search integration.',
 		bullets: ['Video keyword research', 'Metadata optimisation', 'Channel structure', 'Thumbnail & CTR strategy'],
-		href: '/services/youtube-seo',
+		href: '/services/youtube-seo/',
 		linkLabel: 'Explore YouTube SEO',
 	},
 	{
@@ -84,7 +84,7 @@ const disciplines = [
 		title: 'International SEO',
 		desc: 'Hreflang architecture, market-specific keyword research, international site structure, and cross-border authority building.',
 		bullets: ['Hreflang implementation', 'Market keyword research', 'Site structure strategy', 'International link building'],
-		href: '/services/international-seo',
+		href: '/services/international-seo/',
 		linkLabel: 'Explore International SEO',
 	},
 ];
@@ -131,9 +131,9 @@ const faqs = [
 				titleAccent="growth infrastructure."
 				lead="Not a monthly report. Not keyword stuffing. A structured, evidence-led system that builds search visibility as a compounding business asset — from technical foundations through to authority and content architecture."
 				primaryLabel="Request an Audit"
-				primaryHref="/request-audit"
+				primaryHref="/request-audit/"
 				secondaryLabel="Technical SEO"
-				secondaryHref="/services/technical-seo"
+				secondaryHref="/services/technical-seo/"
 			/>
 			<ToolsMarquee label="SEO Tools We Use" tools={tools} />
 
@@ -168,6 +168,10 @@ const faqs = [
 						<p class="system-intro">
 							The result is compounding growth — not traffic spikes that disappear when a campaign ends.
 						</p>
+						<p class="system-intro">
+							AI search optimisation is included, so you are visible in ChatGPT, Perplexity and Google AI
+							Overviews as well as Google. See our <a href="/services/ai-llm-seo/" class="system-link">AI SEO services in Dubai</a>.
+						</p>
 					</div>
 					<div class="system-steps">
 						{
@@ -197,7 +201,7 @@ const faqs = [
 				titleAccent="honest starting point."
 				intro="Before strategy, before content, before links — we need to know what we're working with. A Growpha audit gives you a clear picture of what is holding your site back and what the realistic growth path looks like."
 				ctaLabel="Request Your Audit"
-				ctaHref="/request-audit"
+				ctaHref="/request-audit/"
 			/>
 			<AuditBanner />
 		</main>
@@ -296,5 +300,13 @@ const faqs = [
 		font-weight: 600;
 		font-size: 0.9375rem;
 		color: var(--growpha-text-primary);
+	}
+	.system-link {
+		color: var(--growpha-green-bright);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.system-link:hover {
+		color: var(--growpha-orange);
 	}
 </style>

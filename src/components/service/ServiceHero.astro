@@ -1,6 +1,7 @@
 ---
 interface Props {
 	crumb: string;
+	crumbParent?: { label: string; href: string };
 	label: string;
 	title: string;
 	titleAccent: string;
@@ -14,13 +15,14 @@ interface Props {
 
 const {
 	crumb,
+	crumbParent,
 	label,
 	title,
 	titleAccent,
 	accentClass = 'text-gradient-orange',
 	lead,
 	primaryLabel,
-	primaryHref = '/contact',
+	primaryHref = '/contact/',
 	secondaryLabel,
 	secondaryHref,
 } = Astro.props;
@@ -38,6 +40,12 @@ const chevronRight =
 			<div class="svc-breadcrumb">
 				<a href="/">Home</a>
 				<span set:html={chevronRight} />
+				{crumbParent && (
+					<>
+						<a href={crumbParent.href}>{crumbParent.label}</a>
+						<span set:html={chevronRight} />
+					</>
+				)}
 				<span>{crumb}</span>
 			</div>
 			<div class="section-label"><span class="status-dot"></span>{label}</div>

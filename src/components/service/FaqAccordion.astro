@@ -2,13 +2,28 @@
 interface Faq {
 	q: string;
 	a: string;
+	/** Optional inline link: `text` must appear in `a`. The first occurrence becomes the link. */
+	link?: { text: string; href: string };
 }
 interface Props {
 	title?: string;
 	intro?: string;
 	items: Faq[];
+	/** Emit FAQPage JSON-LD. Set false when the page ships its own structured-data graph. */
+	schema?: boolean;
 }
-const { title = 'Frequently Asked Questions', intro, items } = Astro.props;
+const { title = 'Frequently Asked Questions', intro, items, schema = true } = Astro.props;
+
+const parts = items.map((item) => {
+	const i = item.link ? item.a.indexOf(item.link.text) : -1;
+	if (!item.link || i === -1) return { before: item.a, linkText: '', href: '', after: '' };
+	return {
+		before: item.a.slice(0, i),
+		linkText: item.link.text,
+		href: item.link.href,
+		after: item.a.slice(i + item.link.text.length),
+	};
+});
 
 const jsonLd = {
 	'@context': 'https://schema.org',
@@ -25,7 +40,7 @@ const chevronDown =
 ---
 
 <section class="faq-section">
-	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	{schema && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 	<div class="gp-container">
 		<div class="faq-inner">
 			<div class="faq-head">
@@ -35,14 +50,18 @@ const chevronDown =
 			</div>
 			<div class="faq-list">
 				{
-					items.map((item) => (
+					items.map((item, n) => (
 						<div class="faq-item">
 							<button class="faq-question" aria-expanded="false" data-faq-toggle>
 								<h3>{item.q}</h3>
 								<span class="faq-chevron" set:html={chevronDown} />
 							</button>
 							<div class="faq-answer" data-faq-panel>
-								<div class="faq-answer-inner">{item.a}</div>
+								<div class="faq-answer-inner">
+									{parts[n].before}
+									{parts[n].linkText && <a href={parts[n].href} class="faq-link">{parts[n].linkText}</a>}
+									{parts[n].after}
+								</div>
 							</div>
 						</div>
 					))
@@ -149,5 +168,13 @@ const chevronDown =
 		font-size: 0.9375rem;
 		line-height: 1.75;
 		font-family: var(--font-body);
+	}
+	.faq-link {
+		color: var(--growpha-green-bright);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.faq-link:hover {
+		color: var(--growpha-orange);
 	}
 </style>

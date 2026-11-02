@@ -1,0 +1,16 @@
+# Growpha
+
+> Dubai-based technical SEO and AI search optimisation consultancy, founded and run by Fadil İleri.
+
+## Services
+
+- [AI / LLM SEO](https://growpha.com/services/ai-llm-seo/): optimisation for ChatGPT, Perplexity and Google AI Overviews for UAE businesses
+- [SEO](https://growpha.com/services/seo/): technical foundations, content and authority
+- [Technical SEO](https://growpha.com/services/technical-seo/)
+- [Local SEO](https://growpha.com/services/local-seo/)
+- [Request an audit](https://growpha.com/request-audit/): fixed price 999 AED, 10 business days
+
+## About
+
+- [Who am I](https://growpha.com/who-am-i/): Fadil İleri, founder
+- [Contact](https://growpha.com/contact/)
