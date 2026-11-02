@@ -1,6 +1,6 @@
 // Static top-level pages: home, who-am-i, contact, request-audit, news.
 // Blog posts live in sitemap-blog.xml, service pages live in sitemap-services.xml.
-const STATIC_PATHS = ['/', '/who-am-i/', '/contact/', '/request-audit/', '/news/'];
+const STATIC_PATHS = ['/', '/who-am-i/', '/contact/', '/request-audit/', '/news/', '/privacy-policy/'];
 
 export async function GET(context) {
 	const site = context.site;

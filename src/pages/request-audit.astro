@@ -6,6 +6,10 @@ import FeatureGrid from '../components/service/FeatureGrid.astro';
 import ProcessSteps from '../components/service/ProcessSteps.astro';
 import Deliverables from '../components/service/Deliverables.astro';
 import FaqAccordion from '../components/service/FaqAccordion.astro';
+import Conducted from '../components/service/Conducted.astro';
+import RelatedServices from '../components/service/RelatedServices.astro';
+import avatar from '../assets/brand/fadil-avatar.png';
+import { areaServed, organization, person, website } from '../utils/schema';
 
 const scope = [
 	{
@@ -71,7 +75,7 @@ const scope = [
 	{
 		tag: 'Emerging',
 		title: 'LLM / AI Visibility Analysis',
-		desc: 'Search is no longer just Google. AI systems — ChatGPT, Perplexity, Gemini, Bing Copilot — are now answering commercial queries directly. This section reviews how your brand is currently represented in AI-generated responses and where the gaps are.',
+		desc: 'Search is no longer just Google. ChatGPT, Perplexity, Gemini, Microsoft Copilot and Google AI Overviews now answer commercial queries directly. This section reviews how your brand is represented in those answers and where the gaps are.',
 		bullets: [
 			'Brand citation presence in AI search outputs',
 			'Entity clarity and knowledge graph representation',
@@ -82,12 +86,21 @@ const scope = [
 	},
 ];
 
-const scopeFeatures = scope.map((s) => ({ title: `${s.tag} — ${s.title}`, desc: s.desc, bullets: s.bullets }));
+// Each audit area links to the matching service page.
+const scopeLinks = [
+	{ href: '/services/seo/', linkLabel: 'SEO services' },
+	{ href: '/services/technical-seo/', linkLabel: 'Technical SEO' },
+	{ href: '/services/content-marketing/', linkLabel: 'Content marketing' },
+	{ href: '/services/on-page-seo/', linkLabel: 'On-page SEO' },
+	{ href: '/services/off-page-seo/', linkLabel: 'Off-page SEO' },
+	{ href: '/services/ai-llm-seo/', linkLabel: 'AI SEO services' },
+];
+const scopeFeatures = scope.map((s, i) => ({ title: `${s.tag} — ${s.title}`, desc: s.desc, bullets: s.bullets, ...scopeLinks[i] }));
 
 const whyDifferent = [
 	{ title: 'Not an automated scan', desc: 'Automated tools flag issues. They do not understand context, priority, or commercial relevance. This audit involves genuine expert review — the kind that identifies what actually matters for your specific site and market.' },
 	{ title: 'Solutions, not just findings', desc: 'Most audits tell you what is wrong. This one tells you what to do about it. Every identified issue includes a recommended solution — specific, actionable, and sequenced by priority.' },
-	{ title: 'Covers AI search visibility', desc: 'The majority of SEO audits ignore how AI systems represent your brand. This one does not. LLM visibility is now a commercial consideration, and it is included in every audit.' },
+	{ title: 'Covers AI search visibility', desc: 'Many SEO audits still ignore how AI systems represent your brand. This one does not. LLM visibility is now a commercial consideration, and it is included in every audit.' },
 	{ title: 'Commercially prioritised', desc: 'Not every SEO issue deserves equal attention. This audit distinguishes between what is worth fixing immediately, what can wait, and what is a distraction — based on likely business impact.' },
 ];
 
@@ -102,13 +115,13 @@ const deliverableItems = [
 	'On-page optimisation recommendations',
 	'Backlink profile review and risk flags',
 	'LLM / AI visibility analysis',
-	'Realistic improvement opportunities',
+	'A follow-up call to walk through the findings',
 	'Clear, jargon-free language throughout',
 ];
 
 const processSteps = [
-	{ title: 'Request & Intake', desc: 'Day 1 — You submit the audit request. I confirm scope, collect access requirements, and confirm the 10-day delivery window.' },
-	{ title: 'Access & Discovery', desc: 'Days 1–2 — Read-only access to Google Search Console, Analytics, and any relevant platforms. Initial crawl and data collection begins.' },
+	{ title: 'Request & Intake', desc: 'Before day 1 — You submit the request. I reply within 1–2 business days to confirm scope, access and payment.' },
+	{ title: 'Access & Discovery', desc: 'Days 1–2 — Read-only access to Search Console, Analytics and other relevant platforms is confirmed. Crawl and data collection begin.' },
 	{ title: 'Deep Review', desc: 'Days 2–6 — The substantive work. Technical analysis, content review, backlink assessment, on-page checks, and AI visibility testing — all conducted manually alongside automated tooling.' },
 	{ title: 'Analysis & Prioritisation', desc: 'Days 6–8 — Findings are assessed for commercial impact and implementation effort. Issues are categorised by priority — not listed arbitrarily.' },
 	{ title: 'Report Preparation', desc: 'Days 8–10 — The audit document is compiled. Every identified issue includes a recommended solution. The report is structured for clarity, not volume.' },
@@ -122,19 +135,114 @@ const afterAudit = [
 	{ title: 'A foundation for informed investment', desc: 'Whether you implement internally or engage an agency, the audit gives you the information needed to make decisions based on evidence rather than sales pitches.' },
 ];
 
+// The FAQ is the single source for the visible accordion and the FAQPage JSON-LD,
+// so the markup always matches the on-page text word for word.
 const faqs = [
 	{ q: 'What is included in the SEO Audit?', a: 'The audit covers six areas: traffic performance analysis, technical SEO, content quality, on-page optimisation, off-page and backlink review, and LLM / AI visibility. Each area is reviewed in detail, with identified issues and recommended solutions documented in the final PDF report.' },
-	{ q: 'How long does the audit take?', a: 'The audit is completed and delivered within 10 business days from the point of access confirmation. The timeline is fixed — not subject to delays or scope creep.' },
+	{ q: 'How long does the audit take?', a: 'The audit is delivered within 10 business days, counted from the day read-only access to your Search Console and Analytics is confirmed. The timeline is fixed and not subject to delays or scope creep.' },
+	{ q: 'What access do you need?', a: 'Read-only access to Google Search Console and Google Analytics, plus any other platforms relevant to your site. Read-only means nothing on your site can be changed during the audit. Exact access requirements are confirmed when you submit your request.' },
 	{ q: 'Will I receive solutions as well as identified issues?', a: 'Yes. Every issue identified in the audit is accompanied by a recommended solution. The report is structured to be actionable, not just diagnostic. You will know what is wrong and what to do about it.' },
 	{ q: 'Is this a technical SEO audit only?', a: 'No. The audit covers technical SEO, content quality, on-page optimisation, off-page signals, traffic performance, and LLM / AI visibility. It is a comprehensive review of your site\'s organic search presence — not a narrow technical scan.' },
+	{ q: 'Why not use a free SEO audit tool?', a: 'Free tools are useful for collecting data, but they flag issues without context, priority or commercial relevance. This audit is an expert review: every issue is checked by hand, prioritised by likely business impact and paired with a recommended solution.' },
 	{ q: 'Do you review content and off-page signals too?', a: 'Yes. Content quality, topical coverage, and authority signals are reviewed as part of the standard audit scope. Off-page analysis covers your backlink profile, anchor text distribution, and competitor link gaps.' },
-	{ q: 'Do you include LLM and AI visibility analysis?', a: 'Yes. This is included as a standard component. The audit reviews how your brand is currently represented in AI-generated search responses — including ChatGPT, Perplexity, and Bing Copilot — and identifies where visibility is missing or inaccurate.' },
+	{
+		q: 'Do you include LLM and AI visibility analysis?',
+		a: 'Yes, as a standard part of every audit. It reviews how your brand is currently represented in AI-generated answers, including ChatGPT, Perplexity, Gemini, Microsoft Copilot and Google AI Overviews, and identifies where visibility is missing or inaccurate. For ongoing work, see our AI SEO services.',
+		link: { text: 'AI SEO services', href: '/services/ai-llm-seo/' },
+	},
 	{ q: 'Who is this audit suitable for?', a: 'This audit is suitable for businesses that are serious about organic search performance and want a clear, expert-led assessment of where they stand and what to prioritise. It is particularly useful for businesses that have invested in SEO without seeing expected results, or those preparing to scale their search presence.' },
 	{ q: 'How is the audit delivered?', a: 'The audit is delivered as a structured PDF document. A follow-up call is available to walk through the findings, clarify recommendations, and answer questions about implementation priorities.' },
-	{ q: 'Is the price fixed?', a: 'Yes. The current introductory price is 999 AED — reduced from the standard 2,500 AED as part of our Dubai market launch. This rate is available for a limited number of engagements. Once the allocation is filled, pricing returns to 2,500 AED. There are no hidden fees, no upsells, and no variable pricing based on site size or industry.' },
+	{ q: 'Is the price fixed?', a: 'Yes. The current introductory price is 999 AED, including VAT, reduced from the standard 2,500 AED as part of our Dubai market launch. This rate is available for a limited number of engagements. Once the allocation is filled, pricing returns to 2,500 AED. There are no hidden fees, no upsells, and no variable pricing based on site size or industry.' },
+	{ q: 'How do I pay?', a: 'Payment is by bank transfer, in full, before the audit starts. The 999 AED price includes VAT, and there are no other charges.' },
 	{ q: 'Do you work with Dubai and UAE businesses specifically?', a: 'Yes. Growpha is based in Dubai and works directly with UAE businesses — including SMEs in free zones (DIFC, DMCC, JAFZA), retail and e-commerce operators, professional services firms, and hospitality businesses. The audit is relevant to any business competing for search visibility in the UAE market or internationally.' },
-	{ q: 'What happens after I receive the audit?', a: 'The audit is a standalone deliverable. You can implement the recommendations internally, use them to brief an agency, or engage Growpha for ongoing implementation support. There is no obligation to continue beyond the audit itself.' },
+	{
+		q: 'What happens after I receive the audit?',
+		a: 'The audit is a standalone deliverable. You can implement the recommendations internally, use them to brief an agency, or engage Growpha for ongoing implementation support. There is no obligation to continue beyond the audit itself.',
+		link: { text: 'ongoing implementation support', href: '/services/seo/' },
+	},
 	{ q: 'Do you work with businesses outside Dubai?', a: 'Yes. The audit is built for Dubai and UAE-based businesses specifically, but the process works for any business with a website and Google Search Console access, wherever they are based.' },
+];
+
+const pageUrl = 'https://growpha.com/request-audit/';
+const pageTitle = 'SEO Audit Services in Dubai | 999 AED Fixed Price | Growpha';
+const pageDescription =
+	'Expert-led SEO audit for Dubai and UAE businesses: technical, content, backlinks and AI search visibility. 999 AED fixed price, PDF report in 10 days.';
+
+const schema = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		organization,
+		person,
+		{
+			'@type': 'WebPage',
+			'@id': `${pageUrl}#webpage`,
+			url: pageUrl,
+			name: pageTitle,
+			inLanguage: 'en-AE',
+			isPartOf: { '@id': 'https://growpha.com/#website' },
+			about: { '@id': `${pageUrl}#service` },
+			author: { '@id': 'https://growpha.com/who-am-i/#person' },
+			breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+		},
+		website,
+		{
+			'@type': 'Service',
+			'@id': `${pageUrl}#service`,
+			name: 'SEO Audit',
+			alternateName: ['SEO audit services in Dubai', 'Website SEO audit'],
+			serviceType: 'SEO audit',
+			description:
+				'Expert-led SEO audit covering traffic performance, technical SEO, content, on-page SEO, off-page and backlinks, and LLM / AI search visibility, delivered as a PDF report with a recommended solution for every issue.',
+			provider: { '@id': 'https://growpha.com/#organization' },
+			areaServed,
+			url: pageUrl,
+			offers: {
+				'@type': 'Offer',
+				price: '999',
+				priceCurrency: 'AED',
+				url: pageUrl,
+				availability: 'https://schema.org/InStock',
+				seller: { '@id': 'https://growpha.com/#organization' },
+				priceSpecification: {
+					'@type': 'PriceSpecification',
+					price: '999',
+					priceCurrency: 'AED',
+					valueAddedTaxIncluded: true,
+				},
+			},
+		},
+		{
+			'@type': 'BreadcrumbList',
+			'@id': `${pageUrl}#breadcrumb`,
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://growpha.com/' },
+				{ '@type': 'ListItem', position: 2, name: 'SEO Audit', item: pageUrl },
+			],
+		},
+		{
+			'@type': 'FAQPage',
+			'@id': `${pageUrl}#faq`,
+			mainEntity: faqs.map((f) => ({
+				'@type': 'Question',
+				name: f.q,
+				acceptedAnswer: { '@type': 'Answer', text: f.a },
+			})),
+		},
+	],
+};
+
+const related = [
+	{ label: 'Technical SEO', href: '/services/technical-seo/' },
+	{ label: 'On-Page SEO', href: '/services/on-page-seo/' },
+	{ label: 'AI / LLM SEO', href: '/services/ai-llm-seo/' },
+	{ label: 'Local SEO', href: '/services/local-seo/' },
+];
+
+const conductedStats = [
+	{ value: '10+', label: 'Years in technical SEO' },
+	{ value: '47+', label: 'Clients audited and grown' },
+	{ value: '6', label: 'Audit areas covered' },
+	{ value: '10', label: 'Business days to delivery' },
 ];
 ---
 
@@ -142,8 +250,13 @@ const faqs = [
 <html lang="en">
 	<head>
 		<BaseHead
-			title="SEO Audit in Dubai | 999 AED Fixed Price | Growpha"
-			description="A fixed-price, 999 AED SEO audit covering technical health, content quality, on-page signals, backlinks, and AI search visibility. Delivered in 10 days."
+			title={pageTitle}
+			description={pageDescription}
+			ogTitle="Expert SEO Audit in Dubai: 999 AED, Delivered in 10 Business Days"
+			ogDescription="Technical, content, on-page, backlinks and AI search visibility, reviewed by hand. PDF report with a solution for every issue."
+			ogImage="/og/seo-audit-dubai.jpg"
+			locale="en_AE"
+			schema={schema}
 		/>
 	</head>
 	<body>
@@ -154,16 +267,16 @@ const faqs = [
 					<div class="svc-breadcrumb">
 						<a href="/">Home</a>
 						<span>›</span>
-						<span>Request Audit</span>
+						<span>SEO Audit</span>
 					</div>
-					<div class="section-label"><span class="status-dot"></span>SEO Audit Service</div>
+					<div class="section-label"><span class="status-dot"></span>SEO Audit Services · Dubai</div>
 					<h1 class="ra-h1">
 						A comprehensive<br /><span class="text-gradient-orange">SEO audit</span><br />for Dubai businesses that tells you what to fix.
 					</h1>
 					<p class="ra-lead">
-						Most websites have more SEO problems than they realise — and most audits do not find them. This is a
-						structured, expert-led review of your site's technical foundation, content quality, on-page signals,
-						backlink profile, and AI search visibility. Every issue comes with a recommended solution.
+						Most websites have fixable SEO problems their owners don't know about. This is an expert-led review
+						of your site's technical foundation, content quality, on-page signals, backlink profile and AI
+						search visibility. Every issue comes with a recommended solution.
 					</p>
 					<div class="ra-price-row">
 						<div class="ra-price">999 AED</div>
@@ -227,7 +340,7 @@ const faqs = [
 				label="The Process"
 				title="From request to delivery"
 				titleAccent="in 10 business days."
-				intro="The timeline is fixed. The process is structured. You know exactly what happens between requesting the audit and receiving the report."
+				intro="The timeline is fixed: 10 business days from the day access is confirmed. You know exactly what happens at each stage."
 				steps={processSteps}
 				columns={3}
 			/>
@@ -240,11 +353,12 @@ const faqs = [
 						<div class="ra-pricing-badge">Dubai Launch Offer — 60% OFF</div>
 						<div class="ra-pricing-amount">999 <span>AED</span></div>
 						<div class="ra-pricing-normal">Normal price: 2,500 AED</div>
+						<div class="ra-pricing-vat">Price includes VAT.</div>
 						<p class="ra-pricing-fine">Fixed price. No hidden fees. No variable scope.</p>
 						<div class="ra-pricing-included">
 							<div class="ra-pricing-included-label">Everything Included</div>
 							<ul>
-								{deliverableItems.slice(0, 8).map((item) => <li>{item}</li>)}
+								{deliverableItems.slice(0, 10).map((item) => <li>{item}</li>)}
 							</ul>
 						</div>
 						<a href="#audit-form" class="ghero-btn-primary">Request Your Audit — 999 AED</a>
@@ -261,24 +375,21 @@ const faqs = [
 				columns={2}
 			/>
 
-			<section class="ra-conducted">
-				<div class="gp-container">
-					<div class="section-label">Conducted By</div>
-					<h2 class="ra-conducted-h2">Over a decade of technical SEO<br /><span class="text-gradient-orange">and search strategy experience.</span></h2>
-					<p class="ra-conducted-p">
-						This audit is not outsourced. It is not run through a tool and reformatted. It is conducted by the
-						founder of Growpha — someone who has spent over ten years working on technical SEO, content systems,
-						and search strategy for businesses across e-commerce, SaaS, professional services, and media.
-					</p>
-					<div class="ra-conducted-stats">
-						<div><span>10+</span>Years in technical SEO</div>
-						<div><span>47+</span>Clients audited and grown</div>
-						<div><span>6</span>Audit areas covered</div>
-						<div><span>10</span>Business days to delivery</div>
-					</div>
-					<p class="ra-conducted-meet">Available to meet in person for businesses in DIFC, Business Bay, and JLT.</p>
-				</div>
-			</section>
+			<Conducted
+				label="Conducted By"
+				title="Over a decade of technical SEO"
+				titleAccent="and search strategy experience."
+				text="This audit is not outsourced or run through a tool and reformatted. It is conducted personally by Fadil İleri, founder of Growpha: a Dubai-based technical SEO consultant with over ten years' experience across e-commerce, finance, SaaS, real estate and enterprise sites."
+				photo={avatar}
+				personName="Fadil İleri"
+				personRole="Founder, Growpha"
+				personLinks={[
+					{ label: 'About Fadil', href: '/who-am-i/' },
+					{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/fadilileri34/', external: true },
+				]}
+				stats={conductedStats}
+				note="Available to meet in person for businesses in DIFC, Business Bay, and JLT."
+			/>
 
 			<section class="ra-form-section" id="audit-form">
 				<div class="gp-container">
@@ -297,9 +408,14 @@ const faqs = [
 						<p class="hp-field"><label>Don't fill this out: <input name="bot-field" /></label></p>
 						<label>Full Name *<input type="text" name="name" required /></label>
 						<label>Email Address *<input type="email" name="email" required /></label>
-						<label>Company / Website<input type="text" name="company" /></label>
+						<label>Website URL *<input type="url" name="website" placeholder="https://" required /></label>
+						<label>Company<input type="text" name="company" /></label>
+						<label>WhatsApp / Phone<input type="tel" name="phone" /></label>
 						<label>Tell Me About Your Website *<textarea name="message" rows="5" required></textarea></label>
 						<button type="submit" class="ghero-btn-primary" data-submit-btn>Request Your Audit</button>
+						<p class="ra-form-privacy" data-form-privacy>
+							We use your details only to reply to your audit request. See our <a href="/privacy-policy/">privacy policy</a>.
+						</p>
 						<p class="ra-form-note" data-form-note>
 							Fixed price: 999 AED. 10-day delivery. I review every request personally. Prefer WhatsApp? Message
 							<a href="https://wa.me/971522418594" target="_blank">+971 52 241 8594</a> directly.
@@ -308,7 +424,9 @@ const faqs = [
 				</div>
 			</section>
 
-			<FaqAccordion title="SEO Audit — Frequently Asked Questions" intro="Common questions about the audit scope, process, deliverables, and pricing." items={faqs} />
+			<FaqAccordion title="SEO Audit in Dubai: frequently asked questions" intro="Common questions about the audit scope, process, deliverables, and pricing." items={faqs} schema={false} />
+
+			<RelatedServices items={related} />
 		</main>
 		<Footer />
 	</body>
@@ -329,7 +447,7 @@ const faqs = [
 		fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
 			.then(() => {
 				form.reset();
-				form.querySelectorAll('input, textarea, button').forEach((el) => ((el as HTMLElement).style.display = 'none'));
+				form.querySelectorAll('input, textarea, button, [data-form-privacy]').forEach((el) => ((el as HTMLElement).style.display = 'none'));
 				if (note) {
 					note.textContent = "Thanks — your audit request has been sent. I'll confirm scope and next steps within 1–2 business days.";
 					note.classList.add('form-note-success');
@@ -519,6 +637,11 @@ const faqs = [
 		text-decoration: line-through;
 		margin-top: 4px;
 	}
+	.ra-pricing-vat {
+		font-size: 0.875rem;
+		color: var(--growpha-text-secondary);
+		margin-top: 4px;
+	}
 	.ra-pricing-fine {
 		font-size: 0.875rem;
 		color: var(--growpha-text-secondary);
@@ -560,63 +683,6 @@ const faqs = [
 		left: 0;
 		color: var(--growpha-green-bright);
 		font-weight: 700;
-	}
-
-	.ra-conducted {
-		background: var(--growpha-surface-1);
-		padding: 40px 0;
-		border-top: 1px solid rgba(255, 255, 255, 0.05);
-	}
-	.ra-conducted .section-label {
-		margin-bottom: 16px;
-	}
-	.ra-conducted-h2 {
-		font-family: var(--font-heading);
-		font-weight: 800;
-		font-size: clamp(1.75rem, 3vw, 2.5rem);
-		letter-spacing: -0.025em;
-		line-height: 1.15;
-		margin: 0 0 20px;
-		color: var(--growpha-text-primary);
-		max-width: 680px;
-	}
-	.ra-conducted-p {
-		color: var(--growpha-text-secondary);
-		font-size: 1rem;
-		line-height: 1.75;
-		max-width: 680px;
-		margin: 0 0 32px;
-	}
-	.ra-conducted-stats {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 24px;
-		margin-bottom: 20px;
-	}
-	@media (min-width: 640px) {
-		.ra-conducted-stats {
-			grid-template-columns: repeat(4, 1fr);
-		}
-	}
-	.ra-conducted-stats div {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-	}
-	.ra-conducted-stats span {
-		font-family: var(--font-heading);
-		font-weight: 800;
-		font-size: 1.75rem;
-		color: var(--growpha-orange);
-	}
-	.ra-conducted-stats div {
-		font-size: 0.8125rem;
-		color: var(--growpha-text-muted);
-	}
-	.ra-conducted-meet {
-		font-size: 0.8125rem;
-		color: var(--growpha-text-muted);
-		margin: 0;
 	}
 
 	.ra-form-section {
@@ -681,6 +747,16 @@ const faqs = [
 		font-size: 0.8125rem;
 		color: var(--growpha-text-muted);
 		margin: 0;
+	}
+	.ra-form-privacy {
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+		margin: 0;
+	}
+	.ra-form-privacy a {
+		color: var(--growpha-green-bright);
+		text-decoration: underline;
+		text-underline-offset: 3px;
 	}
 	.ra-form-note a {
 		color: var(--growpha-orange);

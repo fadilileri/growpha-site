@@ -1,0 +1,187 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Privacy Policy | Growpha"
+			description="How Growpha collects, uses and protects the personal details you share through its audit request, contact and newsletter forms."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="pp-section">
+				<div class="gp-container pp-container">
+					<div class="svc-breadcrumb">
+						<a href="/">Home</a>
+						<span>›</span>
+						<span>Privacy Policy</span>
+					</div>
+					<h1 class="pp-h1">Privacy Policy</h1>
+					<p class="pp-updated">Last updated: 2 November 2026</p>
+
+					<p>
+						This policy explains what personal information Growpha collects through growpha.com, why we collect
+						it, and what you can ask us to do with it. Growpha is a Dubai-based SEO and digital growth consultancy
+						run by Fadil İleri.
+					</p>
+
+					<h2>What we collect</h2>
+					<p>We collect only what you choose to send us through the forms on this site, or by messaging us directly.</p>
+					<ul>
+						<li><strong>Audit request form:</strong> your name, email address, website URL, company name (optional), WhatsApp or phone number (optional) and the message you write.</li>
+						<li><strong>Contact form:</strong> your name, email address and message.</li>
+						<li><strong>Newsletter sign-up:</strong> your email address.</li>
+						<li><strong>WhatsApp or email:</strong> anything you send us, including your phone number.</li>
+					</ul>
+					<p>
+						We do not run analytics or advertising trackers on this site. Our hosting provider may keep standard
+						server logs (such as IP address, browser type and the pages requested) to keep the site secure and
+						working. Some logos on our service pages are loaded from an external image service (cdn.simpleicons.org),
+						which receives your IP address and browser details when the page loads.
+					</p>
+
+					<h2>How we use it</h2>
+					<ul>
+						<li>To reply to your request and to carry out the work you ask for, including delivering an SEO audit.</li>
+						<li>To send you the newsletter, if you subscribed to it. You can unsubscribe at any time.</li>
+						<li>To keep a record of our correspondence and our business records.</li>
+						<li>To protect the site from spam and abuse.</li>
+					</ul>
+					<p>We do not sell your personal information and we do not use it for advertising.</p>
+
+					<h2>Why we are allowed to use it</h2>
+					<p>
+						We use your details because you asked us to contact you or to provide a service, because you agreed
+						to receive our newsletter, and because we have a legitimate interest in running and securing the
+						business. We handle personal data in line with the UAE's personal data protection law (Federal
+						Decree-Law No. 45 of 2021).
+					</p>
+
+					<h2>Who we share it with</h2>
+					<p>
+						We share personal information only with the service providers that help us run the site and respond to
+						you: Netlify, which hosts the website and processes form submissions, and the email service we use to
+						receive form notifications and reply to you. These providers may process data outside the UAE. We
+						will disclose information where the law requires it.
+					</p>
+
+					<h2>How long we keep it</h2>
+					<p>
+						We keep your details for as long as we need them to deal with your request and to maintain our business
+						records. We delete them on request unless we are required to keep them by law.
+					</p>
+
+					<h2>Your rights</h2>
+					<p>You can ask us to:</p>
+					<ul>
+						<li>tell you what personal information we hold about you;</li>
+						<li>correct information that is wrong;</li>
+						<li>delete your information;</li>
+						<li>stop using your information for a purpose you object to, or withdraw consent you gave us.</li>
+					</ul>
+					<p>To make a request, <a href="/contact/">contact us</a> or message us on WhatsApp at <a href="https://wa.me/971522418594" target="_blank" rel="noopener noreferrer">+971 52 241 8594</a>. We will reply within a reasonable time.</p>
+
+					<h2>Security</h2>
+					<p>
+						The site is served over HTTPS and form submissions are handled by our hosting provider. No online
+						service is completely secure, so please do not send us passwords or payment card details through the
+						forms. Audit access is always read-only.
+					</p>
+
+					<h2>Children</h2>
+					<p>This site is for businesses. It is not directed at children and we do not knowingly collect their information.</p>
+
+					<h2>Changes to this policy</h2>
+					<p>If we change this policy, we will update the date at the top of this page.</p>
+
+					<h2>Contact</h2>
+					<p>
+						Questions about this policy? Use the <a href="/contact/">contact page</a> or message us on <a href="https://wa.me/971522418594" target="_blank" rel="noopener noreferrer">WhatsApp</a>.
+					</p>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+	.pp-section {
+		background: var(--growpha-black);
+		padding: 72px 0 96px;
+	}
+	.pp-container {
+		max-width: 760px;
+	}
+	.svc-breadcrumb {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 24px;
+		font-size: 0.8125rem;
+		color: var(--growpha-text-muted);
+	}
+	.svc-breadcrumb a {
+		color: var(--growpha-text-muted);
+	}
+	.pp-h1 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: clamp(2rem, 4vw, 2.75rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		color: var(--growpha-text-primary);
+		margin: 0 0 8px;
+	}
+	.pp-updated {
+		color: var(--growpha-text-muted);
+		font-size: 0.875rem;
+		margin: 0 0 32px;
+	}
+	.pp-section h2 {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.375rem;
+		color: var(--growpha-text-primary);
+		margin: 40px 0 12px;
+	}
+	.pp-section p,
+	.pp-section li {
+		color: var(--growpha-text-secondary);
+		font-size: 1rem;
+		line-height: 1.75;
+	}
+	.pp-section p {
+		margin: 0 0 16px;
+	}
+	.pp-section ul {
+		margin: 0 0 16px;
+		padding-left: 22px;
+	}
+	.pp-section li {
+		margin-bottom: 8px;
+	}
+	.pp-section strong {
+		color: var(--growpha-text-primary);
+	}
+	.pp-section a {
+		color: var(--growpha-green-bright);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.pp-section a:hover {
+		color: var(--growpha-orange);
+	}
+</style>

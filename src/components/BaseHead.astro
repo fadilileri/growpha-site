@@ -6,6 +6,7 @@ import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-4.jpg';
 import { SITE_TITLE } from '../consts';
 import { Font } from 'astro:assets';
+import { organization, website } from '../utils/schema';
 
 interface Props {
 	title: string;
@@ -36,31 +37,7 @@ const {
 
 const socialImage = ogImage ? new URL(ogImage, Astro.site) : new URL(image.src, Astro.url);
 
-const sitewideSchema = {
-	'@context': 'https://schema.org',
-	'@graph': [
-		{
-			'@type': 'ProfessionalService',
-			'@id': 'https://growpha.com/#organization',
-			name: 'Growpha',
-			url: 'https://growpha.com/',
-			logo: { '@type': 'ImageObject', url: 'https://growpha.com/logo.png' },
-			description: 'Technical SEO, AI search optimisation and digital growth consultancy based in Dubai.',
-			founder: { '@id': 'https://growpha.com/who-am-i/#person' },
-			areaServed: [
-				{ '@type': 'City', name: 'Dubai' },
-				{ '@type': 'Country', name: 'United Arab Emirates' },
-			],
-		},
-		{
-			'@type': 'WebSite',
-			'@id': 'https://growpha.com/#website',
-			url: 'https://growpha.com/',
-			name: 'Growpha',
-			publisher: { '@id': 'https://growpha.com/#organization' },
-		},
-	],
-};
+const sitewideSchema = { '@context': 'https://schema.org', '@graph': [organization, website] };
 const jsonLd = schema ?? sitewideSchema;
 ---
 

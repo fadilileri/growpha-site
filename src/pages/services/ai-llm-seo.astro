@@ -11,6 +11,7 @@ import AuditBanner from '../../components/service/AuditBanner.astro';
 import ProcessSteps from '../../components/service/ProcessSteps.astro';
 import Conducted from '../../components/service/Conducted.astro';
 import RelatedServices from '../../components/service/RelatedServices.astro';
+import { areaServed, organization, person, website } from '../../utils/schema';
 
 const tools = [
 	{ title: 'OpenAI', initials: 'AI' },
@@ -138,40 +139,13 @@ const pageUrl = 'https://growpha.com/services/ai-llm-seo/';
 const pageTitle = 'AI SEO Services in Dubai | GEO & LLM Optimisation | Growpha';
 const pageDescription =
 	"AI SEO in Dubai from a technical SEO consultant with 10+ years' experience. Get your brand cited by ChatGPT, Perplexity and Google AI Overviews.";
-const areaServed = [
-	{ '@type': 'City', name: 'Dubai' },
-	{ '@type': 'Country', name: 'United Arab Emirates' },
-];
-
 // Facts included here are only those visible on the site. Add address/telephone and the
 // Google Business Profile URL (sameAs) once the licensed business details are confirmed.
 const schema = {
 	'@context': 'https://schema.org',
 	'@graph': [
-		{
-			'@type': 'ProfessionalService',
-			'@id': 'https://growpha.com/#organization',
-			name: 'Growpha',
-			url: 'https://growpha.com/',
-			logo: { '@type': 'ImageObject', url: 'https://growpha.com/logo.png' },
-			description: 'Technical SEO, AI search optimisation and digital growth consultancy based in Dubai.',
-			founder: { '@id': 'https://growpha.com/who-am-i/#person' },
-			areaServed,
-		},
-		{
-			'@type': 'Person',
-			'@id': 'https://growpha.com/who-am-i/#person',
-			name: 'Fadil İleri',
-			jobTitle: 'Founder, Technical SEO & Digital Growth Strategist',
-			url: 'https://growpha.com/who-am-i/',
-			sameAs: ['https://www.linkedin.com/in/fadilileri34/'],
-			knowsAbout: [
-				'Generative engine optimisation',
-				'AI search visibility',
-				'ChatGPT visibility',
-				'AI visibility',
-			],
-		},
+		organization,
+		person,
 		{
 			'@type': 'WebPage',
 			'@id': `${pageUrl}#webpage`,
@@ -183,13 +157,7 @@ const schema = {
 			author: { '@id': 'https://growpha.com/who-am-i/#person' },
 			breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
 		},
-		{
-			'@type': 'WebSite',
-			'@id': 'https://growpha.com/#website',
-			url: 'https://growpha.com/',
-			name: 'Growpha',
-			publisher: { '@id': 'https://growpha.com/#organization' },
-		},
+		website,
 		{
 			'@type': 'Service',
 			'@id': `${pageUrl}#service`,

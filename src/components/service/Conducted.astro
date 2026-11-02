@@ -1,7 +1,15 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Stat {
 	value: string;
 	label: string;
+}
+interface PersonLink {
+	label: string;
+	href: string;
+	external?: boolean;
 }
 interface Props {
 	label: string;
@@ -10,8 +18,13 @@ interface Props {
 	text: string;
 	stats: Stat[];
 	note?: string;
+	/** Optional author block shown under the paragraph. */
+	photo?: ImageMetadata;
+	personName?: string;
+	personRole?: string;
+	personLinks?: PersonLink[];
 }
-const { label, title, titleAccent, text, stats, note } = Astro.props;
+const { label, title, titleAccent, text, stats, note, photo, personName, personRole, personLinks = [] } = Astro.props;
 ---
 
 <section class="ra-conducted">
@@ -19,6 +32,23 @@ const { label, title, titleAccent, text, stats, note } = Astro.props;
 		<div class="section-label">{label}</div>
 		<h2 class="ra-conducted-h2">{title}<br /><span class="text-gradient-orange">{titleAccent}</span></h2>
 		<p class="ra-conducted-p">{text}</p>
+		{
+			personName && (
+				<div class="ra-person">
+					{photo && <Image src={photo} alt={`${personName}, ${personRole ?? ''}`.trim()} width={64} height={64} class="ra-person-photo" />}
+					<div class="ra-person-text">
+						<div class="ra-person-name">{personName}{personRole ? `, ${personRole}` : ''}</div>
+						<div class="ra-person-links">
+							{personLinks.map((l) => (
+								<a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined}>
+									{l.label}
+								</a>
+							))}
+						</div>
+					</div>
+				</div>
+			)
+		}
 		<div class="ra-conducted-stats">
 			{stats.map((s) => <div><span>{s.value}</span>{s.label}</div>)}
 		</div>
@@ -50,7 +80,42 @@ const { label, title, titleAccent, text, stats, note } = Astro.props;
 		font-size: 1rem;
 		line-height: 1.75;
 		max-width: 680px;
-		margin: 0 0 32px;
+		margin: 0 0 28px;
+	}
+	.ra-person {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		margin-bottom: 32px;
+	}
+	.ra-person-photo {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 2px solid rgba(34, 197, 94, 0.35);
+		flex-shrink: 0;
+	}
+	.ra-person-name {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1rem;
+		color: var(--growpha-text-primary);
+		margin-bottom: 4px;
+	}
+	.ra-person-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+	.ra-person-links a {
+		font-size: 0.875rem;
+		color: var(--growpha-green-bright);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.ra-person-links a:hover {
+		color: var(--growpha-orange);
 	}
 	.ra-conducted-stats {
 		display: grid;

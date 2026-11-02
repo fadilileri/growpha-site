@@ -5,6 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ToolsMarquee from '../components/service/ToolsMarquee.astro';
+import { organization, person, website } from '../utils/schema';
 
 const stats = [
 	{ value: '10+', label: 'Years in technical SEO and digital growth' },
@@ -13,45 +14,7 @@ const stats = [
 	{ value: '#1', label: 'Rankings achieved in highly competitive categories' },
 ];
 
-const schema = {
-	'@context': 'https://schema.org',
-	'@graph': [
-		{
-			'@type': 'ProfessionalService',
-			'@id': 'https://growpha.com/#organization',
-			name: 'Growpha',
-			url: 'https://growpha.com/',
-			logo: { '@type': 'ImageObject', url: 'https://growpha.com/logo.png' },
-			description: 'Technical SEO, AI search optimisation and digital growth consultancy based in Dubai.',
-			founder: { '@id': 'https://growpha.com/who-am-i/#person' },
-			areaServed: [
-				{ '@type': 'City', name: 'Dubai' },
-				{ '@type': 'Country', name: 'United Arab Emirates' },
-			],
-		},
-		{
-			'@type': 'Person',
-			'@id': 'https://growpha.com/who-am-i/#person',
-			name: 'Fadil İleri',
-			jobTitle: 'Founder, Technical SEO & Digital Growth Strategist',
-			url: 'https://growpha.com/who-am-i/',
-			sameAs: ['https://www.linkedin.com/in/fadilileri34/'],
-			knowsAbout: [
-				'Generative engine optimisation',
-				'AI search visibility',
-				'ChatGPT visibility',
-				'AI visibility',
-			],
-		},
-		{
-			'@type': 'WebSite',
-			'@id': 'https://growpha.com/#website',
-			url: 'https://growpha.com/',
-			name: 'Growpha',
-			publisher: { '@id': 'https://growpha.com/#organization' },
-		},
-	],
-};
+const schema = { '@context': 'https://schema.org', '@graph': [organization, person, website] };
 
 const howFadilWorks = [
 	'Technical audit before any strategy recommendation',
@@ -147,7 +110,7 @@ const whyWork = [
 								digital growth strategist with over 10 years of experience working with e-commerce brands, enterprise websites,
 								SaaS companies, and UAE businesses. I combine deep technical SEO expertise with AI tools, Python
 								automation, and data-driven analysis to build growth systems that are measurable, scalable, and
-								built to last.
+								built to last. The easiest place to start is a fixed-price <a href="/request-audit/">SEO audit</a>.
 							</p>
 							<div class="wai-hero-actions">
 								<a href="/contact/" class="ghero-btn-primary">Work with Fadil</a>
@@ -397,6 +360,14 @@ const whyWork = [
 		line-height: 1.75;
 		max-width: 560px;
 		margin: 0 0 36px;
+	}
+	.wai-lead a {
+		color: var(--growpha-green-bright);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.wai-lead a:hover {
+		color: var(--growpha-orange);
 	}
 	.wai-hero-actions {
 		display: flex;
