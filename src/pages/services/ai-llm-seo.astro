@@ -3,7 +3,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ServiceHero from '../../components/service/ServiceHero.astro';
-import ToolsMarquee from '../../components/service/ToolsMarquee.astro';
+import AiPlatforms from '../../components/service/AiPlatforms.astro';
 import FeatureGrid from '../../components/service/FeatureGrid.astro';
 import FaqAccordion from '../../components/service/FaqAccordion.astro';
 import ClosingCta from '../../components/service/ClosingCta.astro';
@@ -13,13 +13,56 @@ import Conducted from '../../components/service/Conducted.astro';
 import RelatedServices from '../../components/service/RelatedServices.astro';
 import { areaServed, organization, person, website } from '../../utils/schema';
 
-const tools = [
-	{ title: 'OpenAI', initials: 'AI' },
-	{ title: 'Perplexity', initials: 'PX' },
-	{ title: 'Claude', initials: 'CL' },
-	{ title: 'SEMrush', src: 'https://cdn.simpleicons.org/semrush/ffffff' },
-	{ title: 'Ahrefs', initials: 'AH' },
-	{ title: 'Search Console', src: 'https://cdn.simpleicons.org/googlesearchconsole/ffffff' },
+// Latest user figures each company has stated publicly (checked 2 November 2026).
+// Growth is only shown where the company published two figures about a year apart.
+// ChatGPT is counted in weekly users; the others in monthly users, so totals are not comparable.
+const platforms = [
+	{
+		name: 'Google AI',
+		sub: 'Gemini app',
+		logo: '/images/ai-platforms/googlegemini.svg',
+		stat: '1B+',
+		statLabel: 'monthly active users',
+		growth: '+54%',
+		growthNote: 'vs 650M+ a year earlier',
+		source: 'Alphabet Q3 2026 call, 28 Oct 2026',
+	},
+	{
+		name: 'Google AI Overviews',
+		sub: 'In Google Search',
+		logo: '/images/ai-platforms/google.svg',
+		stat: '2.5B+',
+		statLabel: 'monthly users',
+		growth: '+67%',
+		growthNote: 'vs 1.5B+ at I/O a year earlier',
+		source: 'Google I/O, May 2026',
+	},
+	{
+		name: 'ChatGPT',
+		sub: 'OpenAI',
+		logo: '/images/ai-platforms/openai.svg',
+		stat: '900M',
+		statLabel: 'weekly active users',
+		growth: '+125%',
+		growthNote: 'vs 400M a year earlier',
+		source: 'OpenAI, 27 Feb 2026',
+	},
+	{
+		name: 'Claude',
+		sub: 'Anthropic',
+		logo: '/images/ai-platforms/claude.svg',
+		statLabel: 'Not published by Anthropic',
+		growthNote: 'Third-party estimates differ widely, so none is shown.',
+		source: 'No official source',
+	},
+	{
+		name: 'Perplexity',
+		sub: 'Perplexity AI',
+		logo: '/images/ai-platforms/perplexity.svg',
+		statLabel: 'Not published by Perplexity',
+		growthNote: 'Last company figure: 780M queries a month, May 2025.',
+		source: 'CEO statement, Jun 2025',
+	},
 ];
 
 const shifts = [
@@ -254,7 +297,14 @@ const schema = {
 				secondaryHref="/contact/"
 				image={heroImage}
 			/>
-			<ToolsMarquee label="AI search platforms we optimise for" tools={tools} />
+			<AiPlatforms
+				label="AI search platforms we optimise for"
+				title="Where your buyers"
+				titleAccent="already ask."
+				intro="These platforms now answer commercial questions directly. Here is how many people use each one, and how fast that is growing."
+				platforms={platforms}
+				note="Figures are the latest each company has stated publicly, checked on 2 November 2026. ChatGPT is counted in weekly users and the others in monthly users, so the numbers are not directly comparable. Growth is calculated from the two figures a company published about a year apart; where a figure is given as '1B+', the real change can differ. Anthropic and Perplexity do not publish official user counts, so no growth figure is shown for them. Logos are trademarks of their owners. Growpha is not affiliated with or endorsed by these companies."
+			/>
 
 			<section class="shift-section">
 				<div class="gp-container">
