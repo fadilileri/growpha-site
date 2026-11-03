@@ -33,6 +33,7 @@ const chevronRight =
 				{intro && <p class="fg-intro">{intro}</p>}
 			</div>
 		)}
+		<slot name="before-grid" />
 		<div class:list={['fg-grid', `fg-grid-${columns}`]}>
 			{
 				features.map((f) => (
@@ -57,6 +58,7 @@ const chevronRight =
 				))
 			}
 		</div>
+		<slot name="after-grid" />
 	</div>
 </section>
 
